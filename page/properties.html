@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore verified property listings from Urban Edge Real Estate.">
+    <title>Urban Edge Real Estate | Properties</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* =====================================================
+           ROOT & BASE
+        ====================================================== */
+        :root {
+            --green: #005a2b;
+            --green-dark: #003d1e;
+            --green-light: #e6f4ed;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --gray: #f7f9f8;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --sidebar-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background: var(--gray);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button, input {
+            font: inherit;
+        }
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 5000;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .menu-toggle {
+            font-size: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--green);
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-toggle:hover {
+            background-color: var(--green-light);
+        }
+
+        .menu-toggle:active {
+            transform: scale(0.92);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--green);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-badge {
+            background: var(--green);
+            color: white;
+            font-size: 10px;
+            padding: 4px 7px;
+            border-radius: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .header-center {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 30px;
+        }
+
+        .search-bar {
+            display: flex;
+            width: 100%;
+        }
+
+        .search-bar input {
+            flex: 1;
+            min-width: 0;
+            height: 42px;
+            border: 1px solid var(--border);
+            border-right: none;
+            border-radius: 22px 0 0 22px;
+            padding: 0 18px;
+            outline: none;
+            background: white;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--green);
+        }
+
+        .search-bar button {
+            width: 90px;
+            border: none;
+            background: var(--green);
+            color: white;
+            border-radius: 0 22px 22px 0;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .search-bar button:hover {
+            background: var(--green-dark);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .action-btn {
+            background: var(--green);
+            color: white;
+            padding: 10px 17px;
+            border-radius: 22px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 90, 43, 0.25);
+        }
+
+        /* =====================================================
+           APP CONTAINER & SIDEBAR
+        ====================================================== */
+        .app-container {
+            display: flex;
+            min-height: calc(100vh - 64px);
+        }
+
+        aside#sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            border-right: 1px solid var(--border);
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-title {
+            padding: 10px 15px 15px;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--muted);
+            letter-spacing: 1px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .sidebar-link i {
+            width: 18px;
+            text-align: center;
+        }
+
+        /* =====================================================
+           MAIN CONTENT
+        ====================================================== */
+        main {
+            flex: 1;
+            padding: 28px;
+            min-width: 0;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading span {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .page-heading h1 {
+            margin-top: 5px;
+            font-size: 30px;
+            color: var(--text);
+        }
+
+        .page-heading p {
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           FILTER CHIPS
+        ====================================================== */
+        .filter-chips {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            scrollbar-width: none;
+        }
+
+        .filter-chips::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chip {
+            border: 1px solid var(--border);
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            white-space: nowrap;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+        }
+
+        .chip:hover,
+        .chip.active {
+            background: var(--green);
+            border-color: var(--green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* =====================================================
+           PROPERTY GRID & CARDS
+        ====================================================== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(25px);
+            animation: cardReveal 0.6s ease forwards;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0, 90, 43, 0.14);
+        }
+
+        @keyframes cardReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .thumbnail-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            background: #eeeeee;
+            overflow: hidden;
+        }
+
+        .thumbnail-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover .thumbnail-container img {
+            transform: scale(1.06);
+        }
+
+        .promo-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #dc2626;
+            color: white;
+            padding: 5px 9px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .price-badge {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            background: rgba(0, 90, 43, 0.94);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 800;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-content {
+            display: flex;
+            gap: 12px;
+            padding: 15px;
+        }
+
+        .channel-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid var(--green-light);
+        }
+
+        .card-info {
+            min-width: 0;
+        }
+
+        .card-title {
+            font-size: 15px;
+            line-height: 1.35;
+            font-weight: 750;
+            margin-bottom: 5px;
+        }
+
+        .card-location {
+            color: var(--green);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .card-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+        }
+
+        .no-results i {
+            font-size: 45px;
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        .no-results h2 {
+            margin-bottom: 8px;
+        }
+
+        /* =====================================================
+           FOOTER & FLOATING ACTIONS
+        ====================================================== */
+        footer {
+            background: var(--green-dark);
+            color: white;
+            padding: 20px;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .floating-actions {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 4000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .floating-whatsapp,
+        .back-to-top {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-whatsapp {
+            background: #25D366;
+            color: white;
+            font-size: 28px;
+            transition: 0.3s ease;
+        }
+
+        .floating-whatsapp:hover {
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .back-to-top {
+            border: none;
+            background: white;
+            color: var(--green);
+            font-size: 22px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s ease;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background: var(--green);
+            color: white;
+        }
+
+        /* =====================================================
+           RESPONSIVE MOBILE STYLES
+        ====================================================== */
+        @media (max-width: 768px) {
+            header {
+                padding: 0 12px;
+            }
+
+            .header-center,
+            .header-right {
+                display: none;
+            }
+
+            aside#sidebar {
+                position: fixed;
+                top: 64px;
+                right: 12px;
+                left: auto;
+                width: 220px;
+                background: white;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                z-index: 6000;
+                padding: 10px;
+                display: none; 
+            }
+
+            aside#sidebar .sidebar-title {
+                padding: 5px 10px;
+                font-size: 10px;
+            }
+
+            aside#sidebar .sidebar-link {
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            main {
+                padding: 20px 15px;
+            }
+
+            .page-heading h1 {
+                font-size: 25px;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 14px;
+            }
+
+            .card-content {
+                padding: 11px;
+            }
+
+            .channel-avatar {
+                width: 32px;
+                height: 32px;
+            }
+
+            .card-title {
+                font-size: 13px;
+            }
+
+            .card-location {
+                font-size: 11px;
+            }
+
+            .card-meta {
+                font-size: 10px;
+            }
+
+            .floating-actions {
+                right: 14px;
+                bottom: 15px;
+            }
+
+            .floating-whatsapp,
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 15px;
+            }
+
+            .logo-badge {
+                font-size: 9px;
+            }
+
+            .page-heading h1 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <button class="menu-toggle" id="menuBtn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars" id="menuIcon"></i>
+            </button>
+            <a href="../index.html" class="logo">
+                <span>URBAN EDGE</span>
+                <span class="logo-badge">PROPERTIES</span>
+            </a>
+        </div>
+
+        <div class="header-center">
+            <form class="search-bar" id="searchForm">
+                <input type="search" id="searchInput" placeholder="Search location or property..." autocomplete="off">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="header-right">
+            <a href="https://wa.me/2348102601114?text=Hello%20Urban%20Edge%20Real%20Estate%2C%0A%0AI%20am%20interested%20in%20one%20of%20your%20properties." target="_blank" rel="noopener noreferrer" class="action-btn">
+                <i class="fa-brands fa-whatsapp"></i> Contact Agent
+            </a>
+        </div>
+    </header>
+
+    <div class="app-container">
+
+        <aside id="sidebar">
+            <div class="sidebar-title">PROPERTY MENU</div>
+
+            <a href="properties.html" class="sidebar-link active">
+                <i class="fa-solid fa-house"></i> Home Listings
+            </a>
+
+            <a href="promo.html" class="sidebar-link">
+                <i class="fa-solid fa-fire"></i> Promos & Rewards
+            </a>
+
+            <a href="location.html" class="sidebar-link">
+                <i class="fa-solid fa-location-dot"></i> Top Locations
+            </a>
+
+            <a href="ver.html" class="sidebar-link">
+                <i class="fa-solid fa-shield-halved"></i> Property Verification
+            </a>
+
+            <a href="#" class="sidebar-link" id="inspectionLink">
+                <i class="fa-solid fa-calendar-check"></i> Book Inspection
+            </a>
+
+            <a href="download.html" class="sidebar-link">
+                <i class="fa-solid fa-download"></i> Downloads
+            </a>
+
+            <a href="payment.html" class="sidebar-link">
+                <i class="fa-solid fa-wallet"></i> Payment
+            </a>
+        </aside>
+
+        <main>
+            <div class="page-heading">
+                <span>URBAN EDGE REAL ESTATE</span>
+                <h1>Explore Our Properties</h1>
+                <p>Discover available properties and investment opportunities. Contact our team for inspection and further verification.</p>
+            </div>
+
+            <div class="filter-chips">
+                <button class="chip active" type="button" data-filter="all">All Properties</button>
+                <button class="chip" type="button" data-filter="Awka">Awka</button>
+                <button class="chip" type="button" data-filter="Igbariam">Igbariam</button>
+                <button class="chip" type="button" data-filter="Isiagu">Isiagu</button>
+                <button class="chip" type="button" data-filter="Ukwulu">Ukwulu</button>
+                <button class="chip" type="button" data-filter="Mgbakwu">Mgbakwu</button>
+                <button class="chip" type="button" data-filter="under5">Under ₦5M</button>
+            </div>
+
+            <div class="grid" id="productGrid"></div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-bottom">
+            <span>© 2026 Urban Edge Real Estate. All Rights Reserved.</span>
+            <span>Transparency • Trust • Professionalism</span>
+        </div>
+    </footer>
+
+    <div class="floating-actions">
+        <a href="https://wa.me/2349011157594" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat with Urban Edge Real Estate on WhatsApp" title="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+
+        <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        /* =================================================
+           ELEMENTS
+        ================================================== */
+        const gridContainer = document.getElementById("productGrid");
+        const searchInput = document.getElementById("searchInput");
+        const searchForm = document.getElementById("searchForm");
+        const menuBtn = document.getElementById("menuBtn");
+        const menuIcon = document.getElementById("menuIcon");
+        const sidebar = document.getElementById("sidebar");
+        const backToTop = document.getElementById("backToTop");
+        const chips = document.querySelectorAll(".chip");
+        const inspectionLink = document.getElementById("inspectionLink");
+
+        /* =================================================
+           PROPERTY DATA
+        ================================================== */
+        const listings = [
+            {
+                id: "ifeadigo-layout",
+                title: "Ifeadigo Layout - Fast Developing Plot",
+                location: "Awba Ofemili, Awka",
+                price: "₦4.5M",
+                numericPrice: 4500000,
+                promo: "Documentation Free",
+                image: "../infor/p1.jpeg",
+                doc: "Deed of Assignment & Reg. Survey",
+                detailUrl: "property-details.html?id=ifeadigo"
+            },
+            {
+                id: "urban-residence",
+                title: "Urban Residence Prime Land",
+                location: "Agu-Awka, Awka",
+                price: "₦25M",
+                numericPrice: 25000000,
+                promo: "High Value",
+                image: "../infor/p7.jpg",
+                doc: "Irrevocable Power Of Attorney & Reg. Survey",
+                detailUrl: "property-details.html?id=urban-residence"
+            },
+            {
+                id: "urban-haven",
+                title: "Urban Haven Estate",
+                location: "Isiagu",
+                price: "₦6.5M",
+                numericPrice: 6500000,
+                promo: "Popular",
+                image: "../infor/p5.jpeg",
+                doc: "Deed of Assignment & Reg. Survey",
+                detailUrl: "property-details.html?id=urban-haven"
+            },
+            {
+                id: "urban-garden",
+                title: "Urban Business Investment Plots",
+                location: "Igbariam",
+                price: "₦5.5M",
+                numericPrice: 5500000,
+                promo: "Student Area",
+                image: "../infor/p2.jpeg",
+                doc: "Deed of Assignment & Reg. Survey",
+                detailUrl: "property-details.html?id=urban-garden"
+            },
+            {
+                id: "extravaganza-promo",
+                title: "Urban Edge Extravaganza Sales Promo",
+                location: "All Locations",
+                price: "Win Prizes!",
+                numericPrice: 0,
+                promo: "Extravaganza",
+                image: "../infor/p4.jpeg",
+                doc: "Cars, Rice, Appliances & Cash",
+                detailUrl: "property-details.html?id=extravaganza"
+            },
+            {
+                id: "urban-ville",
+                title: "Urban Ville New Layout",
+                location: "Ukwulu",
+                price: "₦2.5M",
+                numericPrice: 2500000,
+                promo: "Was ₦3.5M",
+                image: "../infor/new.jpeg",
+                doc: "Deed of Assignment & Reg. Survey",
+                detailUrl: "property-details.html?id=urban-ville"
+            },
+            {
+                id: "mgbakwu-plots",
+                title: "New Haven",
+                location: "Mgbakwu",
+                price: "₦1.8M",
+                numericPrice: 3800000,
+                promo: "Hot Deal",
+                image: "../infor/p3.jpeg",
+                doc: "Deed of Assignment & Reg. Survey",
+                detailUrl: "property-details.html?id=mgbakwu-plots"
+            }
+        ];
+
+        let activeFilter = "all";
+
+        /* =================================================
+           RENDER CARDS
+        ================================================== */
+        function renderListings(items) {
+            gridContainer.innerHTML = "";
+
+            if (items.length === 0) {
+                gridContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <h2>No Properties Found</h2>
+                        <p>Try searching for a different location or clearing active filters.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            items.forEach((item, index) => {
+                const card = document.createElement("a");
+                card.href = item.detailUrl;
+                card.className = "card";
+                card.style.animationDelay = `${index * 0.08}s`;
+
+                card.innerHTML = `
+                    <div class="thumbnail-container">
+                        ${item.promo ? `<span class="promo-badge">${item.promo}</span>` : ""}
+                        <span class="price-badge">${item.price}</span>
+                        <img src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x500?text=Property+Image'">
+                    </div>
+                    <div class="card-content">
+                        <img src="../infor/logo.png" alt="Urban Edge" class="channel-avatar" onerror="this.src='https://via.placeholder.com/40'">
+                        <div class="card-info">
+                            <h3 class="card-title">${item.title}</h3>
+                            <div class="card-location"><i class="fa-solid fa-location-dot"></i> ${item.location}</div>
+                            <div class="card-meta">
+                                <span><i class="fa-solid fa-file-contract"></i> ${item.doc}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                gridContainer.appendChild(card);
+            });
+        }
+
+        /* =================================================
+           SEARCH & FILTERS
+        ================================================== */
+        function filterListings() {
+            const query = searchInput.value.toLowerCase().trim();
+
+            const filtered = listings.filter(item => {
+                let matchesFilter = false;
+                if (activeFilter === "all") {
+                    matchesFilter = true;
+                } else if (activeFilter === "under5") {
+                    matchesFilter = item.numericPrice > 0 && item.numericPrice < 5000000;
+                } else {
+                    matchesFilter = item.location.toLowerCase().includes(activeFilter.toLowerCase());
+                }
+
+                const matchesSearch = item.title.toLowerCase().includes(query) || 
+                                      item.location.toLowerCase().includes(query) ||
+                                      item.doc.toLowerCase().includes(query);
+
+                return matchesFilter && matchesSearch;
+            });
+
+            renderListings(filtered);
+        }
+
+        chips.forEach(chip => {
+            chip.addEventListener("click", function () {
+                chips.forEach(c => c.classList.remove("active"));
+                this.classList.add("active");
+                activeFilter = this.getAttribute("data-filter");
+                filterListings();
+            });
+        });
+
+        searchInput.addEventListener("input", filterListings);
+
+        searchForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            filterListings();
+        });
+
+        /* =================================================
+           SIDEBAR TOGGLE (DIRECT & CLEAN)
+        ================================================== */
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            const isHidden = window.getComputedStyle(sidebar).display === 'none';
+
+            if (isHidden) {
+                sidebar.style.display = 'flex';
+                if (menuIcon) menuIcon.className = "fa-solid fa-xmark";
+            } else {
+                sidebar.style.display = 'none';
+                if (menuIcon) menuIcon.className = "fa-solid fa-bars";
+            }
+        });
+
+        /* =================================================
+           SCROLL & OTHER ACTIONS
+        ================================================== */
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 300) {
+                backToTop.classList.add("show");
+            } else {
+                backToTop.classList.remove("show");
+            }
+        });
+
+        backToTop.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        if (inspectionLink) {
+            inspectionLink.addEventListener("click", function (e) {
+                e.preventDefault();
+                window.open("https://wa.me/2348102601114?text=Hello%20Urban%20Edge%20Real%20Estate%2C%0A%0AI%20would%20like%20to%20book%20a%20property%20inspection.", "_blank");
+            });
+        }
+
+        /* =================================================
+           INITIALIZE
+        ================================================== */
+        renderListings(listings);
+    });
+    </script>
+</body>
+</html>

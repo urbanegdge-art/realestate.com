@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions | Urban Edge Real Estate</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* =====================================================
+           ROOT & BASE STYLES
+        ====================================================== */
+        :root {
+            --green: #005a2b;
+            --green-dark: #003d1e;
+            --green-light: #e6f4ed;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --gray: #f7f9f8;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --sidebar-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background: var(--gray);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button, input {
+            font: inherit;
+        }
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 5000;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .menu-toggle {
+            font-size: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--green);
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-toggle:hover {
+            background-color: var(--green-light);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--green);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-badge {
+            background: var(--green);
+            color: white;
+            font-size: 10px;
+            padding: 4px 7px;
+            border-radius: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .header-center {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 30px;
+        }
+
+        .search-bar {
+            display: flex;
+            width: 100%;
+        }
+
+        .search-bar input {
+            flex: 1;
+            min-width: 0;
+            height: 42px;
+            border: 1px solid var(--border);
+            border-right: none;
+            border-radius: 22px 0 0 22px;
+            padding: 0 18px;
+            outline: none;
+            background: white;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--green);
+        }
+
+        .search-bar button {
+            width: 90px;
+            border: none;
+            background: var(--green);
+            color: white;
+            border-radius: 0 22px 22px 0;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .search-bar button:hover {
+            background: var(--green-dark);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .action-btn {
+            background: var(--green);
+            color: white;
+            padding: 10px 17px;
+            border-radius: 22px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 90, 43, 0.25);
+        }
+
+        /* =====================================================
+           APP CONTAINER & SIDEBAR
+        ====================================================== */
+        .app-container {
+            display: flex;
+            min-height: calc(100vh - 64px);
+        }
+
+        aside#sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            border-right: 1px solid var(--border);
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-title {
+            padding: 10px 15px 15px;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--muted);
+            letter-spacing: 1px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .sidebar-link:hover, .sidebar-link.active {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .sidebar-link i {
+            width: 18px;
+            text-align: center;
+        }
+
+        /* =====================================================
+           MAIN CONTENT
+        ====================================================== */
+        main {
+            flex: 1;
+            padding: 35px 40px;
+            min-width: 0;
+            max-width: 1000px;
+        }
+
+        .page-heading {
+            margin-bottom: 30px;
+        }
+
+        .page-heading span {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .page-heading h1 {
+            margin-top: 5px;
+            font-size: 32px;
+            color: var(--text);
+        }
+
+        .page-heading p {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Top 10 Highlight Box */
+        .top10-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--green);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        .top10-card h2 {
+            font-size: 18px;
+            color: var(--green-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top10-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .top10-item {
+            background: var(--gray);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .top10-item:hover {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .top10-item i {
+            color: var(--green);
+        }
+
+        /* Category Sections & Accordion */
+        .faq-category {
+            margin-bottom: 35px;
+        }
+
+        .category-title {
+            font-size: 20px;
+            color: var(--green-dark);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--green-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: border-color 0.2s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #cbd5e1;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 18px 22px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .faq-question i {
+            color: var(--green);
+            font-size: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #fafcfb;
+            border-top: 1px solid transparent;
+        }
+
+        .faq-answer p {
+            padding: 0 22px 20px 22px;
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* Open State */
+        .faq-item.active {
+            border-color: var(--green);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            border-top-color: var(--border);
+            padding-top: 15px;
+        }
+
+        /* Contact Box Card */
+        .contact-box {
+            background: var(--green-dark);
+            color: white;
+            border-radius: 14px;
+            padding: 30px;
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .contact-box-text h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .contact-box-text p {
+            font-size: 13px;
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 8px;
+        }
+
+        .contact-details span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* =====================================================
+           FOOTER & FLOATING ACTIONS
+        ====================================================== */
+        footer {
+            background: var(--green-dark);
+            color: white;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .floating-actions {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 4000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .floating-whatsapp, .back-to-top {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-whatsapp {
+            background: #25D366;
+            color: white;
+            font-size: 28px;
+            transition: 0.3s ease;
+        }
+
+        .floating-whatsapp:hover {
+            transform: translateY(-5px) scale(1.08);
+        }
+
+        .back-to-top {
+            border: none;
+            background: white;
+            color: var(--green);
+            font-size: 22px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.35s ease;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--green);
+            color: white;
+        }
+
+        /* =====================================================
+           RESPONSIVE MOBILE STYLES
+        ====================================================== */
+        @media (max-width: 768px) {
+            header {
+                padding: 0 12px;
+            }
+
+            .header-center, .header-right {
+                display: none;
+            }
+
+            aside#sidebar {
+                position: fixed;
+                top: 64px;
+                right: 12px;
+                left: auto;
+                width: 220px;
+                background: white;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                z-index: 6000;
+                padding: 10px;
+                display: none;
+            }
+
+            main {
+                padding: 24px 16px;
+            }
+
+            .page-heading h1 {
+                font-size: 24px;
+            }
+
+            .contact-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+    <header>
+        <div class="header-left">
+            <button class="menu-toggle" id="menuBtn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars" id="menuIcon"></i>
+            </button>
+            <a href="properties.html" class="logo">
+                <span>URBAN EDGE</span>
+                <span class="logo-badge">PROPERTIES</span>
+            </a>
+        </div>
+
+        <div class="header-center">
+            <form class="search-bar" id="faqSearchForm">
+                <input type="search" id="faqSearchInput" placeholder="Search questions (e.g. CAC, survey, deposit)..." autocomplete="off">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="header-right">
+            <a href="https://wa.me/2348102601114?text=Hello%20Urban%20Edge%20Real%20Estate%2C%0A%0AI%20have%20a%20question%20regarding%20your%20properties." target="_blank" rel="noopener noreferrer" class="action-btn">
+                <i class="fa-brands fa-whatsapp"></i> Contact Agent
+            </a>
+        </div>
+    </header>
+
+    <!-- =====================================================
+         APP CONTAINER
+    ====================================================== -->
+    <div class="app-container">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar">
+            <div class="sidebar-title">PROPERTY MENU</div>
+
+            <a href="properties.html" class="sidebar-link">
+                <i class="fa-solid fa-house"></i> Home Listings
+            </a>
+
+            <a href="promo.html" class="sidebar-link">
+                <i class="fa-solid fa-fire"></i> Promos & Rewards
+            </a>
+
+            <a href="location.html" class="sidebar-link">
+                <i class="fa-solid fa-location-dot"></i> Top Locations
+            </a>
+
+            <a href="ver.html" class="sidebar-link">
+                <i class="fa-solid fa-shield-halved"></i> Property Verification
+            </a>
+
+            <a href="faq.html" class="sidebar-link active">
+                <i class="fa-solid fa-circle-question"></i> Client FAQ
+            </a>
+
+            <a href="#" class="sidebar-link" id="inspectionLink">
+                <i class="fa-solid fa-calendar-check"></i> Book Inspection
+            </a>
+        </aside>
+
+        <!-- MAIN FAQ CONTENT -->
+        <main>
+            <div class="page-heading">
+                <span>CLIENT HELP CENTER</span>
+                <h1>Frequently Asked Questions</h1>
+                <p>Find clear, reliable answers regarding our company registration, property verification, payment options, and documentation process.</p>
+            </div>
+
+            <!-- TOP 10 QUICK ACCESSIBLE QUESTIONS -->
+            <div class="top10-card">
+                <h2><i class="fa-solid fa-star"></i> Top 10 Frequently Asked Questions</h2>
+                <div class="top10-grid">
+                    <div class="top10-item" onclick="scrollToFaq('faq-cac')"><i class="fa-solid fa-circle-check"></i> Is UrbanEdge registered with CAC?</div>
+                    <div class="top10-item" onclick="scrollToFaq('faq-loc')"><i class="fa-solid fa-map-pin"></i> Where are properties located?</div>
+                    <div class="top10-item" onclick="scrollToFaq('faq-inspect')"><i class="fa-solid fa-eye"></i> How can I inspect a property?</div>
+                    <div class="top10-item" onclick="scrollToFaq('faq-verify')"><i class="fa-solid fa-shield"></i> How do I verify land is genuine?</div>
+                    <div class="top10-item" onclick="scrollToFaq('faq-docs')"><i class="fa-solid fa-file-contract"></i> What documents will I receive?</div>
+                    <div class="top10-item" onclick="scrollToFaq('faq-instalment')"><i class="fa-solid fa-credit-card"></i> Do you offer instalment plans?</div>
+                    <div class="top10-item" onclick="scrollToFaq('faq-charges')"><i class="fa-solid fa-coins"></i> Are there additional charges?</div>
+                    <div class="top10-item" onclick="scrollToFaq('faq-diaspora')"><i class="fa-solid fa-plane"></i> Can Nigerians abroad buy?</div>
+                    <div class="top10-item" onclick="scrollToFaq('faq-afterpay')"><i class="fa-solid fa-receipt"></i> What happens after payment?</div>
+                    <div class="top10-item" onclick="scrollToFaq('faq-contact')"><i class="fa-solid fa-phone"></i> How can I contact UrbanEdge?</div>
+                </div>
+            </div>
+
+            <!-- FAQ ACCORDION SECTIONS -->
+            <div id="faqAccordion">
+
+                <!-- 1. COMPANY & VERIFICATION -->
+                <div class="faq-category">
+                    <h2 class="category-title"><i class="fa-solid fa-building"></i> Company & Authenticity</h2>
+
+                    <div class="faq-item" id="faq-about">
+                        <button class="faq-question">
+                            <span>What is UrbanEdge?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>UrbanEdge Real Estate Company Ltd. is a real estate development, consultancy, and management company committed to helping individuals and investors acquire properties with confidence. We provide access to strategically located properties and guide our clients through the acquisition process from inspection to documentation.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-cac">
+                        <button class="faq-question">
+                            <span>Is UrbanEdge a registered company?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. UrbanEdge Real Estate Company Ltd. is a duly registered company in Nigeria with the Corporate Affairs Commission (CAC). Our registration details and relevant corporate documents can be made available for verification.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-verify">
+                        <button class="faq-question">
+                            <span>How do I know that the land I'm buying is genuine?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>UrbanEdge carries out due diligence on properties before marketing them. However, clients are also encouraged to conduct independent verification and engage a qualified property lawyer or surveyor where necessary. We believe transparency and proper verification are essential to every property transaction.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-title-verify">
+                        <button class="faq-question">
+                            <span>Can I verify the property's title?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. We encourage clients to verify the property's title and relevant documentation. Our team can provide the necessary information and documents required for appropriate verification.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. LOCATION & INSPECTION -->
+                <div class="faq-category">
+                    <h2 class="category-title"><i class="fa-solid fa-map-location-dot"></i> Locations & Inspections</h2>
+
+                    <div class="faq-item" id="faq-loc">
+                        <button class="faq-question">
+                            <span>Where are your properties located?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Our properties are located in carefully selected areas with potential for residential development, investment, and future appreciation. The exact location, estate name, plot details, and title documents are provided to clients before they commit to a purchase.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-inspect">
+                        <button class="faq-question">
+                            <span>How can I inspect a property before buying?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>You can schedule an inspection with our team. We will take you to the actual property location, explain the boundaries and estate layout, and answer your questions on-site before you make a decision.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-no-inspect">
+                        <button class="faq-question">
+                            <span>Can I buy land without inspecting it?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, depending on your circumstances, but we strongly recommend inspection. For clients who are unable to visit personally, we can provide appropriate location details, videos, and other information to help them make an informed decision.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-diaspora">
+                        <button class="faq-question">
+                            <span>Can Nigerians living abroad buy from UrbanEdge?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. Nigerians in the diaspora can purchase eligible properties from UrbanEdge. Our team can guide you through the inspection, payment, and documentation process remotely.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. DOCUMENTATION & LEGAL -->
+                <div class="faq-category">
+                    <h2 class="category-title"><i class="fa-solid fa-folder-open"></i> Documentation & Title</h2>
+
+                    <div class="faq-item" id="faq-docs">
+                        <button class="faq-question">
+                            <span>What documents will I receive after buying a property?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The documentation depends on the property and its title. Generally, clients may receive documents such as a Deed of Assignment, Registered Survey, Receipt/Contract of Sale, and other relevant estate or title documents applicable to the property.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-doc-help">
+                        <button class="faq-question">
+                            <span>Does UrbanEdge help with land documentation?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. Our team guides clients through the documentation process and explains the documents applicable to their property. Where documentation fees apply, the client will be informed before payment.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-deed">
+                        <button class="faq-question">
+                            <span>Do I get a Deed of Assignment?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Where applicable to the property, yes. A Deed of Assignment is one of the important legal documents used to transfer an interest in land from the seller/assignor to the buyer/assignee.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-survey">
+                        <button class="faq-question">
+                            <span>What is a Registered Survey and why do I need one?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>A Registered Survey helps establish the location, boundaries, and survey information relating to a parcel of land. It is an important document for confirming the surveyed position of the property and for further land documentation.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-promo-doc">
+                        <button class="faq-question">
+                            <span>What is the current UrbanEdge documentation promotion?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>UrbanEdge currently has a limited promotional offer on qualifying properties where clients can receive a Deed of Assignment and Registered Survey at no additional cost, subject to the terms and duration of the promotion.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-promo-deadline">
+                        <button class="faq-question">
+                            <span>Is there a deadline for the free documentation offer?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. Promotional offers are time-limited. The current offer is available for 60 days, subject to the stated terms and conditions. Clients are encouraged to confirm eligibility before making a purchase.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. PAYMENTS & PROCESS -->
+                <div class="faq-category">
+                    <h2 class="category-title"><i class="fa-solid fa-wallet"></i> Payments & Terms</h2>
+
+                    <div class="faq-item" id="faq-initial">
+                        <button class="faq-question">
+                            <span>How much is the initial payment?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The initial payment depends on the specific property and available payment plan. We offer different payment options on selected properties, and our sales team will provide you with the current terms before you commit.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-instalment">
+                        <button class="faq-question">
+                            <span>Can I pay for my land by instalment?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, selected properties may be available on flexible instalment plans. The duration, initial deposit, and payment schedule depend on the particular property and current offer.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-late-pay">
+                        <button class="faq-question">
+                            <span>What happens if I don't complete my payment on time?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Payment plans are subject to agreed terms and conditions. If a client anticipates difficulty meeting a payment deadline, we encourage them to contact UrbanEdge before the deadline so that the situation can be properly reviewed in accordance with the applicable agreement.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-charges">
+                        <button class="faq-question">
+                            <span>What other costs should I expect apart from the land price?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>This depends on the property. Possible additional costs may include documentation, survey, development, infrastructure, or other applicable statutory/estate charges. All applicable charges should be clearly communicated to you before you make payment.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-price-doc">
+                        <button class="faq-question">
+                            <span>Does the price include documentation?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>This depends on the particular property and promotion. For example, UrbanEdge may run promotional offers where selected documentation is provided free of charge for a limited period. Always confirm the current offer and its terms with our official sales team.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-afterpay">
+                        <button class="faq-question">
+                            <span>What happens after I make payment?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Once payment is confirmed, the transaction proceeds according to the agreed terms. You will receive the applicable payment acknowledgment/receipt and the documentation process will commence according to the property's documentation structure.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-behalf">
+                        <button class="faq-question">
+                            <span>Can someone buy property on my behalf?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. A client may purchase through an authorised representative, subject to proper identification, authorisation, and completion of the required documentation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. DEVELOPMENT & RESALE -->
+                <div class="faq-category">
+                    <h2 class="category-title"><i class="fa-solid fa-trowel-bricks"></i> Development & Resale</h2>
+
+                    <div class="faq-item" id="faq-build">
+                        <button class="faq-question">
+                            <span>Can I build immediately after buying?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>This depends on the property's documentation, estate development status, applicable planning regulations, and whether the necessary approvals have been obtained. Our team will advise you on the applicable requirements.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-dev-help">
+                        <button class="faq-question">
+                            <span>Can UrbanEdge help me develop my property?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. Depending on the project, UrbanEdge can provide or coordinate relevant real estate development and management services. Speak with our team about the development options available for your property.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-resell">
+                        <button class="faq-question">
+                            <span>Can I resell my land after buying it?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Generally, a client may be able to transfer or resell their interest, subject to the terms of the purchase agreement, applicable documentation, and any required consent or administrative process.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-complaint">
+                        <button class="faq-question">
+                            <span>What if I have a complaint about my property?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We encourage clients to contact our customer service or management team immediately. Every complaint should be properly documented and reviewed so that UrbanEdge can provide an appropriate resolution based on the transaction documents and applicable terms.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CONTACT FOOTER CARD -->
+            <div class="contact-box" id="faq-contact">
+                <div class="contact-box-text">
+                    <h3>Still Have Questions?</h3>
+                    <p>Our sales and legal advisory team is available to assist you with property enquiries, site inspections, and title verification.</p>
+                </div>
+                <div class="contact-details">
+                    <span><i class="fa-solid fa-building"></i> UrbanEdge Real Estate Company Ltd.</span>
+                    <span><i class="fa-solid fa-location-dot"></i> 1st Floor, Ebube Dike Plaza, Goodwill Junction, Okpuno, Awka, Anambra State.</span>
+                    <span><i class="fa-solid fa-envelope"></i> Urbanegdge@gmail.com</span>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+    <footer>
+        <div class="footer-bottom">
+            <span>© 2026 Urban Edge Real Estate Company Ltd. All Rights Reserved.</span>
+            <span>Transparency • Trust • Professionalism</span>
+        </div>
+    </footer>
+
+    <!-- =====================================================
+         FLOATING ACTIONS
+    ====================================================== -->
+    <div class="floating-actions">
+        <a href="https://wa.me/2348102601114" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat with Urban Edge Real Estate on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+
+        <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // Sidebar Elements
+        const menuBtn = document.getElementById("menuBtn");
+        const menuIcon = document.getElementById("menuIcon");
+        const sidebar = document.getElementById("sidebar");
+        const backToTop = document.getElementById("backToTop");
+        const inspectionLink = document.getElementById("inspectionLink");
+
+        // Accordion functionality
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach(item => {
+            const questionBtn = item.querySelector(".faq-question");
+            questionBtn.addEventListener("click", () => {
+                const isActive = item.classList.contains("active");
+                
+                // Close all items
+                faqItems.forEach(i => i.classList.remove("active"));
+
+                // Toggle current if it wasn't active
+                if (!isActive) {
+                    item.classList.add("active");
+                }
+            });
+        });
+
+        // Search Filter functionality
+        const searchInput = document.getElementById("faqSearchInput");
+        const searchForm = document.getElementById("faqSearchForm");
+
+        function filterFaqs() {
+            const query = searchInput.value.toLowerCase().trim();
+
+            faqItems.forEach(item => {
+                const qText = item.querySelector(".faq-question span").textContent.toLowerCase();
+                const aText = item.querySelector(".faq-answer p").textContent.toLowerCase();
+
+                if (qText.includes(query) || aText.includes(query)) {
+                    item.style.display = "block";
+                    if (query.length > 2) {
+                        item.classList.add("active");
+                    }
+                } else {
+                    item.style.display = "none";
+                    item.classList.remove("active");
+                }
+            });
+        }
+
+        searchInput.addEventListener("input", filterFaqs);
+        searchForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            filterFaqs();
+        });
+
+        // Sidebar Toggle
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isHidden = window.getComputedStyle(sidebar).display === 'none';
+            if (isHidden) {
+                sidebar.style.display = 'flex';
+                if (menuIcon) menuIcon.className = "fa-solid fa-xmark";
+            } else {
+                sidebar.style.display = 'none';
+                if (menuIcon) menuIcon.className = "fa-solid fa-bars";
+            }
+        });
+
+        // Back to top scroll button
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 300) {
+                backToTop.classList.add("show");
+            } else {
+                backToTop.classList.remove("show");
+            }
+        });
+
+        backToTop.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        if (inspectionLink) {
+            inspectionLink.addEventListener("click", function (e) {
+                e.preventDefault();
+                window.open("https://wa.me/2348102601114?text=Hello%20Urban%20Edge%20Real%20Estate%2C%0A%0AI%20would%20like%20to%20book%20a%20property%20inspection.", "_blank");
+            });
+        }
+    });
+
+    // Quick Scroll and open FAQ function for Top 10 grid
+    function scrollToFaq(faqId) {
+        const target = document.getElementById(faqId);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            target.classList.add('active');
+        }
+    }
+    </script>
+</body>
+</html>

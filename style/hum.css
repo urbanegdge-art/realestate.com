@@ -1,0 +1,38 @@
+
+
+    /* --------------------------------------------------
+       HEADER / NAVBAR (YouTube Style)
+    -------------------------------------------------- */
+    
+
+    .menu-toggle {
+      font-size: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--primary-green);
+      padding: 8px;
+      border-radius: 50%;
+    }
+
+    .menu-toggle:hover {
+      background-color: var(--light-green);
+    }
+
+   
+ 
+        
+
+        .menu-toggle:active {
+            transform: scale(0.92);
+        }
+    
+   
+
+    
+
+    
+
+    
+
+    

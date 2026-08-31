@@ -1,0 +1,2376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Urban Edge Real Estate Extravaganza — Sell More. Win More. Get Rewarded."
+    >
+
+    <title>
+        Urban Edge Extravaganza | Sell & Win Like Mad!
+    </title>
+     <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+<link
+    rel="stylesheet"
+    href="../style/what.css"
+>
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         ICONS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         STYLES
+    ====================================================== -->
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            background: #07130d;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           PRELOADER
+        ====================================================== */
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #07130d;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.8s ease;
+        }
+
+
+        .loader-content {
+            text-align: center;
+        }
+
+
+        .loader-logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            border-top-color: #c9a227;
+            animation: spin 1s linear infinite;
+            margin: auto;
+        }
+
+
+        .loader-text {
+            margin-top: 25px;
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: #c9a227;
+            font-weight: 700;
+        }
+
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* =====================================================
+           PARTICLES
+        ====================================================== */
+
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #c9a227;
+            border-radius: 50%;
+            opacity: 0.35;
+            animation: floatParticle linear infinite;
+        }
+
+
+        @keyframes floatParticle {
+
+            0% {
+                transform: translateY(110vh) scale(0);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.5;
+            }
+
+            80% {
+                opacity: 0.35;
+            }
+
+            100% {
+                transform: translateY(-10vh) scale(1.5);
+                opacity: 0;
+            }
+
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 50% 30%,
+                    rgba(201, 162, 39, 0.18),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07130d,
+                    #0b2417,
+                    #07130d
+                );
+        }
+
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            animation: heroOrbit 18s linear infinite;
+        }
+
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            animation: heroOrbit 12s linear infinite reverse;
+        }
+
+
+        @keyframes heroOrbit {
+
+            from {
+                transform: rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.08);
+            }
+
+            to {
+                transform: rotate(360deg) scale(1);
+            }
+
+        }
+
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 1000px;
+        }
+
+
+        .campaign-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(201, 162, 39, 0.45);
+            background: rgba(201, 162, 39, 0.08);
+            color: #f4d76b;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+
+        @keyframes badgePulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 rgba(201, 162, 39, 0);
+            }
+
+            50% {
+                box-shadow: 0 0 35px rgba(201, 162, 39, 0.25);
+            }
+
+        }
+
+
+        .hero h1 {
+            margin-top: 30px;
+            font-size: clamp(3rem, 8vw, 7.5rem);
+            line-height: 0.95;
+            font-weight: 900;
+            letter-spacing: -5px;
+        }
+
+
+        .hero h1 span {
+            display: block;
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #f4d76b,
+                #c9a227,
+                #ffffff
+            );
+            background-size: 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: goldFlow 5s linear infinite;
+        }
+
+
+        @keyframes goldFlow {
+
+            from {
+                background-position: 0%;
+            }
+
+            to {
+                background-position: 300%;
+            }
+
+        }
+
+
+        .hero-subtitle {
+            max-width: 720px;
+            margin: 35px auto;
+            color: #c9d8ce;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+
+        .btn {
+            padding: 16px 28px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.35s ease;
+        }
+
+
+        .btn-primary {
+            background: linear-gradient(
+                135deg,
+                #c9a227,
+                #f4d76b
+            );
+            color: #07130d;
+            box-shadow:
+                0 10px 35px rgba(201, 162, 39, 0.2);
+        }
+
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow:
+                0 15px 45px rgba(201, 162, 39, 0.35);
+        }
+
+
+        .btn-outline {
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.04);
+            color: #ffffff;
+        }
+
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+
+        /* =====================================================
+           SECTION
+        ====================================================== */
+
+        section {
+            position: relative;
+            z-index: 5;
+            padding: 110px 20px;
+        }
+
+
+        .container {
+            width: min(1200px, 100%);
+            margin: auto;
+        }
+
+
+        .section-heading {
+            text-align: center;
+            max-width: 750px;
+            margin: auto auto 65px;
+        }
+
+
+        .section-heading span {
+            color: #c9a227;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+
+        .section-heading h2 {
+            margin-top: 15px;
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: 1.05;
+            font-weight: 900;
+        }
+
+
+        .section-heading p {
+            margin-top: 20px;
+            color: #aebdb3;
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           REWARD CARDS
+        ====================================================== */
+
+        .rewards {
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(201, 162, 39, 0.08),
+                    transparent 35%
+                );
+        }
+
+
+        .reward-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+
+        .reward-card {
+            position: relative;
+            min-height: 390px;
+            padding: 35px;
+            border-radius: 22px;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.08),
+                    rgba(255, 255, 255, 0.025)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            backdrop-filter: blur(15px);
+
+            transition:
+                transform 0.5s cubic-bezier(.2,.8,.2,1),
+                box-shadow 0.5s ease,
+                border-color 0.5s ease;
+        }
+
+
+        .reward-card::before {
+            content: "";
+            position: absolute;
+            inset: -100%;
+            background:
+                conic-gradient(
+                    transparent,
+                    rgba(201, 162, 39, 0.25),
+                    transparent 30%
+                );
+            animation: cardSpin 7s linear infinite;
+        }
+
+
+        .reward-card::after {
+            content: "";
+            position: absolute;
+            inset: 1px;
+            border-radius: 21px;
+            background: #0b1b12;
+            z-index: 0;
+        }
+
+
+        @keyframes cardSpin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        .reward-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .reward-card:hover {
+            transform:
+                translateY(-12px)
+                rotateX(3deg)
+                rotateY(-2deg);
+
+            border-color:
+                rgba(201, 162, 39, 0.55);
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.4),
+                0 0 35px rgba(201, 162, 39, 0.1);
+        }
+
+
+        .reward-card.featured {
+            border-color: #c9a227;
+            transform: translateY(-12px);
+            box-shadow:
+                0 25px 70px rgba(201, 162, 39, 0.16);
+        }
+
+
+        .reward-card.featured:hover {
+            transform:
+                translateY(-20px)
+                scale(1.02);
+        }
+
+
+        .tier {
+            color: #c9a227;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+
+        .sales-target {
+            margin-top: 15px;
+            font-size: 32px;
+            font-weight: 900;
+        }
+
+
+        .reward-icon {
+            width: 75px;
+            height: 75px;
+            margin: 35px 0 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: rgba(201, 162, 39, 0.12);
+            color: #f4d76b;
+            font-size: 32px;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+
+        @keyframes iconFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(3deg);
+            }
+
+        }
+
+
+        .reward-card h3 {
+            font-size: 21px;
+            line-height: 1.4;
+        }
+
+
+        .reward-card p {
+            margin-top: 15px;
+            color: #aebdb3;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+
+        .grand-prize {
+            color: #f4d76b;
+            font-size: 15px;
+            font-weight: 800;
+            margin-top: 15px;
+        }
+
+
+        /* =====================================================
+           SALES METER
+        ====================================================== */
+
+        .meter-section {
+            background: #050e09;
+        }
+
+
+        .meter {
+            max-width: 950px;
+            margin: auto;
+        }
+
+
+        .meter-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+
+        .meter-track {
+            height: 18px;
+            padding: 3px;
+            background: #15251b;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+
+        .meter-progress {
+            height: 100%;
+            width: 0;
+            border-radius: 50px;
+            background:
+                linear-gradient(
+                    90deg,
+                    #8b7017,
+                    #f4d76b,
+                    #c9a227
+                );
+            box-shadow:
+                0 0 20px rgba(201, 162, 39, 0.5);
+            transition: width 2.5s cubic-bezier(.2,.8,.2,1);
+        }
+
+
+        .meter-tiers {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+
+        .meter-tier {
+            text-align: center;
+            color: #718076;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+
+        .meter-tier.active {
+            color: #f4d76b;
+        }
+
+
+        /* =====================================================
+           HOW IT WORKS
+        ====================================================== */
+
+        .steps {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+
+        .step {
+            padding: 35px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: 0.4s ease;
+        }
+
+
+        .step:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+
+        .step-number {
+            font-size: 55px;
+            font-weight: 900;
+            color: rgba(201, 162, 39, 0.25);
+        }
+
+
+        .step h3 {
+            margin-top: 10px;
+            font-size: 20px;
+        }
+
+
+        .step p {
+            margin-top: 15px;
+            color: #aebdb3;
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           COUNTDOWN
+        ====================================================== */
+
+        .countdown-section {
+            text-align: center;
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(201, 162, 39, 0.12),
+                    transparent 50%
+                );
+        }
+
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+
+        .time-box {
+            width: 130px;
+            padding: 25px 10px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+
+        .time-box strong {
+            display: block;
+            font-size: 42px;
+            color: #f4d76b;
+            font-weight: 900;
+        }
+
+
+        .time-box span {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #9cab9f;
+        }
+
+
+        /* =====================================================
+           GRAND PRIZE
+        ====================================================== */
+
+        .grand-section {
+            padding: 130px 20px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #0b2115,
+                    #152d1c,
+                    #07130d
+                );
+            overflow: hidden;
+        }
+
+
+        .grand-content {
+            position: relative;
+            max-width: 950px;
+            margin: auto;
+            text-align: center;
+        }
+
+
+        .grand-content::before {
+            content: "₦";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 500px;
+            font-weight: 900;
+            color: rgba(201, 162, 39, 0.025);
+            pointer-events: none;
+        }
+
+
+        .grand-content > * {
+            position: relative;
+        }
+
+
+        .grand-content h2 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.95;
+            font-weight: 900;
+        }
+
+
+        .cash {
+            color: #f4d76b;
+        }
+
+
+        .grand-list {
+            max-width: 650px;
+            margin: 40px auto;
+            display: grid;
+            gap: 12px;
+            text-align: left;
+        }
+
+
+        .grand-item {
+            display: flex;
+            gap: 15px;
+            padding: 17px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+
+        .grand-item i {
+            color: #f4d76b;
+        }
+
+
+        /* =====================================================
+           CTA
+        ====================================================== */
+
+        .cta {
+            text-align: center;
+            padding: 120px 20px;
+        }
+
+
+        .cta-box {
+            max-width: 950px;
+            margin: auto;
+            padding: 70px 30px;
+            border-radius: 30px;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(201, 162, 39, 0.13),
+                    rgba(255, 255, 255, 0.03)
+                );
+        }
+
+
+        .cta-box h2 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+        }
+
+
+        .cta-box p {
+            max-width: 650px;
+            margin: 25px auto 35px;
+            color: #b4c2b9;
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           FAQ
+        ====================================================== */
+
+        .faq {
+            max-width: 850px;
+            margin: auto;
+        }
+
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+
+        .faq-question {
+            width: 100%;
+            padding: 25px 5px;
+            background: transparent;
+            color: #ffffff;
+            border: none;
+            text-align: left;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            color: #9fac9f;
+            line-height: 1.8;
+            transition: 0.4s ease;
+        }
+
+
+        .faq-item.active .faq-answer {
+            max-height: 250px;
+            padding-bottom: 25px;
+        }
+
+
+        .faq-question i {
+            transition: 0.3s ease;
+        }
+
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        footer {
+            padding: 50px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            color: #78877d;
+            font-size: 12px;
+        }
+
+
+        footer strong {
+            color: #f4d76b;
+        }
+
+
+        /* =====================================================
+           REVEAL ANIMATION
+        ====================================================== */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           CONFETTI
+        ====================================================== */
+
+        .confetti {
+            position: fixed;
+            top: -20px;
+            width: 9px;
+            height: 15px;
+            z-index: 10000;
+            pointer-events: none;
+            animation: confettiFall 3s linear forwards;
+        }
+
+
+        @keyframes confettiFall {
+
+            to {
+                transform:
+                    translateY(110vh)
+                    rotate(720deg);
+                opacity: 0;
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 900px) {
+
+            .reward-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            section {
+                padding: 80px 18px;
+            }
+
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+
+            .hero-subtitle {
+                font-size: 15px;
+            }
+
+
+            .reward-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .reward-card.featured {
+                transform: none;
+            }
+
+
+            .meter-tiers {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+
+
+            .time-box {
+                width: 75px;
+            }
+
+
+            .time-box strong {
+                font-size: 28px;
+            }
+
+
+            .grand-content h2 {
+                font-size: 3.2rem;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         LOADER
+    ====================================================== -->
+
+    <div id="loader">
+
+        <div class="loader-content">
+
+            <div class="loader-logo"></div>
+
+            <div class="loader-text">
+                URBAN EDGE EXTRAVAGANZA
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PARTICLES
+    ====================================================== -->
+
+    <div class="particles" id="particles"></div>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <header class="hero">
+
+        <div class="hero-content">
+
+            <div class="campaign-badge">
+
+                <i class="fa-solid fa-fire"></i>
+
+                URBAN EDGE REAL ESTATE
+
+                <i class="fa-solid fa-fire"></i>
+
+            </div>
+
+
+            <h1>
+
+                SELL.
+
+                <span>WIN.</span>
+
+                REPEAT.
+
+            </h1>
+
+
+            <p class="hero-subtitle">
+
+                Welcome to the
+
+                <strong>
+                    URBAN EDGE EXTRAVAGANZA
+                </strong>.
+
+                Don't just sell properties —
+                <strong>sell like a champion</strong>,
+                smash your targets and unlock
+                incredible rewards.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#rewards"
+                    class="btn btn-primary"
+                >
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                    VIEW THE PRIZES
+
+                </a>
+
+
+                <a
+                    href="#participate"
+                    class="btn btn-outline"
+                >
+
+                    HOW TO PARTICIPATE
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         REWARDS
+    ====================================================== -->
+
+    <section
+        class="rewards"
+        id="rewards"
+    >
+
+        <div class="container">
+
+            <div class="section-heading reveal">
+
+                <span>
+                    REWARD TIERS
+                </span>
+
+                <h2>
+                    Sell More.<br>
+                    Win More.
+                </h2>
+
+                <p>
+                    Every milestone unlocks another
+                    reward. Hit your target and claim
+                    your prize.
+                </p>
+
+            </div>
+
+
+            <div class="reward-grid">
+
+
+                <!-- CARD 1 -->
+
+                <article class="reward-card reveal">
+
+                    <div class="tier">
+                        MILESTONE 01
+                    </div>
+
+                    <div class="sales-target">
+                        ₦2M – ₦3M
+                    </div>
+
+                    <div class="reward-icon">
+                        <i class="fa-solid fa-bowl-food"></i>
+                    </div>
+
+                    <h3>
+                        Foodie Starter Pack
+                    </h3>
+
+                    <p>
+                        Hit ₦2M – ₦3M in property
+                        sales and unlock:
+                    </p>
+
+                    <div class="grand-prize">
+                        🍜 1 Carton Instant Noodles<br>
+                        🛢️ Bottles of Cooking Oil
+                    </div>
+
+                </article>
+
+
+                <!-- CARD 2 -->
+
+                <article class="reward-card reveal">
+
+                    <div class="tier">
+                        MILESTONE 02
+                    </div>
+
+                    <div class="sales-target">
+                        ₦4M – ₦5M
+                    </div>
+
+                    <div class="reward-icon">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                    </div>
+
+                    <h3>
+                        Premium Food Pack
+                    </h3>
+
+                    <p>
+                        Push your sales to the next
+                        level and unlock:
+                    </p>
+
+                    <div class="grand-prize">
+                        🍚 25kg Premium Rice<br>
+                        🛢️ 2-Litre Cooking Oil
+                    </div>
+
+                </article>
+
+
+                <!-- CARD 3 -->
+
+                <article class="reward-card reveal">
+
+                    <div class="tier">
+                        MILESTONE 03
+                    </div>
+
+                    <div class="sales-target">
+                        ₦10M – ₦15M
+                    </div>
+
+                    <div class="reward-icon">
+                        <i class="fa-solid fa-house-circle-check"></i>
+                    </div>
+
+                    <h3>
+                        Mega Home Package
+                    </h3>
+
+                    <p>
+                        Hit ₦10M – ₦15M in sales and
+                        step into the bigger rewards:
+                    </p>
+
+                    <div class="grand-prize">
+                        🍚 50kg Premium Rice<br>
+                        🎁 Assorted Food Items<br>
+                        🏠 Home Appliances
+                    </div>
+
+                </article>
+
+
+                <!-- CARD 4 -->
+
+                <article class="reward-card reveal">
+
+                    <div class="tier">
+                        MILESTONE 04
+                    </div>
+
+                    <div class="sales-target">
+                        ₦20M – ₦30M
+                    </div>
+
+                    <div class="reward-icon">
+                        <i class="fa-solid fa-fire-burner"></i>
+                    </div>
+
+                    <h3>
+                        Home Upgrade Package
+                    </h3>
+
+                    <p>
+                        Smash ₦20M – ₦30M in sales and
+                        claim:
+                    </p>
+
+                    <div class="grand-prize">
+                        🔥 Standing Gas Cooker<br>
+                        🏠 Home Appliances<br>
+                        🎁 Assorted Food Items
+                    </div>
+
+                </article>
+
+
+                <!-- CARD 5 -->
+
+                <article
+                    class="reward-card featured reveal"
+                >
+
+                    <div class="tier">
+                        🏆 ULTIMATE MILESTONE
+                    </div>
+
+                    <div class="sales-target">
+                        ₦50M – ₦100M+
+                    </div>
+
+                    <div class="reward-icon">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+
+                    <h3>
+                        THE CHAMPION'S REWARD
+                    </h3>
+
+                    <p>
+                        This is where ordinary sales
+                        champions become Urban Edge
+                        legends.
+                    </p>
+
+                    <div class="grand-prize">
+                        💰 ₦500,000 Cash Cheque<br>
+                        🏅 Official Sales Ambassador<br>
+                        ✈️ Exotic Trip Qualification
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SALES METER
+    ====================================================== -->
+
+    <section class="meter-section">
+
+        <div class="container">
+
+            <div class="section-heading reveal">
+
+                <span>
+                    YOUR JOURNEY
+                </span>
+
+                <h2>
+                    How Far Can You Go?
+                </h2>
+
+                <p>
+                    Every deal moves you closer to
+                    another reward.
+                </p>
+
+            </div>
+
+
+            <div class="meter reveal">
+
+                <div class="meter-label">
+
+                    <span>
+                        START SELLING
+                    </span>
+
+                    <strong>
+                        ₦100M+
+                    </strong>
+
+                </div>
+
+
+                <div class="meter-track">
+
+                    <div
+                        class="meter-progress"
+                        id="meterProgress"
+                    ></div>
+
+                </div>
+
+
+                <div class="meter-tiers">
+
+                    <div class="meter-tier active">
+                        ₦2M+
+                    </div>
+
+                    <div class="meter-tier">
+                        ₦4M+
+                    </div>
+
+                    <div class="meter-tier">
+                        ₦10M+
+                    </div>
+
+                    <div class="meter-tier">
+                        ₦20M+
+                    </div>
+
+                    <div class="meter-tier">
+                        ₦50M+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PARTICIPATION
+    ====================================================== -->
+
+    <section id="participate">
+
+        <div class="container">
+
+            <div class="section-heading reveal">
+
+                <span>
+                    HOW IT WORKS
+                </span>
+
+                <h2>
+                    Three Steps.<br>
+                    Unlimited Possibilities.
+                </h2>
+
+            </div>
+
+
+            <div class="steps">
+
+
+                <div class="step reveal">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Register
+                    </h3>
+
+                    <p>
+                        Register as an Urban Edge
+                        Realtor / Sales Partner and
+                        officially join the team.
+                    </p>
+
+                </div>
+
+
+                <div class="step reveal">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Start Selling
+                    </h3>
+
+                    <p>
+                        Promote Urban Edge properties,
+                        connect buyers with genuine
+                        opportunities and close deals.
+                    </p>
+
+                </div>
+
+
+                <div class="step reveal">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Hit Your Target & Win
+                    </h3>
+
+                    <p>
+                        Reach your sales milestone,
+                        unlock your reward and keep
+                        climbing toward the ultimate prize.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COUNTDOWN
+    ====================================================== -->
+
+    <section class="countdown-section">
+
+        <div class="container">
+
+            <div class="section-heading reveal">
+
+                <span>
+                    THE CLOCK IS RUNNING
+                </span>
+
+                <h2>
+                    Your Next Big Win
+                    Starts Now.
+                </h2>
+
+                <p>
+                    Don't wait until everyone else is
+                    already closing deals.
+                </p>
+
+            </div>
+
+
+            <div class="countdown reveal">
+
+                <div class="time-box">
+
+                    <strong id="days">
+                        00
+                    </strong>
+
+                    <span>
+                        DAYS
+                    </span>
+
+                </div>
+
+
+                <div class="time-box">
+
+                    <strong id="hours">
+                        00
+                    </strong>
+
+                    <span>
+                        HOURS
+                    </span>
+
+                </div>
+
+
+                <div class="time-box">
+
+                    <strong id="minutes">
+                        00
+                    </strong>
+
+                    <span>
+                        MINUTES
+                    </span>
+
+                </div>
+
+
+                <div class="time-box">
+
+                    <strong id="seconds">
+                        00
+                    </strong>
+
+                    <span>
+                        SECONDS
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         GRAND PRIZE
+    ====================================================== -->
+
+    <section class="grand-section">
+
+        <div class="grand-content reveal">
+
+            <span class="section-heading">
+
+                <span>
+                    THE ULTIMATE TARGET
+                </span>
+
+            </span>
+
+
+            <h2>
+
+                ₦50M+
+
+                <br>
+
+                <span class="cash">
+                    CHANGES EVERYTHING.
+                </span>
+
+            </h2>
+
+
+            <div class="grand-list">
+
+                <div class="grand-item">
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    <span>
+                        Qualify for a ₦500,000 cash cheque
+                    </span>
+
+                </div>
+
+
+                <div class="grand-item">
+
+                    <i class="fa-solid fa-medal"></i>
+
+                    <span>
+                        Become an official Urban Edge
+                        Sales Ambassador
+                    </span>
+
+                </div>
+
+
+                <div class="grand-item">
+
+                    <i class="fa-solid fa-plane"></i>
+
+                    <span>
+                        Qualify for an exotic trip
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="btn btn-primary"
+                id="grandPrizeBtn"
+            >
+
+                🔥 I'M GOING FOR IT
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CTA
+    ====================================================== -->
+
+    <section class="cta">
+
+        <div class="cta-box reveal">
+
+            <h2>
+                READY TO<br>
+                <span style="color:#f4d76b;">
+                    SELL & WIN?
+                </span>
+            </h2>
+
+            <p>
+                Register today, start promoting Urban Edge
+                properties and turn every successful deal
+                into another opportunity to win.
+            </p>
+
+
+            <a
+                href="partner.html"
+                class="btn btn-primary"
+            >
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                REGISTER AS A SALES PARTNER
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FAQ
+    ====================================================== -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-heading reveal">
+
+                <span>
+                    FAQ
+                </span>
+
+                <h2>
+                    Got Questions?
+                </h2>
+
+            </div>
+
+
+            <div class="faq">
+
+
+                <div class="faq-item reveal">
+
+                    <button class="faq-question">
+
+                        Who can participate?
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </button>
+
+                    <div class="faq-answer">
+
+                        Registered Urban Edge Real Estate
+                        Realtors and Sales Partners who
+                        meet the applicable promotion
+                        requirements can participate.
+
+                    </div>
+
+                </div>
+
+
+                <div class="faq-item reveal">
+
+                    <button class="faq-question">
+
+                        How do I qualify for a reward?
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </button>
+
+                    <div class="faq-answer">
+
+                        You qualify by reaching the stated
+                        sales milestone. All sales must be
+                        properly verified and approved by
+                        Urban Edge Real Estate.
+
+                    </div>
+
+                </div>
+
+
+                <div class="faq-item reveal">
+
+                    <button class="faq-question">
+
+                        Can I keep selling after winning a prize?
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </button>
+
+                    <div class="faq-answer">
+
+                        Absolutely. The higher your verified
+                        sales performance, the more
+                        opportunities you may unlock.
+
+                    </div>
+
+                </div>
+
+
+                <div class="faq-item reveal">
+
+                    <button class="faq-question">
+
+                        How will prizes be awarded?
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </button>
+
+                    <div class="faq-answer">
+
+                        Sales milestones and eligibility will
+                        be verified by Urban Edge Real Estate
+                        before applicable rewards are awarded.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <strong>
+            URBAN EDGE REAL ESTATE
+        </strong>
+
+        <br><br>
+
+        Building Wealth. Creating Communities.
+        Securing Your Future.
+
+        <br><br>
+
+        © 2026 Urban Edge Real Estate.
+        All rights reserved.
+
+    </footer>
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 Urban Edge Real Estate.
+            All Rights Reserved.
+        </span>
+
+        <span>
+            Transparency • Trust • Professionalism
+        </span>
+
+    </div>
+
+</div>
+
+</footer>
+
+<!-- FLOATING ACTION BUTTONS -->
+<div class="floating-actions">
+
+
+<!-- WhatsApp -->
+<a
+    href="https://wa.me/2349011157594"
+    class="floating-whatsapp"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with Urban Edge Real Estate on WhatsApp"
+>
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+    <!-- Back To Top -->
+    <button
+        type="button"
+        class="back-to-top"
+        id="backToTop"
+        aria-label="Back to top"
+    >
+        ↑
+    </button>
+
+</div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           LOADER
+        ====================================================== */
+
+        window.addEventListener(
+            "load",
+            function() {
+
+                setTimeout(
+                    function() {
+
+                        document
+                            .getElementById("loader")
+                            .style.opacity = "0";
+
+
+                        setTimeout(
+                            function() {
+
+                                document
+                                    .getElementById("loader")
+                                    .style.display = "none";
+
+                            },
+                            800
+                        );
+
+                    },
+                    700
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           PARTICLES
+        ====================================================== */
+
+        const particles =
+            document.getElementById("particles");
+
+
+        for (
+            let i = 0;
+            i < 45;
+            i++
+        ) {
+
+            const particle =
+                document.createElement("div");
+
+
+            particle.className =
+                "particle";
+
+
+            particle.style.left =
+                Math.random() * 100 + "%";
+
+
+            particle.style.animationDuration =
+                (5 + Math.random() * 10) + "s";
+
+
+            particle.style.animationDelay =
+                Math.random() * 8 + "s";
+
+
+            particle.style.transform =
+                `scale(${Math.random()})`;
+
+
+            particles.appendChild(
+                particle
+            );
+
+        }
+
+
+        /* =====================================================
+           SCROLL REVEAL
+        ====================================================== */
+
+        const revealElements =
+            document.querySelectorAll(
+                ".reveal"
+            );
+
+
+        const revealObserver =
+            new IntersectionObserver(
+                function(entries) {
+
+                    entries.forEach(
+                        function(entry) {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target
+                                    .classList
+                                    .add("visible");
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+
+        revealElements.forEach(
+            function(element) {
+
+                revealObserver.observe(
+                    element
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           SALES METER ANIMATION
+        ====================================================== */
+
+        const meter =
+            document.getElementById(
+                "meterProgress"
+            );
+
+
+        const meterObserver =
+            new IntersectionObserver(
+                function(entries) {
+
+                    if (
+                        entries[0].isIntersecting
+                    ) {
+
+                        meter.style.width =
+                            "100%";
+
+                        meterObserver.disconnect();
+
+                    }
+
+                },
+                {
+                    threshold: 0.5
+                }
+            );
+
+
+        meterObserver.observe(
+            meter
+        );
+
+
+        /* =====================================================
+           COUNTDOWN
+           
+           CHANGE THIS DATE TO YOUR REAL
+           PROMOTION END DATE.
+        ====================================================== */
+
+        const promotionEnd =
+            new Date(
+                "December 31, 2026 23:59:59"
+            ).getTime();
+
+
+        function updateCountdown() {
+
+            const now =
+                new Date().getTime();
+
+
+            const distance =
+                promotionEnd - now;
+
+
+            if (distance <= 0) {
+
+                document.getElementById(
+                    "days"
+                ).textContent = "00";
+
+                document.getElementById(
+                    "hours"
+                ).textContent = "00";
+
+                document.getElementById(
+                    "minutes"
+                ).textContent = "00";
+
+                document.getElementById(
+                    "seconds"
+                ).textContent = "00";
+
+                return;
+
+            }
+
+
+            const days =
+                Math.floor(
+                    distance /
+                    (1000 * 60 * 60 * 24)
+                );
+
+
+            const hours =
+                Math.floor(
+                    (
+                        distance %
+                        (1000 * 60 * 60 * 24)
+                    ) /
+                    (1000 * 60 * 60)
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (
+                        distance %
+                        (1000 * 60 * 60)
+                    ) /
+                    (1000 * 60)
+                );
+
+
+            const seconds =
+                Math.floor(
+                    (
+                        distance %
+                        (1000 * 60)
+                    ) /
+                    1000
+                );
+
+
+            document.getElementById(
+                "days"
+            ).textContent =
+                String(days).padStart(2, "0");
+
+
+            document.getElementById(
+                "hours"
+            ).textContent =
+                String(hours).padStart(2, "0");
+
+
+            document.getElementById(
+                "minutes"
+            ).textContent =
+                String(minutes).padStart(2, "0");
+
+
+            document.getElementById(
+                "seconds"
+            ).textContent =
+                String(seconds).padStart(2, "0");
+
+        }
+
+
+        updateCountdown();
+
+
+        setInterval(
+            updateCountdown,
+            1000
+        );
+
+
+        /* =====================================================
+           FAQ
+        ====================================================== */
+
+        const faqQuestions =
+            document.querySelectorAll(
+                ".faq-question"
+            );
+
+
+        faqQuestions.forEach(
+            function(question) {
+
+                question.addEventListener(
+                    "click",
+                    function() {
+
+                        const item =
+                            question.parentElement;
+
+
+                        item.classList.toggle(
+                            "active"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           GRAND PRIZE CONFETTI
+        ====================================================== */
+
+        document
+            .getElementById("grandPrizeBtn")
+            .addEventListener(
+                "click",
+                function() {
+
+                    for (
+                        let i = 0;
+                        i < 100;
+                        i++
+                    ) {
+
+                        const piece =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        piece.className =
+                            "confetti";
+
+
+                        piece.style.left =
+                            Math.random() * 100 + "vw";
+
+
+                        piece.style.background =
+                            Math.random() > 0.5
+                                ? "#c9a227"
+                                : "#ffffff";
+
+
+                        piece.style.animationDuration =
+                            (
+                                2 +
+                                Math.random() * 2
+                            ) + "s";
+
+
+                        piece.style.animationDelay =
+                            Math.random() * 0.8 + "s";
+
+
+                        document.body.appendChild(
+                            piece
+                        );
+
+
+                        setTimeout(
+                            function() {
+
+                                piece.remove();
+
+                            },
+                            4000
+                        );
+
+                    }
+
+                }
+            );
+
+
+    </script>
+
+<script
+    src="../js/what.js"
+></script>
+
+</body>
+
+</html>

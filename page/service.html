@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Edge Real Estate - Service Catalog</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animations CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- NAVIGATION HEADER -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <span class="text-2xl font-extrabold text-amber-600 tracking-tight">URBAN EDGE</span>
+                <span class="text-xs uppercase font-semibold text-gray-400 border-l border-gray-300 pl-2">Real Estate</span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#services" class="hover:text-amber-600 transition">Our Services</a>
+                <a href="properties.html" class="hover:text-amber-600 transition">Properties</a>
+                <a href="partner.html" class="hover:text-amber-600 transition">Partner Program</a>
+            </nav>
+
+            <a href="https://wa.me/2348102601114?text=Hello%20Urban%20Edge%20Team%2C%20I%20have%20an%20inquiry%20about%20your%20services." 
+               target="_blank" 
+               class="hidden md:inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-lg shadow-sm transition">
+                <i class="fa-brands fa-whatsapp mr-2 text-base"></i> Quick Chat
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button id="menuBtn" class="md:hidden p-2 text-gray-600 hover:text-amber-600">
+                <i id="menuIcon" class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Sidebar -->
+        <div id="sidebar" class="hidden flex-col bg-white border-b border-gray-200 px-6 py-4 space-y-4 md:hidden">
+            <a href="#services" class="text-gray-700 font-medium hover:text-amber-600">Our Services</a>
+            <a href="#catalog" class="text-gray-700 font-medium hover:text-amber-600">Properties</a>
+            <a href="#partner" class="text-gray-700 font-medium hover:text-amber-600">Partner Program</a>
+            <a href="https://wa.me/2348102601114?text=Hello%20Urban%20Edge%20Team%2C%20I%20have%20an%20inquiry%20about%20your%20services." 
+               target="_blank" 
+               class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-amber-600 rounded-lg">
+                <i class="fa-brands fa-whatsapp mr-2"></i> Quick Chat
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative bg-gray-900 text-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="relative max-w-5xl mx-auto text-center space-y-6" data-aos="fade-up">
+            <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full uppercase tracking-wider">Premium Real Estate Services</span>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight">Innovative Solutions for Property Development & Investments</h1>
+            <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">Explore our portfolio of services, book site inspections, or join our high-performing sales network directly via instant communication.</p>
+        </div>
+    </section>
+
+    <!-- SERVICES CATALOG FILTER & GRID -->
+    <section id="services" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-gray-900">Service Catalog</h2>
+            <p class="text-gray-600 mt-2">Filter our core offerings to discover how Urban Edge can assist your goals.</p>
+            
+            <!-- Category Filter Controls -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6">
+                <button class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-amber-600 text-white shadow-sm" data-filter="all">All Services</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-white text-gray-600 border border-gray-200 hover:border-amber-600 transition" data-filter="property">Property Sales</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-white text-gray-600 border border-gray-200 hover:border-amber-600 transition" data-filter="advisory">Advisory & Inspections</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-white text-gray-600 border border-gray-200 hover:border-amber-600 transition" data-filter="network">Sales Network</button>
+            </div>
+        </div>
+
+        <!-- Service Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Service 1: Property Inspections -->
+            <div class="catalog-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col" data-category="advisory" data-aos="fade-up">
+                <div class="h-48 bg-gray-200 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" alt="Site Inspection" class="w-full h-full object-cover">
+                    <span class="absolute top-4 left-4 bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Advisory</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Guided Site Inspections</h3>
+                        <p class="text-gray-600 text-sm">Schedule private, guided walkthroughs of prime residential and commercial land estates across prime developments.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100">
+                        <a id="inspectionLink" href="#" class="w-full py-2.5 px-4 bg-gray-900 hover:bg-amber-600 text-white font-semibold text-sm rounded-lg flex items-center justify-center transition">
+                            <i class="fa-solid fa-calendar-check mr-2"></i> Book Inspection
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2: Sales Partner Network -->
+            <div class="catalog-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col" data-category="network" data-aos="fade-up" data-aos-delay="100">
+                <div class="h-48 bg-gray-200 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80" alt="Sales Network" class="w-full h-full object-cover">
+                    <span class="absolute top-4 left-4 bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Network</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Sales Team Registration</h3>
+                        <p class="text-gray-600 text-sm">Join the Urban Edge sales network to access exclusive property listings and earning structures.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100">
+                        <a href="#partner" class="w-full py-2.5 px-4 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm rounded-lg flex items-center justify-center transition">
+                            <i class="fa-solid fa-user-plus mr-2"></i> Apply to Join
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3: Commercial & Residential Sales -->
+            <div class="catalog-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col" data-category="property" data-aos="fade-up" data-aos-delay="200">
+                <div class="h-48 bg-gray-200 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" alt="Property Acquisition" class="w-full h-full object-cover">
+                    <span class="absolute top-4 left-4 bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Property</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Estate Land Acquisition</h3>
+                        <p class="text-gray-600 text-sm">Direct purchasing options for verified titles, fast allocation, and high-ROI investment plots.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100">
+                        <button onclick="triggerWhatsAppInquiry('Estate Land Acquisition')" class="w-full py-2.5 px-4 bg-gray-900 hover:bg-amber-600 text-white font-semibold text-sm rounded-lg flex items-center justify-center transition">
+                            <i class="fa-solid fa-circle-info mr-2"></i> Request Brochure
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- DYNAMIC REGISTRATION SECTION -->
+    <section id="partner" class="py-16 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gray-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden" data-aos="zoom-in">
+                
+                <div class="relative z-10 max-w-2xl mx-auto text-center space-y-4">
+                    <h2 class="text-3xl font-bold">Partner Sales Registration</h2>
+                    <p class="text-gray-300 text-sm">Register your interest directly to start collaborating with the Urban Edge Real Estate team.</p>
+                </div>
+
+                <!-- Alert Messages -->
+                <div id="successAlert" class="hidden mt-6 bg-emerald-500/10 border border-emerald-500 text-emerald-400 px-4 py-3 rounded-xl items-center text-sm">
+                    <i class="fa-solid fa-circle-check text-xl mr-3"></i>
+                    <span>Redirecting your registration details to WhatsApp...</span>
+                </div>
+
+                <!-- Registration Form -->
+                <form id="partnerForm" class="mt-8 space-y-4 relative z-10 max-w-xl mx-auto">
+                    <div>
+                        <label for="fullName" class="block text-xs font-semibold uppercase text-gray-400 mb-1">Full Name</label>
+                        <input type="text" id="fullName" required class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 transition" placeholder="e.g. Chukwuma Eze">
+                    </div>
+
+                    <div>
+                        <label for="emailAddress" class="block text-xs font-semibold uppercase text-gray-400 mb-1">Email Address</label>
+                        <input type="email" id="emailAddress" required class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 transition" placeholder="name@example.com">
+                    </div>
+
+                    <div>
+                        <label for="phoneNumber" class="block text-xs font-semibold uppercase text-gray-400 mb-1">Phone Number</label>
+                        <input type="tel" id="phoneNumber" required class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 transition" placeholder="e.g. 08102601114">
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full py-3.5 px-6 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center">
+                        <i id="btnIcon" class="fa-solid fa-paper-plane mr-2"></i>
+                        <span id="btnText">Submit Registration</span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <p class="text-sm">&copy; Urban Edge Real Estate. All rights reserved.</p>
+            <p class="text-xs text-gray-500">For direct support, contact us via WhatsApp: +234 810 260 1114</p>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-amber-600 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-amber-700">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- AOS Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <!-- MAIN JAVASCRIPT -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // 1. Initialize AOS Animations
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-in-out'
+        });
+
+        // 2. DOM Elements
+        const menuBtn = document.getElementById("menuBtn");
+        const menuIcon = document.getElementById("menuIcon");
+        const sidebar = document.getElementById("sidebar");
+        const backToTop = document.getElementById("backToTop");
+        const inspectionLink = document.getElementById("inspectionLink");
+        const partnerForm = document.getElementById("partnerForm");
+        const successAlert = document.getElementById("successAlert");
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        const catalogCards = document.querySelectorAll(".catalog-card");
+
+        // 3. Dynamic Service Filtering
+        filterBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                // Active Button Styling
+                filterBtns.forEach(b => {
+                    b.classList.remove("bg-amber-600", "text-white");
+                    b.classList.add("bg-white", "text-gray-600");
+                });
+                btn.classList.remove("bg-white", "text-gray-600");
+                btn.classList.add("bg-amber-600", "text-white");
+
+                const filter = btn.getAttribute("data-filter");
+
+                catalogCards.forEach(card => {
+                    if (filter === "all" || card.getAttribute("data-category") === filter) {
+                        card.style.display = "flex";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            });
+        });
+
+        // 4. Partner Form WhatsApp Redirect Handler
+        if (partnerForm) {
+            partnerForm.addEventListener("submit", function(e) {
+                e.preventDefault();
+
+                const rawName = document.getElementById("fullName").value.trim();
+                const rawEmail = document.getElementById("emailAddress").value.trim();
+                const rawPhone = document.getElementById("phoneNumber").value.trim();
+
+                const name = encodeURIComponent(rawName);
+                const email = encodeURIComponent(rawEmail);
+                const phone = encodeURIComponent(rawPhone);
+
+                const message = `Hello Urban Edge Team,%0A%0AI would like to register for the sales team:%0A- Name: ${name}%0A- Email: ${email}%0A- Phone: ${phone}`;
+                
+                if (successAlert) {
+                    successAlert.classList.remove("hidden");
+                    successAlert.classList.add("flex");
+                    successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+                partnerForm.reset();
+                window.open(`https://wa.me/2348102601114?text=${message}`, '_blank');
+            });
+        }
+
+        // 5. Sidebar Toggle
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isHidden = sidebar.classList.contains('hidden');
+                if (isHidden) {
+                    sidebar.classList.remove('hidden');
+                    sidebar.classList.add('flex');
+                    if (menuIcon) menuIcon.className = "fa-solid fa-xmark text-xl";
+                } else {
+                    sidebar.classList.add('hidden');
+                    sidebar.classList.remove('flex');
+                    if (menuIcon) menuIcon.className = "fa-solid fa-bars text-xl";
+                }
+            });
+        }
+
+        // 6. Scroll back to top
+        if (backToTop) {
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > 300) {
+                    backToTop.classList.remove("opacity-0", "pointer-events-none");
+                    backToTop.classList.add("opacity-100");
+                } else {
+                    backToTop.classList.add("opacity-0", "pointer-events-none");
+                    backToTop.classList.remove("opacity-100");
+                }
+            });
+
+            backToTop.addEventListener("click", function () {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
+
+        // 7. Site Inspection Link Handler
+        if (inspectionLink) {
+            inspectionLink.addEventListener("click", function (e) {
+                e.preventDefault();
+                window.open("https://wa.me/2348102601114?text=Hello%20Urban%20Edge%20Real%20Estate%2C%0A%0AI%20would%20like%20to%20book%20a%20property%20inspection.", "_blank");
+            });
+        }
+    });
+
+    // Helper for direct property WhatsApp inquiries
+    function triggerWhatsAppInquiry(serviceName) {
+        const text = encodeURIComponent(`Hello Urban Edge Real Estate,\n\nI would like more information and a brochure regarding: ${serviceName}.`);
+        window.open(`https://wa.me/2348102601114?text=${text}`, '_blank');
+    }
+    </script>
+</body>
+</html>

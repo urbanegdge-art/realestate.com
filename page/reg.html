@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Registration Portal</title>
+  <!-- Google Fonts & External Libraries -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <!-- Added html2pdf.js for true PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; padding: 30px 15px; color: #334155; }
+    
+    .container { 
+      max-width: 780px; 
+      margin: 0 auto; 
+      background: #ffffff; 
+      border-radius: 16px; 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25); 
+      overflow: hidden; 
+      animation: fadeIn 0.5s ease-in-out; 
+    }
+
+    /* Header Section */
+    .company-header {
+      background: #ffffff;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .company-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .brand-details h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .brand-details p {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .portal-badge {
+      background: #eff6ff;
+      color: #1be709;
+      font-weight: 600;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #bfdbfe;
+      white-space: nowrap;
+    }
+
+    /* Stepper Navigation */
+    .stepper-container { background: #f8fafc; padding: 20px 30px; border-bottom: 1px solid #e2e8f0; }
+    .stepper { display: flex; justify-content: space-between; position: relative; }
+    .stepper::before { content: ''; position: absolute; top: 18px; left: 5%; width: 90%; height: 3px; background: #cbd5e1; z-index: 1; }
+    .step-node { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+    .step-circle { 
+      width: 38px; height: 38px; border-radius: 50%; background: #ffffff; color: #64748b; 
+      display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
+      border: 3px solid #cbd5e1; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    .step-node.active .step-circle { background: #33f004; color: #ffffff; border-color: #93c5fd; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15); }
+    .step-node.completed .step-circle { background: #10b981; color: #ffffff; border-color: #10b981; }
+    .step-title { font-size: 12px; margin-top: 8px; font-weight: 600; color: #64748b; transition: 0.3s; }
+    .step-node.active .step-title { color: #0aee1d; }
+
+    /* Form Panels & Animations */
+    .form-body { padding: 30px; }
+    .step-panel { display: none; }
+    .step-panel.active { display: block; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    h2 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group.full { grid-column: span 2; }
+    label { font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #475569; }
+    input, select, textarea { 
+      padding: 12px 14px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 14px; 
+      outline: none; transition: all 0.2s; background: #ffffff; color: #1e293b;
+    }
+    input:focus, select:focus, textarea:focus { border-color: #30ee0a; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12); }
+
+    /* Buttons & Actions */
+    .btn-group { display: flex; justify-content: space-between; margin-top: 28px; padding-top: 20px; border-top: 1px solid #f1f5f9; }
+    button, .btn-link { 
+      padding: 12px 22px; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; 
+      cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
+    }
+    .btn-prev { background: #f1f5f9; color: #475569; }
+    .btn-prev:hover { background: #e2e8f0; }
+    .btn-next { background: #33f30c; color: #ffffff; }
+    .btn-next:hover { background: #08f02f; transform: translateY(-1px); }
+
+    /* Step 5 Summary Card */
+    .summary-card { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .summary-section { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px dashed #cbd5e1; }
+    .summary-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .summary-section h4 { font-size: 13px; color: #0ae415; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .summary-row { display: flex; justify-content: space-between; font-size: 14px; padding: 5px 0; }
+    .summary-label { font-weight: 500; color: #64748b; }
+    .summary-value { font-weight: 600; color: #0f172a; text-align: right; max-width: 60%; word-break: break-word; }
+
+    /* Barcode Display */
+    .barcode-container { text-align: center; margin: 20px 0 10px 0; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .barcode-container svg { max-width: 100%; height: 70px; }
+
+    /* Action Buttons Grid */
+    .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 24px; }
+    .btn-action { width: 100%; color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .btn-whatsapp { background: #10b981; }
+    .btn-whatsapp:hover { background: #059669; }
+    .btn-email { background: #04f010; }
+    .btn-email:hover { background: #06ec06; }
+    .btn-pdf { background: #8b5cf6; }
+    .btn-pdf:hover { background: #7c3aed; }
+    .btn-print { background: #475569; }
+    .btn-print:hover { background: #334155; }
+
+    /* Keyframe Animations */
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Print Stylesheet Overrides */
+    @media print {
+      body { background: #ffffff; padding: 0; }
+      .container { box-shadow: none; border-radius: 0; max-width: 100%; }
+      .stepper-container, .btn-group, .action-grid { display: none !important; }
+      .step-panel { display: block !important; }
+      #step-1, #step-2, #step-3, #step-4 { display: none !important; }
+    }
+
+    /* Mobile View Adaptations */
+    @media (max-width: 600px) {
+      .company-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+      .step-title { display: none; }
+      .form-body { padding: 20px; }
+      .action-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Prevents PDF elements from breaking mid-page */
+    .summary-section { 
+      page-break-inside: avoid; 
+    }
+
+
+    @media print {
+  /* Hide background colors & unused UI controls */
+  body {
+    background: #ffffff !important;
+    padding: 0 !important;
+  }
+
+  .container {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Hide stepper, headers, and bottom buttons */
+  .company-header,
+  .stepper-container,
+  .btn-group,
+  .action-grid {
+    display: none !important;
+  }
+
+  /* Display only Step 5 content clearly */
+  .step-panel {
+    display: none !important;
+  }
+
+  #step-5 {
+    display: block !important;
+  }
+
+  /* PDF Print Document Clean Header */
+  #step-5::before {
+    content: "URBAN EDGE - OFFICIAL CLIENT REGISTRATION SUMMARY";
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    border-bottom: 2px solid #06f312;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+
+  .summary-card {
+    border: none !important;
+    padding: 0 !important;
+  }
+}
+
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Hide navigation controls, headers, and action buttons */
+  .company-header,
+  .stepper-container,
+  .btn-group,
+  .action-grid,
+  button {
+    display: none !important;
+  }
+
+  /* Force display of Step 5 summary section only */
+  .step-panel {
+    display: none !important;
+  }
+
+  #step-5 {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Container adjustments for clean print margins */
+  .container {
+    box-shadow: none !important;
+    border: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .summary-section {
+    page-break-inside: avoid;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+}
+  </style>
+</head>
+<body>
+
+<div class="container" id="portalContainer">
+  <!-- Header Branding -->
+  <div class="company-header">
+    <div class="brand-left">
+      <img src="../infor/logo.png" alt="Company Logo" class="company-logo" onerror="this.src='https://via.placeholder.com/52?text=LOGO'">
+      <div class="brand-details">
+        <h1 id="companyTitle">URBAN EDGE</h1>
+        <p>Official Client Registration Portal</p>
+        <p>Reg:0389918</p>
+      </div>
+    </div>
+    <span class="portal-badge">Verified Form</span>
+  </div>
+
+  <!-- Stepper Progress Header -->
+  <div class="stepper-container">
+    <div class="stepper">
+      <div class="step-node active" id="node-1"><div class="step-circle">1</div><div class="step-title">Personal</div></div>
+      <div class="step-node" id="node-2"><div class="step-circle">2</div><div class="step-title">Property</div></div>
+      <div class="step-node" id="node-3"><div class="step-circle">3</div><div class="step-title">Payment</div></div>
+      <div class="step-node" id="node-4"><div class="step-circle">4</div><div class="step-title">Verify</div></div>
+      <div class="step-node" id="node-5"><div class="step-circle">5</div><div class="step-title">Summary</div></div>
+    </div>
+  </div>
+
+  <div class="form-body">
+    <form id="registrationForm" onsubmit="return false;">
+      
+      <!-- STEP 1: Personal Details -->
+      <div class="step-panel active" id="step-1">
+        <h2>👤 Step 1: Personal Information</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" placeholder="e.g. John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="e.g. +234 801 234 5678" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="e.g. john@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="address">Residential Address</label>
+            <textarea id="address" rows="2" placeholder="Enter complete residential address"></textarea>
+          </div>
+        </div>
+        <div class="btn-group">
+          <div></div>
+          <button type="button" class="btn-next" onclick="nextStep(2)">Next: Property Details →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Property Information -->
+<div class="step-panel" id="step-2">
+  <h2>🏙️ Step 2: Property Details</h2>
+  <div class="form-grid">
+    <div class="form-group">
+      <label for="propertyName">Selected Estate / Scheme</label>
+      <select id="propertyName" required>
+        <option value="" disabled selected>-- Select an Estate / Scheme --</option>
+        <option value="Urban Edge Phase 1 - Epe">Urban Edge Phase 1 - Epe</option>
+        <option value="Urban Edge Phase 2 - Ibeju-Lekki">Urban Edge Phase 2 - Ibeju-Lekki</option>
+        <option value="Urban Edge Commercial Hub">Urban Edge Commercial Hub</option>
+        <option value="Urban Edge Luxury Heights">Urban Edge Luxury Heights</option>
+        <option value="Urban Edge Extension">Urban Edge Extension</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="plotType">Plot Type / Size</label>
+      <select id="plotType">
+        <option value="300 sqm (Starter)">300 sqm (Starter)</option>
+        <option value="500 sqm (Standard)">500 sqm (Standard)</option>
+        <option value="Commercial Plot">Commercial Plot</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="plotsQuantity">Number of Plots</label>
+      <input type="number" id="plotsQuantity" value="1" min="1">
+    </div>
+    <div class="form-group">
+      <label for="allocatedBlock">Preferred Block/Plot No.</label>
+      <input type="text" id="allocatedBlock" placeholder="e.g. Block C, Plot 12">
+    </div>
+  </div>
+  <div class="btn-group">
+    <button type="button" class="btn-prev" onclick="prevStep(1)">← Back</button>
+    <button type="button" class="btn-next" onclick="nextStep(3)">Next: Payment Info →</button>
+  </div>
+</div>
+
+      <!-- STEP 3: Payment Details -->
+      <div class="step-panel" id="step-3">
+        <h2>💳 Step 3: Payment Details</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="paymentPlan">Payment Plan Option</label>
+            <select id="paymentPlan">
+              <option value="Outright Payment">Outright Payment</option>
+              <option value="3 Months Installment">3 Months Installment</option>
+              <option value="6 Months Installment">6 Months Installment</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="amountPaid">Amount Paid (₦)</label>
+            <input type="text" id="amountPaid" placeholder="e.g. 2,500,000">
+          </div>
+          <div class="form-group">
+            <label for="paymentMode">Payment Channel</label>
+            <select id="paymentMode">
+              <option value="Bank Transfer">Bank Transfer</option>
+              <option value="POS / Card">POS / Card</option>
+              <option value="Direct Deposit">Direct Deposit</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="transactionRef">Transaction Ref / Teller No.</label>
+            <input type="text" id="transactionRef" placeholder="e.g. TXN-98421039">
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn-prev" onclick="prevStep(2)">← Back</button>
+          <button type="button" class="btn-next" onclick="nextStep(4)">Next: Verification →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Verification -->
+      <div class="step-panel" id="step-4">
+        <h2>🛡️ Step 4: Verification & Next of Kin</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="idType">Identification Document</label>
+            <select id="idType">
+              <option value="National ID (NIN)">National ID (NIN)</option>
+              <option value="Voter's Card">Voter's Card</option>
+              <option value="International Passport">International Passport</option>
+              <option value="Driver's License">Driver's License</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="idNumber">ID Document Number</label>
+            <input type="text" id="idNumber" placeholder="e.g. 12345678901">
+          </div>
+          <div class="form-group">
+            <label for="nextOfKinName">Next of Kin Full Name</label>
+            <input type="text" id="nextOfKinName" placeholder="e.g. Jane Doe">
+          </div>
+          <div class="form-group">
+            <label for="nextOfKinPhone">Next of Kin Contact</label>
+            <input type="tel" id="nextOfKinPhone" placeholder="e.g. +234 809 999 0000">
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn-prev" onclick="prevStep(3)">← Back</button>
+          <button type="button" class="btn-next" onclick="goToStep5()">Review Complete Summary →</button>
+        </div>
+      </div>
+
+      <!-- STEP 5: Aggregated Summary & Action Hub -->
+      <div class="step-panel" id="step-5">
+        <h2>📄 Step 5: Registration Summary & Verification</h2>
+        
+        <div class="summary-card" id="summaryOutput">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <div class="barcode-container">
+          <svg id="barcode"></svg>
+        </div>
+
+        <div class="action-grid">
+          <button type="button" class="btn-action btn-whatsapp" onclick="sendViaWhatsApp()">📱 WhatsApp</button>
+          <button type="button" class="btn-action btn-email" onclick="sendViaEmail()">✉️ Email</button>
+          <button type="button" class="btn-action btn-pdf" onclick="downloadPDF()">📥 Save PDF</button>
+          <button type="button" class="btn-action btn-print" onclick="window.print()">🖨️ Print</button>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn-prev" onclick="prevStep(4)">← Edit Information</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- Load jsPDF library safely from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+<script>
+  let currentStep = 1;
+
+  function updateStepUI(step) {
+    document.querySelectorAll('.step-panel').forEach(panel => panel.classList.remove('active'));
+    document.getElementById(`step-${step}`).classList.add('active');
+
+    document.querySelectorAll('.step-node').forEach((node, index) => {
+      const stepIdx = index + 1;
+      node.classList.remove('active', 'completed');
+      if (stepIdx === step) {
+        node.classList.add('active');
+      } else if (stepIdx < step) {
+        node.classList.add('completed');
+      }
+    });
+    currentStep = step;
+  }
+
+  function nextStep(step) { updateStepUI(step); }
+  function prevStep(step) { updateStepUI(step); }
+
+  function goToStep5() {
+    renderSummary();
+    generateBarcode();
+    updateStepUI(5);
+  }
+
+  function getFormData() {
+    return {
+      fullName: document.getElementById('fullName').value || 'N/A',
+      phone: document.getElementById('phone').value || 'N/A',
+      email: document.getElementById('email').value || 'N/A',
+      gender: document.getElementById('gender').value || 'N/A',
+      address: document.getElementById('address').value || 'N/A',
+      propertyName: document.getElementById('propertyName').value || 'N/A',
+      plotType: document.getElementById('plotType').value || 'N/A',
+      plotsQuantity: document.getElementById('plotsQuantity').value || 'N/A',
+      allocatedBlock: document.getElementById('allocatedBlock').value || 'N/A',
+      paymentPlan: document.getElementById('paymentPlan').value || 'N/A',
+      amountPaid: document.getElementById('amountPaid').value || 'N/A',
+      paymentMode: document.getElementById('paymentMode').value || 'N/A',
+      transactionRef: document.getElementById('transactionRef').value || 'N/A',
+      idType: document.getElementById('idType').value || 'N/A',
+      idNumber: document.getElementById('idNumber').value || 'N/A',
+      nextOfKinName: document.getElementById('nextOfKinName').value || 'N/A',
+      nextOfKinPhone: document.getElementById('nextOfKinPhone').value || 'N/A'
+    };
+  }
+
+  function renderSummary() {
+    const data = getFormData();
+    const summaryHTML = `
+      <div class="summary-section">
+        <h4>1. Personal Details</h4>
+        <div class="summary-row"><span class="summary-label">Full Name:</span><span class="summary-value">${data.fullName}</span></div>
+        <div class="summary-row"><span class="summary-label">Phone Number:</span><span class="summary-value">${data.phone}</span></div>
+        <div class="summary-row"><span class="summary-label">Email Address:</span><span class="summary-value">${data.email}</span></div>
+        <div class="summary-row"><span class="summary-label">Gender:</span><span class="summary-value">${data.gender}</span></div>
+        <div class="summary-row"><span class="summary-label">Address:</span><span class="summary-value">${data.address}</span></div>
+      </div>
+
+      <div class="summary-section">
+        <h4>2. Property Details</h4>
+        <div class="summary-row"><span class="summary-label">Property Name:</span><span class="summary-value">${data.propertyName}</span></div>
+        <div class="summary-row"><span class="summary-label">Plot Type:</span><span class="summary-value">${data.plotType}</span></div>
+        <div class="summary-row"><span class="summary-label">Quantity:</span><span class="summary-value">${data.plotsQuantity} Plot(s)</span></div>
+        <div class="summary-row"><span class="summary-label">Block / Plot No:</span><span class="summary-value">${data.allocatedBlock}</span></div>
+      </div>
+
+      <div class="summary-section">
+        <h4>3. Payment Details</h4>
+        <div class="summary-row"><span class="summary-label">Payment Plan:</span><span class="summary-value">${data.paymentPlan}</span></div>
+        <div class="summary-row"><span class="summary-label">Amount Paid:</span><span class="summary-value">₦${data.amountPaid}</span></div>
+        <div class="summary-row"><span class="summary-label">Payment Channel:</span><span class="summary-value">${data.paymentMode}</span></div>
+        <div class="summary-row"><span class="summary-label">Transaction Ref:</span><span class="summary-value">${data.transactionRef}</span></div>
+      </div>
+
+      <div class="summary-section">
+        <h4>4. Verification & Next of Kin</h4>
+        <div class="summary-row"><span class="summary-label">ID Type:</span><span class="summary-value">${data.idType}</span></div>
+        <div class="summary-row"><span class="summary-label">ID Number:</span><span class="summary-value">${data.idNumber}</span></div>
+        <div class="summary-row"><span class="summary-label">Next of Kin Name:</span><span class="summary-value">${data.nextOfKinName}</span></div>
+        <div class="summary-row"><span class="summary-label">Next of Kin Phone:</span><span class="summary-value">${data.nextOfKinPhone}</span></div>
+      </div>
+    `;
+    document.getElementById('summaryOutput').innerHTML = summaryHTML;
+  }
+
+  function generateBarcode() {
+    const data = getFormData();
+    const barcodeCode = data.transactionRef !== 'N/A' ? data.transactionRef : 'REG-' + Math.floor(100000 + Math.random() * 900000);
+    JsBarcode("#barcode", barcodeCode, {
+      format: "CODE128",
+      lineColor: "#0f172a",
+      width: 2,
+      height: 50,
+      displayValue: true,
+      fontSize: 12
+    });
+  }
+
+  function sendViaWhatsApp() {
+    const d = getFormData();
+    let companyPhone = "2349011157594";
+
+    const rawMessage = 
+      `*CLIENT REGISTRATION DETAILS*\n\n` +
+      `*1. PERSONAL*\n• Name: ${d.fullName}\n• Phone: ${d.phone}\n• Email: ${d.email}\n• Address: ${d.address}\n\n` +
+      `*2. PROPERTY*\n• Estate: ${d.propertyName}\n• Plot Type: ${d.plotType}\n• Quantity: ${d.plotsQuantity}\n• Block/Plot: ${d.allocatedBlock}\n\n` +
+      `*3. PAYMENT*\n• Plan: ${d.paymentPlan}\n• Amount Paid: ₦${d.amountPaid}\n• Channel: ${d.paymentMode}\n• Ref: ${d.transactionRef}\n\n` +
+      `*4. VERIFICATION*\n• ID: ${d.idType} (${d.idNumber})\n• Next of Kin: ${d.nextOfKinName} (${d.nextOfKinPhone})`;
+
+    const encodedText = encodeURIComponent(rawMessage);
+    window.open(`https://wa.me/${companyPhone}?text=${encodedText}`, '_blank');
+  }
+
+  function sendViaEmail() {
+    const d = getFormData();
+    const recipient = "urbanegdge@gmail.com";
+    const subject = encodeURIComponent(`Registration Summary - ${d.fullName}`);
+    const body = encodeURIComponent(
+      `REGISTRATION SUMMARY DETAILS:\n\n` +
+      `PERSONAL INFORMATION:\n- Full Name: ${d.fullName}\n- Phone: ${d.phone}\n- Email: ${d.email}\n- Address: ${d.address}\n\n` +
+      `PROPERTY DETAILS:\n- Estate: ${d.propertyName}\n- Plot Type: ${d.plotType}\n- Quantity: ${d.plotsQuantity}\n- Preferred Plot: ${d.allocatedBlock}\n\n` +
+      `PAYMENT INFORMATION:\n- Payment Plan: ${d.paymentPlan}\n- Amount Paid: NGN ${d.amountPaid}\n- Channel: ${d.paymentMode}\n- Transaction Ref: ${d.transactionRef}\n\n` +
+      `VERIFICATION & NEXT OF KIN:\n- ID: ${d.idType} - ${d.idNumber}\n- Next of Kin Name: ${d.nextOfKinName}\n- Next of Kin Contact: ${d.nextOfKinPhone}`
+    );
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${body}`;
+    window.open(gmailUrl, '_blank');
+  }
+
+  // DIRECT PDF DOWNLOAD GENERATOR
+  function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const d = getFormData();
+
+    // Header banner
+    doc.setFillColor(15, 23, 42); // slate dark background
+    doc.rect(0, 0, 210, 30, 'F');
+    
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(18);
+    doc.setFont("helvetica", "bold");
+    doc.text("URBAN EDGE PROPERTIES", 14, 16);
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.text("Official Client Registration Summary", 14, 24);
+
+    // Form data structured table
+    const tableRows = [
+      [{ content: '1. Personal Details', colSpan: 2, styles: { fillColor: [37, 99, 235], textColor: 255, fontStyle: 'bold' } }],
+      ['Full Name', d.fullName],
+      ['Phone Number', d.phone],
+      ['Email Address', d.email],
+      ['Gender', d.gender],
+      ['Address', d.address],
+
+      [{ content: '2. Property Details', colSpan: 2, styles: { fillColor: [37, 99, 235], textColor: 255, fontStyle: 'bold' } }],
+      ['Property Name', d.propertyName],
+      ['Plot Type', d.plotType],
+      ['Quantity', `${d.plotsQuantity} Plot(s)`],
+      ['Block / Plot No', d.allocatedBlock],
+
+      [{ content: '3. Payment Details', colSpan: 2, styles: { fillColor: [37, 99, 235], textColor: 255, fontStyle: 'bold' } }],
+      ['Payment Plan', d.paymentPlan],
+      ['Amount Paid', `NGN ${d.amountPaid}`],
+      ['Payment Channel', d.paymentMode],
+      ['Transaction Ref', d.transactionRef],
+
+      [{ content: '4. Verification & Next of Kin', colSpan: 2, styles: { fillColor: [37, 99, 235], textColor: 255, fontStyle: 'bold' } }],
+      ['ID Type / Number', `${d.idType} (${d.idNumber})`],
+      ['Next of Kin Name', d.nextOfKinName],
+      ['Next of Kin Contact', d.nextOfKinPhone]
+    ];
+
+    doc.autoTable({
+      startY: 35,
+      body: tableRows,
+      theme: 'grid',
+      styles: { fontSize: 9, cellPadding: 3 },
+      columnStyles: { 0: { fontStyle: 'bold', cellWidth: 60 } }
+    });
+
+    // Render Barcode SVG onto Canvas then into PDF
+    const svgElement = document.getElementById('barcode');
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+
+    img.onload = function() {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      const imgData = canvas.toDataURL('image/png');
+      
+      const finalY = doc.lastAutoTable.finalY + 10;
+      doc.addImage(imgData, 'PNG', 65, finalY, 80, 25);
+
+      // Triggers immediate browser file download (.pdf)
+      const fileName = `Registration_${d.fullName.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.pdf`;
+      doc.save(fileName);
+    };
+
+    img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+  }
+</script>
+
+</body>
+</html>

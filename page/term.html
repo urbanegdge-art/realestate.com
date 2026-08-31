@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work With Us | Urban Edge Real Estate</title>
+
+    <!-- Font Awesome & AOS Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- EmailJS SDK Integration -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <style>
+        /* =====================================================
+           ROOT & BASE STYLES
+        ====================================================== */
+        :root {
+            --green: #005a2b;
+            --green-dark: #003d1e;
+            --green-light: #e6f4ed;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --gray: #f8faf9;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --sidebar-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background: var(--gray);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 5000;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .menu-toggle {
+            font-size: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--green);
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-toggle:hover {
+            background-color: var(--green-light);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--green);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-badge {
+            background: var(--green);
+            color: white;
+            font-size: 10px;
+            padding: 4px 7px;
+            border-radius: 5px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .action-btn {
+            background: var(--green);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 22px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 90, 43, 0.25);
+        }
+
+        /* =====================================================
+           APP LAYOUT & SIDEBAR
+        ====================================================== */
+        .app-container {
+            display: flex;
+            min-height: calc(100vh - 64px);
+        }
+
+        aside#sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            border-right: 1px solid var(--border);
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-title {
+            padding: 10px 15px 15px;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--muted);
+            letter-spacing: 1px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .sidebar-link:hover, .sidebar-link.active {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .sidebar-link i {
+            width: 18px;
+            text-align: center;
+        }
+
+        /* =====================================================
+           MAIN CONTENT AREA
+        ====================================================== */
+        main {
+            flex: 1;
+            padding: 35px 40px 60px;
+            min-width: 0;
+            max-width: 1100px;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            position: relative;
+            background: linear-gradient(135deg, rgba(0, 90, 43, 0.92), rgba(0, 61, 30, 0.96)),
+                        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            border-radius: 20px;
+            padding: 50px 40px;
+            color: white;
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 90, 43, 0.2);
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.3), transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 680px;
+        }
+
+        .hero-tag {
+            background: rgba(212, 175, 55, 0.25);
+            color: var(--gold);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            display: inline-block;
+            margin-bottom: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            text-transform: uppercase;
+        }
+
+        .hero-banner h1 {
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        .hero-banner h1 span {
+            color: var(--gold);
+        }
+
+        .hero-banner p {
+            font-size: 16px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* Info Cards Grid */
+        .grid-two-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: var(--green-dark);
+            color: white;
+            border-radius: 18px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0, 90, 43, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gold);
+        }
+
+        .card-header-title {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .card-header-title i {
+            color: var(--gold);
+            font-size: 22px;
+        }
+
+        .benefit-list, .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .benefit-item, .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .item-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 18px;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .item-text h4 {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: white;
+            margin-bottom: 3px;
+        }
+
+        .item-text p {
+            font-size: 13.5px;
+            opacity: 0.85;
+            line-height: 1.4;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .form-header {
+            margin-bottom: 25px;
+        }
+
+        .form-header h2 {
+            font-size: 24px;
+            color: var(--green-dark);
+            margin-bottom: 6px;
+        }
+
+        .form-header p {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .form-group input, .form-group select {
+            height: 48px;
+            padding: 0 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            background: var(--gray);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--green);
+            background: white;
+        }
+
+        .submit-btn {
+            background: var(--green);
+            color: white;
+            border: none;
+            height: 50px;
+            padding: 0 30px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 90, 43, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: var(--muted);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Status Alerts */
+        .alert {
+            display: none;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-success {
+            background: var(--green-light);
+            color: var(--green-dark);
+            border: 1px solid var(--green);
+        }
+
+        .alert-error {
+            background: #fde8e8;
+            color: #9b1c1c;
+            border: 1px solid #f8b4b4;
+        }
+
+        /* Bottom Contact Box */
+        .cta-box {
+            background: linear-gradient(135deg, var(--green-dark), var(--green));
+            border-radius: 18px;
+            padding: 35px 30px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 15px 35px rgba(0, 90, 43, 0.2);
+            flex-wrap: wrap;
+        }
+
+        .cta-text h3 {
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .cta-text p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            background: white;
+            color: var(--green-dark);
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 14px;
+            transition: 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-btn:hover {
+            background: var(--green-light);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        /* =====================================================
+           FOOTER & FLOATING ACTIONS
+        ====================================================== */
+        footer {
+            background: var(--green-dark);
+            color: white;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .floating-actions {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 4000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .floating-whatsapp, .back-to-top {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-whatsapp {
+            background: #25D366;
+            color: white;
+            font-size: 28px;
+            transition: 0.3s ease;
+        }
+
+        .floating-whatsapp:hover {
+            transform: translateY(-5px) scale(1.08);
+        }
+
+        .back-to-top {
+            border: none;
+            background: white;
+            color: var(--green);
+            font-size: 22px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.35s ease;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--green);
+            color: white;
+        }
+
+        /* =====================================================
+           RESPONSIVE MOBILE STYLES
+        ====================================================== */
+        @media (max-width: 768px) {
+            header {
+                padding: 0 12px;
+            }
+
+            .header-right {
+                display: none;
+            }
+
+            aside#sidebar {
+                position: fixed;
+                top: 64px;
+                right: 12px;
+                left: auto;
+                width: 220px;
+                background: white;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                z-index: 6000;
+                padding: 10px;
+                display: none;
+            }
+
+            main {
+                padding: 20px 16px 40px;
+            }
+
+            .hero-banner {
+                padding: 35px 20px;
+                border-radius: 14px;
+            }
+
+            .hero-banner h1 {
+                font-size: 28px;
+            }
+
+            .cta-box {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+    <header>
+        <div class="header-left">
+            <button class="menu-toggle" id="menuBtn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars" id="menuIcon"></i>
+            </button>
+            <a href="../index.html" class="logo">
+                <span>URBAN EDGE</span>
+                
+            </a>
+            <a href="properties.html" class="logo">
+                
+                <span class="logo-badge">PROPERTIES</span>
+            </a> 
+        </div>
+
+        <div class="header-right">
+            <a href="https://wa.me/2348102601114?text=Hello%20Urban%20Edge%20Real%20Estate%2C%0A%0AI%20am%20interested%20in%20joining%20your%20sales%20team." target="_blank" rel="noopener noreferrer" class="action-btn">
+                <i class="fa-brands fa-whatsapp"></i> Chat with Us
+            </a>
+        </div>
+    </header>
+
+    <!-- =====================================================
+         APP CONTAINER
+    ====================================================== -->
+    <div class="app-container">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar">
+            <div class="sidebar-title">PROPERTY MENU</div>
+
+            <a href="properties.html" class="sidebar-link">
+                <i class="fa-solid fa-house"></i> Home Listings
+            </a>
+
+            <a href="promo.html" class="sidebar-link">
+                <i class="fa-solid fa-fire"></i> Promos & Rewards
+            </a>
+
+            <a href="values.html" class="sidebar-link">
+                <i class="fa-solid fa-gem"></i> Core Values
+            </a>
+
+            <a href="careers.html" class="sidebar-link active">
+                <i class="fa-solid fa-user-plus"></i> Work With Us
+            </a>
+
+            <a href="faq.html" class="sidebar-link">
+                <i class="fa-solid fa-circle-question"></i> Client FAQ
+            </a>
+
+            <a href="#" class="sidebar-link" id="inspectionLink">
+                <i class="fa-solid fa-calendar-check"></i> Book Inspection
+            </a>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main>
+
+            <!-- HERO BANNER -->
+            <div class="hero-banner" data-aos="fade-down" data-aos-duration="1000">
+                <div class="hero-content">
+                    <span class="hero-tag">CAREER OPPORTUNITY</span>
+                    <h1>WORK WITH <span>US</span></h1>
+                    <p>Join the premier Urban Edge Real Estate sales team and unlock your earning potential! Partner with us by selling any of our estates.</p>
+                </div>
+            </div>
+
+            <!-- TWO COLUMN INFO CARDS -->
+            <div class="grid-two-col">
+
+                <!-- PERKS & BENEFITS CARD -->
+                <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-header-title">
+                        <i class="fa-solid fa-trophy"></i> Benefits & Incentives
+                    </div>
+                    <div class="benefit-list">
+                        <div class="benefit-item">
+                            <div class="item-icon">
+                                <i class="fa-solid fa-sack-dollar"></i>
+                            </div>
+                            <div class="item-text">
+                                <h4>Earn Up to 500K Monthly</h4>
+                                <p>Generous commission structures paid promptly on estate sales transactions.</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="item-icon">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <div class="item-text">
+                                <h4>Exclusive Incentives</h4>
+                                <p>Qualify for performance bonuses, cash rewards, and luxury gifts.</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="item-icon">
+                                <i class="fa-solid fa-handshake"></i>
+                            </div>
+                            <div class="item-text">
+                                <h4>Ambassadorial Opportunities</h4>
+                                <p>Gain brand representation status and expand your real estate leadership profile.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OFFICE & TRAINING DETAILS CARD -->
+                <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-header-title">
+                        <i class="fa-solid fa-building-user"></i> Our Office & Training
+                    </div>
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <div class="item-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="item-text">
+                                <h4>Office Address</h4>
+                                <p>1st floor, Ebube Dike Plaza, Goodwill Junction, Okpuno, Awka.</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="item-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="item-text">
+                                <h4>Email Enquiries</h4>
+                                <p>Urbanegdge@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="item-icon">
+                                <i class="fa-solid fa-calendar-days"></i>
+                            </div>
+                            <div class="item-text">
+                                <h4>Weekly Training Schedule</h4>
+                                <p>Training holds Tuesday and Saturday every week.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SIGN UP REGISTRATION FORM -->
+            <div class="form-card" data-aos="fade-up" data-aos-delay="300" id="signupSection">
+                <div class="form-header">
+                    <h2>Sign Up Today</h2>
+                    <p>Enter your details below to register for our sales team network and weekly training sessions.</p>
+                </div>
+
+                <!-- Alerts -->
+                <div class="alert alert-success" id="successAlert">
+                    <i class="fa-solid fa-circle-check"></i> Registration submitted! An email notification has been sent to <strong>Urbanegdge@gmail.com</strong>.
+                </div>
+                <div class="alert alert-error" id="errorAlert">
+                    <i class="fa-solid fa-triangle-exclamation"></i> <span id="errorMessage">Something went wrong. Please try again or contact us directly.</span>
+                </div>
+
+                <form id="partnerForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="user_name" placeholder="e.g. Chukwuma Eze" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emailAddress">Email Address</label>
+                            <input type="email" id="emailAddress" name="user_email" placeholder="e.g. name@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="tel" id="phoneNumber" name="user_phone" placeholder="e.g. 08102601114" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fa-solid fa-paper-plane" id="btnIcon"></i> <span id="btnText">Submit Registration</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- BOTTOM CTA BOX -->
+            <div class="cta-box" data-aos="zoom-in" data-aos-duration="800">
+                <div class="cta-text">
+                    <h3>Ready to Advance Your Career?</h3>
+                    <p>Scan the code or contact us at <strong>Urbanegdge@gmail.com</strong>. We look forward to building your success!</p>
+                </div>
+                <a href="https://wa.me/2348102601114?text=Hello%20Urban%20Edge%20Real%20Estate%2C%0A%0AI%20am%20ready%20to%20register%20as%20a%20sales%20partner." target="_blank" rel="noopener noreferrer" class="cta-btn">
+                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+    <footer>
+        <div class="footer-bottom">
+            <span>© 2026 Urban Edge Real Estate Company Ltd. All Rights Reserved.</span>
+            <span>Empowering Real Estate Consultants & Partners</span>
+        </div>
+    </footer>
+
+    <!-- =====================================================
+         FLOATING ACTIONS
+    ====================================================== -->
+    <div class="floating-actions">
+        <a href="https://wa.me/2348102601114" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+
+        <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- =====================================================
+         JAVASCRIPT & EMAIL DISPATCH LOGIC
+    ====================================================== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Initialize AOS Animations
+    AOS.init({
+        duration: 800,
+        once: true,
+        easing: 'ease-in-out'
+    });
+
+    // Sidebar & UI Elements
+    const menuBtn = document.getElementById("menuBtn");
+    const menuIcon = document.getElementById("menuIcon");
+    const sidebar = document.getElementById("sidebar");
+    const backToTop = document.getElementById("backToTop");
+    const inspectionLink = document.getElementById("inspectionLink");
+
+    // Form Elements
+    const partnerForm = document.getElementById("partnerForm");
+    const successAlert = document.getElementById("successAlert");
+
+    // Form Submit Handler (Redirects directly to WhatsApp)
+    if (partnerForm) {
+        partnerForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            // Get Form Input Values
+            const rawName = document.getElementById("fullName").value.trim();
+            const rawEmail = document.getElementById("emailAddress").value.trim();
+            const rawPhone = document.getElementById("phoneNumber").value.trim();
+
+            const name = encodeURIComponent(rawName);
+            const email = encodeURIComponent(rawEmail);
+            const phone = encodeURIComponent(rawPhone);
+
+            // Format WhatsApp Message
+            const message = `Hello Urban Edge Team,%0A%0AI would like to register for the sales team:%0A- Name: ${name}%0A- Email: ${email}%0A- Phone: ${phone}`;
+            
+            // Show success message on UI
+            if (successAlert) {
+                successAlert.style.display = "flex";
+                successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            // Reset form
+            partnerForm.reset();
+
+            // Open WhatsApp in new tab
+            window.open(`https://wa.me/2348102601114?text=${message}`, '_blank');
+        });
+    }
+
+    // Sidebar Toggle
+    if (menuBtn && sidebar) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isHidden = window.getComputedStyle(sidebar).display === 'none';
+            if (isHidden) {
+                sidebar.style.display = 'flex';
+                if (menuIcon) menuIcon.className = "fa-solid fa-xmark";
+            } else {
+                sidebar.style.display = 'none';
+                if (menuIcon) menuIcon.className = "fa-solid fa-bars";
+            }
+        });
+    }
+
+    // Scroll back to top
+    if (backToTop) {
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 300) {
+                backToTop.classList.add("show");
+            } else {
+                backToTop.classList.remove("show");
+            }
+        });
+
+        backToTop.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+
+    // Inspection Link Handler
+    if (inspectionLink) {
+        inspectionLink.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.open("https://wa.me/2348102601114?text=Hello%20Urban%20Edge%20Real%20Estate%2C%0A%0AI%20would%20like%20to%20book%20a%20property%20inspection.", "_blank");
+        });
+    }
+});
+    </script>
+</body>
+</html>

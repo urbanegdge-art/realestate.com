@@ -1,0 +1,1738 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Property Management | Urban Edge Real Estate Ltd</title>
+
+    <meta name="description"
+        content="Professional property management services by Urban Edge Real Estate Ltd. We help property owners protect their assets, manage properties and enjoy peace of mind.">
+
+    <link rel="icon" type="image/png" href="../infor/logo1.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #fff;
+            color: #17251c;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        :root {
+            --green: #0d5c35;
+            --dark-green: #063b22;
+            --deep-green: #031d11;
+            --light-green: #edf7f0;
+            --gold: #c8a951;
+            --dark: #102019;
+            --gray: #69766e;
+            --light: #f6f8f6;
+            --white: #fff;
+        }
+
+        .container {
+            width: 88%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-label {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-family: "Playfair Display", serif;
+            color: var(--dark);
+            font-size: clamp(35px, 4vw, 55px);
+            line-height: 1.12;
+            margin-bottom: 22px;
+        }
+
+        .section-text {
+            color: var(--gray);
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 18px 5%;
+            transition: .4s ease;
+        }
+
+        header.scrolled {
+            background: rgba(3, 29, 17, .96);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 35px rgba(0,0,0,.15);
+        }
+
+        .nav {
+            max-width: 1300px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            color: white;
+        }
+
+        .logo img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .logo strong {
+            display: block;
+            font-size: 16px;
+            letter-spacing: .7px;
+        }
+
+        .logo span {
+            font-size: 10px;
+            opacity: .7;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .nav-links a:not(.nav-btn)::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: .3s;
+        }
+
+        .nav-links a:not(.nav-btn):hover::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            background: white;
+            color: var(--green) !important;
+            padding: 12px 20px;
+            border-radius: 30px;
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .hero {
+            min-height: 92vh;
+            position: relative;
+
+            display: flex;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(3,29,17,.96),
+                    rgba(3,29,17,.76),
+                    rgba(3,29,17,.35)
+                ),
+                url("infor/p1.jpg") center/cover no-repeat;
+        }
+
+        .hero-content {
+            padding-top: 60px;
+            color: white;
+            max-width: 850px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            border: 1px solid rgba(255,255,255,.3);
+            background: rgba(255,255,255,.06);
+
+            padding: 9px 16px;
+            border-radius: 30px;
+
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            backdrop-filter: blur(5px);
+
+            margin-bottom: 25px;
+        }
+
+        .hero-tag::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+
+            0% {
+                box-shadow: 0 0 0 0 rgba(200,169,81,.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(200,169,81,0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(200,169,81,0);
+            }
+
+        }
+
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(45px, 6vw, 78px);
+            line-height: 1.02;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #d8c477;
+        }
+
+        .hero p {
+            max-width: 700px;
+            color: rgba(255,255,255,.84);
+            font-size: 17px;
+            line-height: 1.85;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: .3s ease;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #087847;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0,0,0,.2);
+        }
+
+        .btn-outline {
+            color: white;
+            border: 1px solid rgba(255,255,255,.45);
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--dark-green);
+        }
+
+        .hero-bottom {
+            position: absolute;
+            bottom: 30px;
+            left: 6%;
+
+            color: rgba(255,255,255,.6);
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+
+        /* =====================================================
+           INTRODUCTION
+        ====================================================== */
+
+        .intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .intro-image {
+            position: relative;
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .floating-card {
+            position: absolute;
+            right: -25px;
+            bottom: 30px;
+
+            background: white;
+            padding: 25px;
+
+            border-left: 4px solid var(--green);
+            border-radius: 8px;
+
+            box-shadow: 0 20px 50px rgba(0,0,0,.15);
+        }
+
+        .floating-card strong {
+            display: block;
+            font-size: 28px;
+            color: var(--green);
+            margin-bottom: 4px;
+        }
+
+        .floating-card span {
+            font-size: 11px;
+            color: var(--gray);
+        }
+
+
+        /* =====================================================
+           SERVICES
+        ====================================================== */
+
+        .services-section {
+            background: var(--light);
+        }
+
+        .section-heading {
+            max-width: 750px;
+            margin: 0 auto 55px;
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .service-card {
+            position: relative;
+
+            background: white;
+            padding: 35px;
+
+            border-radius: 10px;
+            border: 1px solid #e7ece8;
+
+            overflow: hidden;
+
+            transition: .4s ease;
+        }
+
+        .service-card::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: 0;
+
+            width: 100%;
+            height: 3px;
+
+            background: var(--green);
+
+            transform: scaleX(0);
+            transform-origin: left;
+
+            transition: .4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,.08);
+        }
+
+        .service-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--light-green);
+            color: var(--green);
+
+            border-radius: 50%;
+
+            font-size: 22px;
+
+            margin-bottom: 25px;
+        }
+
+        .service-number {
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 13px;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+
+        /* =====================================================
+           BENEFITS
+        ====================================================== */
+
+        .benefits-section {
+            background: white;
+        }
+
+        .benefits-layout {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .benefits-image {
+            position: relative;
+        }
+
+        .benefits-image img {
+            width: 100%;
+            height: 560px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .benefit-list {
+            margin-top: 30px;
+            display: grid;
+            gap: 23px;
+        }
+
+        .benefit {
+            display: flex;
+            gap: 17px;
+        }
+
+        .check {
+            flex-shrink: 0;
+
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--light-green);
+            color: var(--green);
+
+            font-weight: 800;
+        }
+
+        .benefit h4 {
+            margin-bottom: 6px;
+        }
+
+        .benefit p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           PROCESS
+        ====================================================== */
+
+        .process-section {
+            background: var(--light);
+        }
+
+        .process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .process-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .process-number {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--green);
+            color: white;
+
+            border-radius: 50%;
+
+            font-weight: 800;
+
+            margin-bottom: 20px;
+        }
+
+        .process-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .process-card p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           STATS
+        ====================================================== */
+
+        .stats {
+            background: var(--dark-green);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .stat {
+            text-align: center;
+            padding: 20px;
+            border-right: 1px solid rgba(255,255,255,.13);
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat strong {
+            display: block;
+
+            font-family: "Playfair Display", serif;
+            font-size: 42px;
+
+            color: white;
+
+            margin-bottom: 7px;
+        }
+
+        .stat span {
+            color: rgba(255,255,255,.6);
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           CTA
+        ====================================================== */
+
+        .cta {
+            position: relative;
+            padding: 110px 0;
+
+            background:
+                linear-gradient(
+                    rgba(3,29,17,.95),
+                    rgba(3,29,17,.95)
+                ),
+                url("infor/p1.jpg") center/cover;
+
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .cta .section-label {
+            color: #d7c276;
+        }
+
+        .cta h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(38px, 5vw, 60px);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            color: rgba(255,255,255,.72);
+            line-height: 1.8;
+            max-width: 650px;
+            margin: 0 auto 30px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        footer {
+            background: #02170d;
+            color: white;
+            text-align: center;
+            padding: 30px 5%;
+        }
+
+        footer p {
+            font-size: 12px;
+            color: rgba(255,255,255,.55);
+        }
+
+
+        /* =====================================================
+           REVEAL ANIMATION
+        ====================================================== */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity .8s ease, transform .8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           MOBILE MENU BUTTON
+        ====================================================== */
+
+        .menu-toggle {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid rgba(255,255,255,.35);
+            background: rgba(255,255,255,.08);
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            position: relative;
+        }
+
+        .menu-toggle span {
+            position: absolute;
+
+            width: 19px;
+            height: 2px;
+
+            background: white;
+
+            left: 11px;
+
+            transition: .3s;
+        }
+
+        .menu-toggle span:nth-child(1) {
+            top: 13px;
+        }
+
+        .menu-toggle span:nth-child(2) {
+            top: 19px;
+        }
+
+        .menu-toggle span:nth-child(3) {
+            top: 25px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            top: 19px;
+            transform: rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            top: 19px;
+            transform: rotate(-45deg);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media(max-width: 950px) {
+
+            .nav-links {
+                position: absolute;
+
+                top: 80px;
+                left: 5%;
+                right: 5%;
+
+                display: none;
+                flex-direction: column;
+
+                padding: 25px;
+
+                background: rgba(3,29,17,.98);
+                backdrop-filter: blur(15px);
+
+                border-radius: 12px;
+
+                box-shadow: 0 20px 50px rgba(0,0,0,.25);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .intro,
+            .benefits-layout {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .process {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media(max-width: 600px) {
+
+            .container {
+                width: 90%;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .hero {
+                min-height: 760px;
+            }
+
+            .hero h1 {
+                font-size: 46px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .services-grid,
+            .process {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-image img,
+            .benefits-image img {
+                height: 400px;
+            }
+
+            .floating-card {
+                right: 15px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,.13);
+            }
+
+            .stat strong {
+                font-size: 30px;
+            }
+
+            .logo strong {
+                font-size: 14px;
+            }
+
+            .logo img {
+                width: 42px;
+                height: 42px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header id="header">
+
+    <nav class="nav">
+
+        <a href="../index.html" class="logo">
+
+            <img src="../infor/logo.png"
+                 alt="Urban Edge Real Estate Logo">
+
+            <div>
+                <strong>URBAN EDGE</strong>
+                <span>REAL ESTATE LTD</span>
+            </div>
+
+        </a>
+
+
+        <div class="nav-links" id="navLinks">
+
+            <a href="../index.html">Home</a>
+
+            <a href="../page/properties.html">Properties</a>
+
+            <a href="../page/FQA.html">About Us</a>
+
+            <a href="../page/cons.html">
+                Consultancy
+            </a>
+
+            
+            <a href="../index.html#contact  " class="nav-btn">
+                Contact Us
+            </a>
+
+        </div>
+
+
+        <button class="menu-toggle" id="menuToggle"
+                aria-label="Open navigation menu">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-content reveal">
+
+            <div class="hero-tag">
+                Professional Property Management
+            </div>
+
+            <h1>
+                Your Property.
+                <span>Our Responsibility.</span>
+            </h1>
+
+            <p>
+                Property ownership should be an investment,
+                not a daily burden. At Urban Edge Real Estate Ltd,
+                we help property owners protect their assets,
+                maintain their properties and enjoy a smoother,
+                more organized ownership experience.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge,%20I%20am%20interested%20in%20your%20Property%20Management%20services.%20I%20would%20like%20to%20speak%20with%20a%20consultant."
+                   target="_blank"
+                   class="btn btn-primary">
+
+                    Manage My Property
+
+                </a>
+
+
+                <a href="service.html"
+                   class="btn btn-outline">
+
+                    Explore Our Services
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-bottom">
+        SCROLL TO DISCOVER ↓
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     INTRODUCTION
+====================================================== -->
+
+<section class="section">
+
+    <div class="container intro">
+
+
+        <div class="reveal">
+
+            <div class="section-label">
+                Property Management
+            </div>
+
+            <h2 class="section-title">
+                Let Your Property Work For You.
+            </h2>
+
+            <p class="section-text">
+
+                Owning a property comes with responsibilities.
+
+                Maintenance, inspections, repairs, tenant concerns,
+                vacancies and unexpected issues can consume valuable
+                time and create unnecessary stress.
+
+                <br><br>
+
+                Urban Edge Real Estate Ltd provides professional
+                property management support designed to help you
+                stay on top of these responsibilities while
+                protecting the value and appeal of your property.
+
+                <br><br>
+
+                Whether you own one property or a growing portfolio,
+                we help you manage the details so you can focus
+                on the bigger picture.
+
+            </p>
+
+        </div>
+
+
+        <div class="intro-image reveal">
+
+            <img src="../infor/p2.png"
+                 alt="Professional property management">
+
+            <div class="floating-card">
+
+                <strong>Peace</strong>
+
+                <span>
+                    OF MIND FOR PROPERTY OWNERS
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICES
+====================================================== -->
+
+<section class="section services-section"
+         id="services">
+
+    <div class="container">
+
+
+        <div class="section-heading reveal">
+
+            <div class="section-label">
+                What We Manage
+            </div>
+
+            <h2 class="section-title">
+                Professional Support For Your Property
+            </h2>
+
+            <p class="section-text">
+                We provide practical property management support
+                designed around the needs of property owners,
+                landlords and investors.
+            </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+
+            <div class="service-card reveal">
+
+                <div class="service-number">
+                    01 / PROPERTY OVERSIGHT
+                </div>
+
+                <div class="service-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    Property Oversight
+                </h3>
+
+                <p>
+                    We help monitor the condition of your property
+                    and identify issues that may require attention
+                    before they become bigger and more expensive
+                    problems.
+                </p>
+
+            </div>
+
+
+            <div class="service-card reveal">
+
+                <div class="service-number">
+                    02 / MAINTENANCE
+                </div>
+
+                <div class="service-icon">
+                    🔧
+                </div>
+
+                <h3>
+                    Maintenance & Repairs
+                </h3>
+
+                <p>
+                    We coordinate maintenance and repair needs
+                    to help keep your property functional,
+                    attractive and properly maintained.
+                </p>
+
+            </div>
+
+
+            <div class="service-card reveal">
+
+                <div class="service-number">
+                    03 / TENANT SUPPORT
+                </div>
+
+                <div class="service-icon">
+                    👥
+                </div>
+
+                <h3>
+                    Tenant Support
+                </h3>
+
+                <p>
+                    We provide professional assistance with
+                    tenant-related matters, helping create a
+                    more organized and positive rental experience.
+                </p>
+
+            </div>
+
+
+            <div class="service-card reveal">
+
+                <div class="service-number">
+                    04 / ADMINISTRATION
+                </div>
+
+                <div class="service-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Property Administration
+                </h3>
+
+                <p>
+                    We assist with the administrative aspects
+                    of property ownership and help keep important
+                    property matters organized.
+                </p>
+
+            </div>
+
+
+            <div class="service-card reveal">
+
+                <div class="service-number">
+                    05 / INSPECTION
+                </div>
+
+                <div class="service-icon">
+                    🔍
+                </div>
+
+                <h3>
+                    Property Inspection
+                </h3>
+
+                <p>
+                    Regular property attention helps identify
+                    maintenance needs, potential concerns and
+                    opportunities to improve your property's condition.
+                </p>
+
+            </div>
+
+
+            <div class="service-card reveal">
+
+                <div class="service-number">
+                    06 / VALUE PROTECTION
+                </div>
+
+                <div class="service-icon">
+                    📈
+                </div>
+
+                <h3>
+                    Protecting Property Value
+                </h3>
+
+                <p>
+                    Proper maintenance and proactive management
+                    help preserve your property's appeal and
+                    support its long-term value.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     WHY US
+====================================================== -->
+
+<section class="section benefits-section">
+
+    <div class="container benefits-layout">
+
+
+        <div class="benefits-image reveal">
+
+            <img src="../infor/p1.jpg"
+                 alt="Urban Edge property management">
+
+        </div>
+
+
+        <div class="reveal">
+
+            <div class="section-label">
+                Why Urban Edge
+            </div>
+
+            <h2 class="section-title">
+                More Than Management.
+                It's Property Care.
+            </h2>
+
+            <p class="section-text">
+                Your property represents an investment of your
+                money, time and future. Our goal is to help you
+                protect that investment through professional,
+                consistent and responsible property management.
+            </p>
+
+
+            <div class="benefit-list">
+
+
+                <div class="benefit">
+
+                    <div class="check">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Professional Oversight
+                        </h4>
+
+                        <p>
+                            Keep your property under professional
+                            attention even when you cannot be there
+                            personally.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="check">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Reduced Stress
+                        </h4>
+
+                        <p>
+                            Spend less time worrying about everyday
+                            property responsibilities.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="check">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Better Maintenance
+                        </h4>
+
+                        <p>
+                            Stay proactive with property maintenance
+                            instead of waiting for problems to escalate.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="check">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Long-Term Value
+                        </h4>
+
+                        <p>
+                            Consistent care can help preserve the
+                            condition and appeal of your property.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROCESS
+====================================================== -->
+
+<section class="section process-section">
+
+    <div class="container">
+
+
+        <div class="section-heading reveal">
+
+            <div class="section-label">
+                Our Process
+            </div>
+
+            <h2 class="section-title">
+                Simple. Professional. Organized.
+            </h2>
+
+            <p class="section-text">
+                We make property management easier by giving
+                every property the attention it deserves.
+            </p>
+
+        </div>
+
+
+        <div class="process">
+
+
+            <div class="process-card reveal">
+
+                <div class="process-number">
+                    01
+                </div>
+
+                <h3>
+                    Understand
+                </h3>
+
+                <p>
+                    We learn about your property, your expectations
+                    and the level of management support you require.
+                </p>
+
+            </div>
+
+
+            <div class="process-card reveal">
+
+                <div class="process-number">
+                    02
+                </div>
+
+                <h3>
+                    Assess
+                </h3>
+
+                <p>
+                    We assess the property's condition and identify
+                    important management and maintenance requirements.
+                </p>
+
+            </div>
+
+
+            <div class="process-card reveal">
+
+                <div class="process-number">
+                    03
+                </div>
+
+                <h3>
+                    Manage
+                </h3>
+
+                <p>
+                    We provide the agreed property management support
+                    and coordinate relevant activities.
+                </p>
+
+            </div>
+
+
+            <div class="process-card reveal">
+
+                <div class="process-number">
+                    04
+                </div>
+
+                <h3>
+                    Protect
+                </h3>
+
+                <p>
+                    Through consistent attention and proper care,
+                    we help protect the condition and value of your
+                    property.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STATS
+====================================================== -->
+
+<section class="section stats">
+
+    <div class="container stats-grid">
+
+
+        <div class="stat reveal">
+
+            <strong>360°</strong>
+
+            <span>
+                Property Care
+            </span>
+
+        </div>
+
+
+        <div class="stat reveal">
+
+            <strong>24/7</strong>
+
+            <span>
+                Owner Peace of Mind
+            </span>
+
+        </div>
+
+
+        <div class="stat reveal">
+
+            <strong>6+</strong>
+
+            <span>
+                Management Services
+            </span>
+
+        </div>
+
+
+        <div class="stat reveal">
+
+            <strong>1</strong>
+
+            <span>
+                Trusted Property Partner
+            </span>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+====================================================== -->
+
+<section class="cta">
+
+    <div class="container">
+
+        <div class="cta-content reveal">
+
+            <div class="section-label">
+                Ready To Take The Stress Away?
+            </div>
+
+            <h2>
+                Your Property Deserves
+                Professional Care.
+            </h2>
+
+            <p>
+                Don't let property ownership become a daily burden.
+                Let Urban Edge Real Estate Ltd help you manage,
+                maintain and protect your investment.
+            </p>
+
+
+            <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge,%20I%20am%20interested%20in%20your%20Property%20Management%20services.%20Please%20I%20would%20like%20to%20discuss%20managing%20my%20property."
+               target="_blank"
+               class="btn btn-primary">
+
+                Talk To A Property Manager
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <p>
+        © 2026 Urban Edge Real Estate Ltd.
+        Building Wealth. Creating Communities. Securing Your Future.
+    </p>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+    /* =====================================================
+       MOBILE MENU
+    ====================================================== */
+
+    const menuToggle =
+        document.getElementById("menuToggle");
+
+    const navLinks =
+        document.getElementById("navLinks");
+
+
+    menuToggle.addEventListener("click", function () {
+
+        menuToggle.classList.toggle("active");
+
+        navLinks.classList.toggle("active");
+
+    });
+
+
+    /* Close menu after clicking a link */
+
+    document.querySelectorAll(".nav-links a")
+        .forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                menuToggle.classList.remove("active");
+
+                navLinks.classList.remove("active");
+
+            });
+
+        });
+
+
+
+    /* =====================================================
+       HEADER SCROLL EFFECT
+    ====================================================== */
+
+    const header =
+        document.getElementById("header");
+
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 60) {
+
+            header.classList.add("scrolled");
+
+        } else {
+
+            header.classList.remove("scrolled");
+
+        }
+
+    });
+
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ====================================================== */
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+
+    const observer =
+        new IntersectionObserver(
+
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("active");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.15
+            }
+
+        );
+
+
+    revealElements.forEach(element => {
+
+        observer.observe(element);
+
+    });
+
+</script>
+
+
+</body>
+</html>
+

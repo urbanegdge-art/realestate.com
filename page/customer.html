@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emmanuel Peculiar - Front Desk & Customer Care | Urban Edge Real Estate</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- AOS (Animate On Scroll) CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#006837',
+              hover: '#00522b',
+              light: '#f0f7f3',
+              accent: '#e5a823'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased text-gray-800 overflow-x-hidden">
+
+  <!-- Navigation Bar Header with Image Logo -->
+  <header class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Company Brand & Logo Image -->
+      <a href="../index.html" class="flex items-center space-x-3 group">
+        <img src="../infor/logo.png" alt="Urban Edge Logo" class="w-12 h-12 object-contain group-hover:scale-105 transition duration-300">
+        <div class="flex flex-col">
+          <span class="text-xl font-extrabold text-brand tracking-wider leading-none">URBAN EDGE</span>
+          <span class="text-[10px] text-gray-500 font-semibold tracking-widest uppercase mt-1">Real Estate Ltd. Reg:0389918</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-700">
+        <a href="../index.html" class="hover:text-brand transition">Home</a>
+        <a href="properties.html" class="hover:text-brand transition">Properties</a>
+        <a href="../index.html#team" class="text-brand transition">Our Team</a>
+        <a href="../index.html#contact" class="hover:text-brand transition">Contact</a>
+      </nav>
+
+      <a href="location.html" class="bg-brand hover:bg-brand-hover text-white text-sm font-semibold px-5 py-2.5 rounded-md transition shadow-sm hover:scale-105 transform">
+        Invest Today
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Profile Banner Section -->
+  <section class="relative bg-gradient-to-r from-gray-900 via-gray-800 to-brand text-white py-16 lg:py-24 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Profile Photo with Entrance Animation -->
+        <div class="lg:col-span-5 flex justify-center" data-aos="fade-right" data-aos-duration="1000">
+          <div class="relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-brand-accent to-brand rounded-2xl blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+            <img src="../infor/front.jpg" alt="Emmanuel Peculiar" class="relative rounded-2xl shadow-2xl w-full max-w-md object-cover border-4 border-white/20 transform group-hover:scale-[1.01] transition duration-500">
+          </div>
+        </div>
+
+        <!-- Profile Bio Header -->
+        <div class="lg:col-span-7 space-y-6" data-aos="fade-left" data-aos-duration="1000">
+          <span class="inline-block px-3 py-1 bg-brand-accent/20 text-brand-accent rounded-full text-xs font-bold uppercase tracking-wider border border-brand-accent/30 animate__animated animate__fadeInDown">
+            Executive Spotlight
+          </span>
+          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Emmanuel Peculiar</h1>
+          <p class="text-xl text-brand-accent font-semibold">Front Desk Officer / Customer Care</p>
+          <p class="text-gray-300 text-base leading-relaxed">
+            Managing brand interactions, client relations, and front-desk customer support to deliver a seamless client experience from first contact to key handoff.
+          </p>
+
+          <!-- Quick Stats -->
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-gray-700/60">
+            <div data-aos="zoom-in" data-aos-delay="200">
+              <span class="block text-2xl font-bold text-white">99%</span>
+              <span class="text-xs text-gray-400">Client Satisfaction</span>
+            </div>
+            <div data-aos="zoom-in" data-aos-delay="400">
+              <span class="block text-2xl font-bold text-white">&lt; 5 Mins</span>
+              <span class="text-xs text-gray-400">Avg Response Time</span>
+            </div>
+            <div data-aos="zoom-in" data-aos-delay="600">
+              <span class="block text-2xl font-bold text-white">2,500+</span>
+              <span class="text-xs text-gray-400">Inquiries Handled</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Article Content Section -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+      <!-- Executive Article Body -->
+      <article class="lg:col-span-8 space-y-8 bg-white p-8 sm:p-10 rounded-2xl shadow-sm border border-gray-100" data-aos="fade-up">
+        
+        <div>
+          <span class="text-xs font-bold text-brand uppercase tracking-wider">Client Experience & Relations</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 mb-4">First Impressions Last: Mastering Front-Office Excellence and Client Retention in Real Estate</h2>
+          <p class="text-gray-500 text-sm italic">Published by Emmanuel Peculiar | Front Desk Officer & Customer Care, Urban Edge Real Estate Ltd.</p>
+        </div>
+
+        <hr class="border-gray-100">
+
+        <div class="prose max-w-none text-gray-700 leading-relaxed space-y-6">
+          <p class="text-lg text-gray-600 font-medium">
+            In high-value property markets, customer care is the primary bridge between client expectations and long-term brand loyalty.
+          </p>
+
+          <h3 class="text-xl font-bold text-gray-900 pt-2 flex items-center gap-2">
+            <i class="fa-solid fa-headset text-brand"></i> 1. The Power of Immediate, Empathetic Communication
+          </h3>
+          <p>
+            Whether handling inbound inquiries for luxury investments or scheduling site inspections, rapid response times set the tone for client confidence. Establishing transparent communication channels ensures that buyers and investors feel valued from their very first interaction.
+          </p>
+
+          <h3 class="text-xl font-bold text-gray-900 pt-2 flex items-center gap-2">
+            <i class="fa-solid fa-bell-concierge text-brand"></i> 2. Frictionless Front-Office Operations
+          </h3>
+          <p>
+            A well-structured front desk operates as the control hub for visitor reception, consultation scheduling, and administrative distribution. Seamless operational workflows ensure that client visits run on schedule and with absolute professionalism.
+          </p>
+
+          <h3 class="text-xl font-bold text-gray-900 pt-2 flex items-center gap-2">
+            <i class="fa-solid fa-heart-circle-check text-brand"></i> 3. Building Lifelong Investor Relationships
+          </h3>
+          <p>
+            Customer care does not end when a deal closes. Maintaining post-sale support, addressing feedback promptly, and providing property management updates transforms one-time buyers into repeat investors and brand advocates.
+          </p>
+
+          <blockquote class="p-6 bg-brand-light border-l-4 border-brand rounded-r-xl italic text-gray-800 my-6 font-medium">
+            "Excellence in customer care is not just about answering questions—it's about creating an atmosphere of trust, clarity, and reliability."
+          </blockquote>
+        </div>
+
+        <!-- Core Customer Care Pillars -->
+        <div class="pt-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-6">Service Pillars</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            
+            <div class="p-5 bg-gray-50 rounded-xl border border-gray-100 hover:border-brand transition-all hover:-translate-y-1 duration-300" data-aos="zoom-in" data-aos-delay="100">
+              <i class="fa-solid fa-comments text-brand text-2xl mb-3"></i>
+              <h4 class="font-bold text-gray-900 text-sm">Responsive Support</h4>
+              <p class="text-xs text-gray-500 mt-1">Prompt inquiry resolution across calls, emails, and direct messaging.</p>
+            </div>
+
+            <div class="p-5 bg-gray-50 rounded-xl border border-gray-100 hover:border-brand transition-all hover:-translate-y-1 duration-300" data-aos="zoom-in" data-aos-delay="200">
+              <i class="fa-solid fa-calendar-check text-brand text-2xl mb-3"></i>
+              <h4 class="font-bold text-gray-900 text-sm">Inspection Logistics</h4>
+              <p class="text-xs text-gray-500 mt-1">Coordinating client appointments and site visitation schedules.</p>
+            </div>
+
+            <div class="p-5 bg-gray-50 rounded-xl border border-gray-100 hover:border-brand transition-all hover:-translate-y-1 duration-300" data-aos="zoom-in" data-aos-delay="300">
+              <i class="fa-solid fa-handshake-angle text-brand text-2xl mb-3"></i>
+              <h4 class="font-bold text-gray-900 text-sm">Post-Sale Care</h4>
+              <p class="text-xs text-gray-500 mt-1">Nurturing long-term relationships and assisting with ongoing inquiries.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </article>
+
+      <!-- Sidebar: Curated Reading & External Links -->
+      <aside class="lg:col-span-4 space-y-8" data-aos="fade-left">
+        
+        <!-- Curated Resources -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-4">
+          <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2 border-b border-gray-100 pb-3">
+            <i class="fa-solid fa-book-bookmark text-brand"></i> Customer Experience Reading List
+          </h3>
+          <p class="text-xs text-gray-500">Essential guides on customer relationship management & service excellence:</p>
+
+          <ul class="space-y-3 text-sm">
+            <li>
+              <a href="https://hbr.org/topic/subject/customer-relationship-management" target="_blank" class="block p-3 rounded-lg bg-gray-50 hover:bg-brand-light hover:text-brand transition group">
+                <div class="flex items-center justify-between font-semibold">
+                  <span>Customer Relationship Guide (HBR)</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs group-hover:translate-x-0.5 transition"></i>
+                </div>
+                <p class="text-xs text-gray-500 mt-0.5">Strategies for retaining high-value clients and improving satisfaction.</p>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://www.zendesk.com/blog/customer-service-skills/" target="_blank" class="block p-3 rounded-lg bg-gray-50 hover:bg-brand-light hover:text-brand transition group">
+                <div class="flex items-center justify-between font-semibold">
+                  <span>Zendesk CX Insights</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs group-hover:translate-x-0.5 transition"></i>
+                </div>
+                <p class="text-xs text-gray-500 mt-0.5">Modern frameworks for front-office communication and service standards.</p>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://www.hubspot.com/resources/e-books" target="_blank" class="block p-3 rounded-lg bg-gray-50 hover:bg-brand-light hover:text-brand transition group">
+                <div class="flex items-center justify-between font-semibold">
+                  <span>HubSpot Customer Success Ebooks</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs group-hover:translate-x-0.5 transition"></i>
+                </div>
+                <p class="text-xs text-gray-500 mt-0.5">Best practices for client onboarding and long-term engagement.</p>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://www.forbes.com/customer-experience/" target="_blank" class="block p-3 rounded-lg bg-gray-50 hover:bg-brand-light hover:text-brand transition group">
+                <div class="flex items-center justify-between font-semibold">
+                  <span>Forbes CX Council</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs group-hover:translate-x-0.5 transition"></i>
+                </div>
+                <p class="text-xs text-gray-500 mt-0.5">Industry leadership articles on service delivery and client trust.</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Direct Contact Card -->
+        <div class="bg-brand text-white p-6 rounded-2xl shadow-lg space-y-4 relative overflow-hidden">
+          <div class="absolute -right-6 -bottom-6 text-white/10 text-9xl">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <h3 class="text-lg font-bold">Contact Customer Care</h3>
+          <p class="text-sm text-gray-200">Have questions about property offerings or site visits? Contact Emmanuel Peculiar at our reception desk.</p>
+          <a href="mailto: urbanegdge@gmail.com " class="inline-block w-full text-center py-3 bg-white text-brand font-bold rounded-lg hover:bg-gray-100 transition shadow-sm">
+            <i class="fa-solid fa-envelope mr-2"></i> Reach Front Desk
+          </a>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Floating Action Buttons -->
+  <div class="fixed bottom-6 right-6 flex flex-col space-y-3 z-50">
+    <a href="#" class="w-12 h-12 bg-brand hover:bg-brand-hover text-white rounded-full flex items-center justify-center shadow-lg transition hover:scale-110">
+      <i class="fa-solid fa-arrow-up"></i>
+    </a>
+    <a href="#" class="w-12 h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-lg transition hover:scale-110">
+      <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+  </div>
+
+  <!-- AOS Animation Script Initialization -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  </script>
+
+</body>
+</html>

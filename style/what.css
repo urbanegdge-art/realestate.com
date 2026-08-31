@@ -1,0 +1,128 @@
+/* =========================================================
+   FLOATING ACTION BUTTONS
+========================================================= */
+
+.floating-actions {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+
+/* WhatsApp */
+
+.floating-whatsapp,
+.back-to-top {
+
+    width: 56px;
+    height: 56px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    border: none;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.20);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.floating-whatsapp {
+
+    background: #25D366;
+
+    color: white;
+
+    font-size: 25px;
+}
+
+
+.floating-whatsapp:hover {
+
+    transform: translateY(-5px) scale(1.05);
+
+    box-shadow:
+        0 15px 35px rgba(37, 211, 102, 0.35);
+}
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+.back-to-top {
+
+    background: #ffffff;
+
+    color: #176b45;
+
+    font-size: 25px;
+    font-weight: 700;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(20px);
+
+    pointer-events: none;
+}
+
+
+.back-to-top.show {
+
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+
+.back-to-top:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .floating-actions {
+
+        right: 16px;
+        bottom: 18px;
+
+        gap: 10px;
+    }
+
+    .floating-whatsapp,
+    .back-to-top {
+
+        width: 50px;
+        height: 50px;
+    }
+
+}

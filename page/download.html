@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    Downloads | Urban Edge Real Estate
+</title>
+
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    body {
+        font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+        background:
+            linear-gradient(
+                135deg,
+                #07130d,
+                #102b1b,
+                #07130d
+            );
+
+        color: white;
+
+        min-height: 100vh;
+    }
+
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    .download-header {
+
+        padding: 25px 7%;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,0.1);
+
+        background:
+            rgba(0,0,0,0.2);
+
+        backdrop-filter:
+            blur(10px);
+
+    }
+
+
+    .logo-area {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+    }
+
+
+    .logo-area img {
+
+        width: 50px;
+
+        height: 50px;
+
+        object-fit: contain;
+
+    }
+
+
+    .company-name {
+
+        font-size: 18px;
+
+        font-weight: bold;
+
+        letter-spacing: 1px;
+
+    }
+
+
+    .back-btn {
+
+        color: white;
+
+        text-decoration: none;
+
+        padding: 12px 18px;
+
+        border:
+            1px solid
+            rgba(255,255,255,0.2);
+
+        border-radius: 8px;
+
+        transition: 0.3s;
+
+    }
+
+
+    .back-btn:hover {
+
+        background:
+            rgba(255,255,255,0.1);
+
+    }
+
+
+    /* =========================================
+       MAIN SECTION
+    ========================================= */
+
+    .download-section {
+
+        width: min(1200px, 90%);
+
+        margin: auto;
+
+        padding:
+            80px 0;
+
+    }
+
+
+    .intro {
+
+        text-align: center;
+
+        max-width: 750px;
+
+        margin:
+            auto
+            auto
+            60px;
+
+    }
+
+
+    .intro span {
+
+        color: #d4af37;
+
+        font-size: 12px;
+
+        font-weight: bold;
+
+        letter-spacing: 3px;
+
+    }
+
+
+    .intro h1 {
+
+        font-size:
+            clamp(
+                2.3rem,
+                6vw,
+                4.5rem
+            );
+
+        margin-top: 15px;
+
+    }
+
+
+    .intro p {
+
+        margin-top: 20px;
+
+        color: #b7c4bb;
+
+        line-height: 1.8;
+
+    }
+
+
+    /* =========================================
+       DOWNLOAD CARD
+    ========================================= */
+
+    .document-card {
+
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            1.5fr;
+
+        gap: 35px;
+
+        padding: 30px;
+
+        border-radius: 20px;
+
+        background:
+            rgba(255,255,255,0.06);
+
+        border:
+            1px solid
+            rgba(255,255,255,0.1);
+
+        backdrop-filter:
+            blur(15px);
+
+        box-shadow:
+            0 20px 70px
+            rgba(0,0,0,0.3);
+
+        animation:
+            fadeUp
+            0.8s
+            ease;
+
+    }
+
+
+    /* =========================================
+       FILE INFORMATION
+    ========================================= */
+
+    .document-info {
+
+        padding: 25px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+    }
+
+
+    .file-icon {
+
+        width: 90px;
+
+        height: 90px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 45px;
+
+        background:
+            rgba(212,175,55,0.12);
+
+        border-radius: 20px;
+
+        margin-bottom: 25px;
+
+    }
+
+
+    .document-info h2 {
+
+        font-size: 28px;
+
+        margin-bottom: 15px;
+
+    }
+
+
+    .document-info p {
+
+        color: #b7c4bb;
+
+        line-height: 1.8;
+
+    }
+
+
+    .file-details {
+
+        margin:
+            25px
+            0;
+
+        padding:
+            20px;
+
+        background:
+            rgba(0,0,0,0.2);
+
+        border-radius: 12px;
+
+    }
+
+
+    .file-details div {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        padding: 10px 0;
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,0.08);
+
+    }
+
+
+    .file-details div:last-child {
+
+        border-bottom: none;
+
+    }
+
+
+    .file-details span {
+
+        color: #9eaea3;
+
+    }
+
+
+    /* =========================================
+       BUTTONS
+    ========================================= */
+
+    .button-group {
+
+        display: grid;
+
+        gap: 15px;
+
+    }
+
+
+    .download-btn {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 10px;
+
+        padding: 17px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #d4af37,
+                #f4d76b
+            );
+
+        color: #07130d;
+
+        text-decoration: none;
+
+        font-weight: bold;
+
+        border-radius: 10px;
+
+        transition: 0.3s;
+
+    }
+
+
+    .download-btn:hover {
+
+        transform:
+            translateY(-4px);
+
+        box-shadow:
+            0 15px 35px
+            rgba(212,175,55,0.25);
+
+    }
+
+
+    .view-btn {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 10px;
+
+        padding: 16px;
+
+        color: white;
+
+        text-decoration: none;
+
+        border:
+            1px solid
+            rgba(255,255,255,0.2);
+
+        border-radius: 10px;
+
+        transition: 0.3s;
+
+    }
+
+
+    .view-btn:hover {
+
+        background:
+            rgba(255,255,255,0.08);
+
+    }
+
+
+    /* =========================================
+       PDF PREVIEW
+    ========================================= */
+
+    .preview-box {
+
+        min-height: 550px;
+
+        border-radius: 15px;
+
+        overflow: hidden;
+
+        background: white;
+
+        position: relative;
+
+    }
+
+
+    .preview-box iframe {
+
+        width: 100%;
+
+        height: 100%;
+
+        min-height: 550px;
+
+        border: none;
+
+    }
+
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    footer {
+
+        text-align: center;
+
+        padding:
+            35px
+            20px;
+
+        color: #8fa095;
+
+        border-top:
+            1px solid
+            rgba(255,255,255,0.08);
+
+    }
+
+
+    footer strong {
+
+        color: #d4af37;
+
+    }
+
+
+    /* =========================================
+       ANIMATION
+    ========================================= */
+
+    @keyframes fadeUp {
+
+        from {
+
+            opacity: 0;
+
+            transform:
+                translateY(40px);
+
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+
+        }
+
+    }
+
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media
+    (
+        max-width: 850px
+    ) {
+
+        .document-card {
+
+            grid-template-columns:
+                1fr;
+
+        }
+
+
+        .preview-box {
+
+            min-height: 450px;
+
+        }
+
+
+        .preview-box iframe {
+
+            min-height: 450px;
+
+        }
+
+    }
+
+
+    @media
+    (
+        max-width: 600px
+    ) {
+
+        .download-header {
+
+            padding:
+                20px
+                5%;
+
+        }
+
+
+        .company-name {
+
+            font-size: 13px;
+
+        }
+
+
+        .back-btn {
+
+            padding:
+                10px
+                12px;
+
+            font-size: 12px;
+
+        }
+
+
+        .document-card {
+
+            padding: 15px;
+
+        }
+
+
+        .document-info {
+
+            padding: 20px 10px;
+
+        }
+
+
+        .preview-box {
+
+            min-height: 350px;
+
+        }
+
+
+        .preview-box iframe {
+
+            min-height: 350px;
+
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header
+    class="download-header"
+>
+
+    <div
+        class="logo-area"
+    >
+
+        <!-- CHANGE THIS TO YOUR LOGO -->
+
+        <img
+            src="../infor/logo.png"
+            alt="Urban Edge Real Estate Logo"
+        >
+
+
+        <div
+            class="company-name"
+        >
+
+            URBAN EDGE REAL ESTATE
+
+        </div>
+
+    </div>
+
+
+    <a
+        href="properties.html"
+        class="back-btn"
+    >
+
+        ← Back to Website
+
+    </a>
+
+</header>
+
+
+
+<!-- =========================================
+     DOWNLOAD SECTION
+========================================= -->
+
+<main
+    class="download-section"
+>
+
+
+    <div
+        class="intro"
+    >
+
+        <span>
+            DOCUMENT CENTRE
+        </span>
+
+
+        <h1>
+            View & Download
+        </h1>
+
+
+        <p>
+
+            View the Urban Edge Real Estate
+            document directly on this page
+            or download a copy to your device.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- =====================================
+         DOCUMENT CARD
+    ====================================== -->
+
+    <section
+        class="document-card"
+    >
+
+
+        <!-- FILE INFORMATION -->
+
+        <div
+            class="document-info"
+        >
+
+
+            <div
+                class="file-icon"
+            >
+
+                📄
+
+            </div>
+
+
+            <h2>
+                Urban Edge Property Brochure
+            </h2>
+
+
+            <p>
+
+                Download our official property
+                brochure to explore available
+                properties, investment opportunities
+                and other important information.
+
+            </p>
+
+
+
+            <div
+                class="file-details"
+            >
+
+                <div>
+
+                    <span>
+                        File Type
+                    </span>
+
+                    <strong>
+                        PDF
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Document
+                    </span>
+
+                    <strong>
+                        Property Brochure
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong>
+                        Available
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div
+                class="button-group"
+            >
+
+
+                <!-- DOWNLOAD -->
+
+                <a
+                    href="../infor/Document 25.pdf"
+                    download
+                    class="download-btn"
+                >
+
+                    ⬇️ Download PDF
+
+                </a>
+
+
+
+                <!-- OPEN PDF -->
+
+                <a
+                    href="../infor/Document 25.pdf"
+                    target="_blank"
+                    class="view-btn"
+                >
+
+                    👁️ Open Full Document
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =====================================
+             PDF PREVIEW
+        ====================================== -->
+
+        <div
+            class="preview-box"
+        >
+
+            <iframe
+
+                src="../infor/Document 25.pdf"
+
+                title="Urban Edge Property Brochure"
+
+            ></iframe>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <strong>
+        URBAN EDGE REAL ESTATE
+    </strong>
+
+    <br><br>
+
+    Building Wealth. Creating Communities.
+    Securing Your Future.
+
+    <br><br>
+
+    © 2026 Urban Edge Real Estate.
+    All Rights Reserved.
+
+</footer>
+
+</body>
+
+</html>

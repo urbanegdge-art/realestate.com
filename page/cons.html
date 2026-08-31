@@ -1,0 +1,1237 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Real Estate Consultancy | Urban Edge Real Estate Ltd</title>
+
+    <meta name="description"
+          content="Professional real estate consultancy services from Urban Edge Real Estate Ltd. Get expert guidance on property acquisition, investment, due diligence, documentation and real estate strategy.">
+
+    <link rel="icon" type="image/png" href="../infor/logo1.jpg">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            color: #17251c;
+            background: #ffffff;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        :root {
+            --green: #0d5c35;
+            --dark-green: #063b22;
+            --light-green: #eaf5ee;
+            --gold: #c8a951;
+            --dark: #102019;
+            --white: #ffffff;
+            --gray: #66736b;
+            --light: #f6f8f6;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 6%;
+            color: white;
+        }
+
+        .nav {
+            max-width: 1300px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .logo-text strong {
+            display: block;
+            font-size: 17px;
+            letter-spacing: .5px;
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            opacity: .8;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: .3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            background: white;
+            color: var(--green);
+            padding: 12px 20px;
+            border-radius: 30px;
+        }
+
+        .nav-btn::after {
+            display: none;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 90vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(3, 32, 18, .92),
+                    rgba(3, 32, 18, .68),
+                    rgba(3, 32, 18, .30)
+                ),
+                url("infor/p1.jpg") center/cover no-repeat;
+        }
+
+        .hero-content {
+            width: 90%;
+            max-width: 1300px;
+            margin: auto;
+            color: white;
+            padding-top: 70px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid rgba(255,255,255,.35);
+            border-radius: 30px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero h1 {
+            max-width: 850px;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(45px, 6vw, 78px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #d7c276;
+        }
+
+        .hero p {
+            max-width: 680px;
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255,255,255,.86);
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: .3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #087846;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,.5);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--dark-green);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 30px;
+            left: 6%;
+            font-size: 11px;
+            letter-spacing: 2px;
+            opacity: .7;
+        }
+
+        /* =========================
+           INTRO
+        ========================== */
+
+        .section {
+            padding: 100px 6%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .section-label {
+            color: var(--green);
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(34px, 4vw, 52px);
+            line-height: 1.15;
+            margin-bottom: 22px;
+            color: var(--dark);
+        }
+
+        .section-text {
+            color: var(--gray);
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .intro-image {
+            position: relative;
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .experience-box {
+            position: absolute;
+            right: -25px;
+            bottom: 30px;
+            background: var(--green);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,.2);
+        }
+
+        .experience-box strong {
+            display: block;
+            font-size: 35px;
+        }
+
+        .experience-box span {
+            font-size: 12px;
+            opacity: .8;
+        }
+
+        /* =========================
+           SERVICES
+        ========================== */
+
+        .services-section {
+            background: var(--light);
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 55px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 35px;
+            border-radius: 10px;
+            border: 1px solid #e8ece9;
+            transition: .4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 0;
+            background: var(--green);
+            transition: .4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(10,50,30,.1);
+        }
+
+        .service-card:hover::before {
+            height: 100%;
+        }
+
+        .service-number {
+            font-size: 13px;
+            color: var(--gold);
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* =========================
+           PROCESS
+        ========================== */
+
+        .process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .process-card {
+            position: relative;
+            padding: 30px;
+            border-top: 2px solid #dce6df;
+        }
+
+        .process-card span {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--green);
+            color: white;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .process-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .process-card p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           STATS
+        ========================== */
+
+        .stats {
+            background: var(--dark-green);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+        }
+
+        .stat {
+            padding: 20px;
+            border-right: 1px solid rgba(255,255,255,.15);
+        }
+
+        .stat:last-child {
+            border: none;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 42px;
+            margin-bottom: 5px;
+            font-family: "Playfair Display", serif;
+        }
+
+        .stat span {
+            color: rgba(255,255,255,.65);
+            font-size: 13px;
+        }
+
+        /* =========================
+           WHY US
+        ========================== */
+
+        .why {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .why-image img {
+            width: 100%;
+            height: 560px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .benefits {
+            display: grid;
+            gap: 22px;
+            margin-top: 30px;
+        }
+
+        .benefit {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+
+        .check {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--light-green);
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .benefit h4 {
+            margin-bottom: 5px;
+        }
+
+        .benefit p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           CTA
+        ========================== */
+
+        .cta {
+            padding: 100px 6%;
+            background:
+                linear-gradient(
+                    rgba(3, 43, 25, .94),
+                    rgba(3, 43, 25, .94)
+                ),
+                url("infor/p1.jpg") center/cover;
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(35px, 5vw, 60px);
+            max-width: 850px;
+            margin: auto auto 20px;
+        }
+
+        .cta p {
+            max-width: 650px;
+            margin: auto auto 30px;
+            line-height: 1.8;
+            color: rgba(255,255,255,.75);
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #031d11;
+            color: white;
+            padding: 30px 6%;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 13px;
+            color: rgba(255,255,255,.6);
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================== */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .intro,
+            .why {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .process {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,.15);
+            }
+
+            .experience-box {
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px 5%;
+            }
+
+            .logo img {
+                width: 43px;
+                height: 43px;
+            }
+
+            .logo-text strong {
+                font-size: 14px;
+            }
+
+            .hero {
+                min-height: 780px;
+            }
+
+            .hero-content {
+                width: 90%;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .section {
+                padding: 70px 5%;
+            }
+
+            .services-grid,
+            .process {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-image img,
+            .why-image img {
+                height: 400px;
+            }
+
+            .experience-box {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat strong {
+                font-size: 30px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================== -->
+
+<header>
+    <nav class="nav">
+
+        <a href="../index.html" class="logo">
+            <img src="../infor/logo.png" alt="Urban Edge Real Estate Logo">
+
+            <div class="logo-text">
+                <strong>URBAN EDGE</strong>
+                <span>REAL ESTATE LTD</span>
+            </div>
+        </a>
+
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../page/properties.html">Properties</a>
+            <a href="../page/FQA.html">About Us</a>
+            <a href="https://wa.me/2349011157594 " target="_blank"> Consultancy</a>
+            <a href="../index.html#contact" class="nav-btn">Contact Us</a>
+        </div>
+
+    </nav>
+</header>
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="hero">
+
+    <div class="hero-content reveal">
+
+        <div class="hero-tag">
+            Real Estate Consultancy
+        </div>
+
+        <h1>
+            Make Smarter
+            <span>Property Decisions.</span>
+        </h1>
+
+        <p>
+            Real estate is more than buying and selling property.
+            It is about making informed decisions that protect your
+            money, create opportunities and build lasting wealth.
+        </p>
+
+        <div class="hero-buttons">
+            
+           
+       <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%20Real%20Estate%20Ltd,%20I%20am%20interested%20in%20your%20Real%20Estate%20Consultancy%20services.%20I%20would%20like%20to%20speak%20with%20a%20consultant."  class="btn btn-primary"  target="_blank">
+          Speak With A Consultant
+             </a>
+
+
+
+            <a href="service.html" class="btn btn-outline">
+                Explore Our Services
+            </a>
+        </div>
+
+    </div>
+
+    <div class="hero-scroll">
+        SCROLL TO DISCOVER ↓
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INTRO
+========================== -->
+
+<section class="section">
+
+    <div class="container intro">
+
+        <div class="reveal">
+
+            <div class="section-label">
+                Our Expertise
+            </div>
+
+            <h2 class="section-title">
+                Your Property Goals.
+                Our Professional Guidance.
+            </h2>
+
+            <p class="section-text">
+                At Urban Edge Real Estate Ltd, we provide professional
+                real estate consultancy designed to help individuals,
+                families, businesses and investors make confident
+                property decisions.
+                <br><br>
+                From identifying the right investment opportunity to
+                evaluating property documentation, our consultants
+                help you understand the market, identify risks and
+                choose opportunities that align with your goals.
+            </p>
+
+        </div>
+
+        <div class="intro-image reveal">
+
+            <img src="../infor/p1.jpg"
+                 alt="Real estate property consultation">
+
+            <div class="experience-box">
+                <strong>360°</strong>
+                <span>PROPERTY GUIDANCE</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SERVICES
+========================== -->
+
+<section class="section services-section" id="services">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <div class="section-label">
+                What We Do
+            </div>
+
+            <h2 class="section-title">
+                Consultancy Services Built Around Your Goals
+            </h2>
+
+            <p class="section-text">
+                Whether you are purchasing your first property,
+                expanding your investment portfolio or looking for
+                strategic real estate opportunities, our team is here
+                to guide you.
+            </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+            <div class="service-card reveal">
+                <div class="service-number">01</div>
+                <h3>Property Investment Advisory</h3>
+                <p>
+                    Get professional guidance on property investments,
+                    potential opportunities, market considerations and
+                    long-term investment strategies.
+                </p>
+            </div>
+
+
+            <div class="service-card reveal">
+                <div class="service-number">02</div>
+                <h3>Property Acquisition</h3>
+                <p>
+                    We help clients identify suitable properties based
+                    on location, budget, purpose and investment goals.
+                </p>
+            </div>
+
+
+            <div class="service-card reveal">
+                <div class="service-number">03</div>
+                <h3>Property Due Diligence</h3>
+                <p>
+                    Before committing your funds, we help assess
+                    important property information and identify
+                    potential issues that require attention.
+                </p>
+            </div>
+
+
+            <div class="service-card reveal">
+                <div class="service-number">04</div>
+                <h3>Title & Documentation Guidance</h3>
+                <p>
+                    Receive professional guidance through the
+                    documentation and title-processing stages of a
+                    property transaction.
+                </p>
+            </div>
+
+
+            <div class="service-card reveal">
+                <div class="service-number">05</div>
+                <h3>Market & Location Analysis</h3>
+                <p>
+                    Understand how location, infrastructure,
+                    accessibility and development trends can influence
+                    property opportunities.
+                </p>
+            </div>
+
+
+            <div class="service-card reveal">
+                <div class="service-number">06</div>
+                <h3>Real Estate Strategy</h3>
+                <p>
+                    We help individuals and businesses develop practical
+                    property strategies aligned with their financial
+                    objectives and long-term plans.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PROCESS
+========================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <div class="section-label">
+                Our Approach
+            </div>
+
+            <h2 class="section-title">
+                From Questions To Confident Decisions
+            </h2>
+
+        </div>
+
+
+        <div class="process">
+
+            <div class="process-card reveal">
+                <span>01</span>
+                <h3>Understand</h3>
+                <p>
+                    We first understand your property needs,
+                    objectives, budget and expectations.
+                </p>
+            </div>
+
+
+            <div class="process-card reveal">
+                <span>02</span>
+                <h3>Analyse</h3>
+                <p>
+                    We evaluate the available opportunities,
+                    locations, property information and relevant
+                    considerations.
+                </p>
+            </div>
+
+
+            <div class="process-card reveal">
+                <span>03</span>
+                <h3>Advise</h3>
+                <p>
+                    Our team provides practical recommendations
+                    based on the information available.
+                </p>
+            </div>
+
+
+            <div class="process-card reveal">
+                <span>04</span>
+                <h3>Move Forward</h3>
+                <p>
+                    With clearer information, you can proceed with
+                    greater confidence and a better understanding of
+                    your decision.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     STATS
+========================== -->
+
+<section class="section stats">
+
+    <div class="container stats-grid">
+
+        <div class="stat reveal">
+            <strong>360°</strong>
+            <span>Property Guidance</span>
+        </div>
+
+        <div class="stat reveal">
+            <strong>100%</strong>
+            <span>Client Focused</span>
+        </div>
+
+        <div class="stat reveal">
+            <strong>6+</strong>
+            <span>Core Services</span>
+        </div>
+
+        <div class="stat reveal">
+            <strong>1</strong>
+            <span>Trusted Property Partner</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     WHY URBAN EDGE
+========================== -->
+
+<section class="section">
+
+    <div class="container why">
+
+        <div class="why-image reveal">
+
+            <img src="../infor/p3.jpeg"
+                 alt="Urban Edge real estate consultation">
+
+        </div>
+
+
+        <div class="reveal">
+
+            <div class="section-label">
+                Why Urban Edge
+            </div>
+
+            <h2 class="section-title">
+                Real Estate Decisions Deserve Professional Guidance.
+            </h2>
+
+            <p class="section-text">
+                Property transactions can involve significant financial
+                commitments. Our role is to help you approach those
+                decisions with better information, clearer direction
+                and professional support.
+            </p>
+
+
+            <div class="benefits">
+
+                <div class="benefit">
+
+                    <div class="check">✓</div>
+
+                    <div>
+                        <h4>Professional Guidance</h4>
+                        <p>
+                            Practical advice throughout your property
+                            journey.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="check">✓</div>
+
+                    <div>
+                        <h4>Client-Centred Approach</h4>
+                        <p>
+                            Our recommendations are built around your
+                            individual property objectives.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="check">✓</div>
+
+                    <div>
+                        <h4>Risk Awareness</h4>
+                        <p>
+                            We help you identify important questions
+                            and potential concerns before making major
+                            decisions.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="check">✓</div>
+
+                    <div>
+                        <h4>Long-Term Perspective</h4>
+                        <p>
+                            We look beyond today's transaction and
+                            consider the broader property objective.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================== -->
+
+<section class="cta">
+
+    <div class="reveal">
+
+        <div class="section-label" style="color:#d7c276;">
+            Let's Talk Property
+        </div>
+
+        <h2>
+            Have A Property Goal?
+            Let's Build A Strategy.
+        </h2>
+
+        <p>
+            Whether you are buying land, acquiring a property,
+            exploring an investment or simply need professional
+            guidance, Urban Edge is ready to help you take the next
+            step.
+        </p>
+
+        <a href="  https://wa.me/2349011157594?text=Hello%20Urban%20Edge%20Real%20Estate%20Ltd,%20I%20am%20interested%20in%20your%20Real%20Estate%20Consultancy%20services.%20I%20would%20like%20to%20speak%20with%20a%20consultant.   " class="btn btn-primary">
+            Talk To A Consultant
+        </a>
+       
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+    <p>
+        © 2026 Urban Edge Real Estate Ltd.
+        Building Wealth. Creating Communities. Securing Your Future.
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script>
+
+    /* =========================
+       SCROLL REVEAL
+    ========================== */
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+    const revealObserver =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("active");
+
+                        revealObserver.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+    revealElements.forEach(element => {
+        revealObserver.observe(element);
+    });
+
+
+    /* =========================
+       HEADER BACKGROUND
+    ========================== */
+
+    const header =
+        document.querySelector("header");
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 80) {
+
+            header.style.background =
+                "rgba(3, 29, 17, .94)";
+
+            header.style.backdropFilter =
+                "blur(12px)";
+
+        } else {
+
+            header.style.background =
+                "transparent";
+
+            header.style.backdropFilter =
+                "none";
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
+

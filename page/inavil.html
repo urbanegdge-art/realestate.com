@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Coming Soon | Urban Edge Real Estate</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --green: #005a2b;
+            --green-dark: #003d1e;
+            --green-light: #e6f4ed;
+            --gray: #f7f9f8;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background: var(--gray);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Header */
+        header {
+            height: 64px;
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            background: var(--green);
+            color: white;
+            font-size: 10px;
+            padding: 4px 7px;
+            border-radius: 5px;
+        }
+
+        /* Hero / Content */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .notice-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            max-width: 520px;
+            width: 100%;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            background: var(--green-light);
+            color: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 24px;
+        }
+
+        .notice-card h1 {
+            font-size: 26px;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .notice-card p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .action-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 22px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--green);
+            border: 1px solid var(--green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--green-light);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--green-dark);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 480px) {
+            .notice-card {
+                padding: 30px 20px;
+            }
+
+            .action-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="properties.html" class="logo">
+            <span>URBAN EDGE</span>
+            <span class="logo-badge">PROPERTIES</span>
+        </a>
+    </header>
+
+    <main>
+        <div class="notice-card">
+            <div class="icon-box">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+            <h1>Page Under Maintenance</h1>
+            <p>This section is currently unavailable while we work on bringing you updated listings and details. Please check back shortly or get in touch with our team directly.</p>
+            
+            <div class="action-group">
+                <a href="properties.html" class="btn btn-primary">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Listings
+                </a>
+                <a href="https://wa.me/2348102601114?text=Hello%20Urban%20Edge%20Real%20Estate%2C%0A%0AI%20am%20inquiring%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <span>© 2026 Urban Edge Real Estate. All Rights Reserved.</span>
+    </footer>
+
+</body>
+</html>

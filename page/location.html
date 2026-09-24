@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Urban Edge Real Estate - Interactive Locations & Flyer Showcase</title>
+  <title>Urbanegdge Real Estate - Interactive Locations & Flyer Showcase</title>
   <style>
     /* RESET & VARS */
     * {
@@ -49,17 +49,22 @@
     }
 
     .logo-box {
-      width: 45px;
-      height: 45px;
-      background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
-      border-radius: 8px;
+      width: 50px;
+      height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 22px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .brand-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .brand-title h1 {
@@ -102,40 +107,45 @@
       margin: 1.5rem auto 0;
       padding: 0 2rem;
       width: 100%;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    .select-wrapper {
+    .select-wrapper, .search-wrapper {
+      flex: 1;
+      min-width: 280px;
       position: relative;
       background: white;
-      padding: 1rem 1.5rem;
+      padding: 0.75rem 1.25rem;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       border: 1px solid #e2e8f0;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
-    .select-label {
+    .select-label, .search-label {
       font-weight: 700;
       color: var(--dark-green);
       white-space: nowrap;
+      font-size: 0.95rem;
     }
 
-    select {
+    select, input[type="text"] {
       width: 100%;
-      padding: 0.75rem 1rem;
+      padding: 0.65rem 1rem;
       border: 2px solid #cbd5e1;
       border-radius: 8px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--text-main);
       outline: none;
       transition: border-color 0.3s;
-      cursor: pointer;
       background: #f8fafc;
     }
 
-    select:focus {
+    select:focus, input[type="text"]:focus {
       border-color: var(--primary-green);
     }
 
@@ -323,27 +333,6 @@
         height: 450px;
       }
     }
-
-    /* LOGO CONTAINER */
-.logo-box {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #ffffff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* LOGO IMAGE STYLING */
-.brand-logo {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Keeps logo proportions intact without cropping */
-  display: block;
-}
   </style>
 </head>
 <body>
@@ -352,10 +341,10 @@
   <header>
     <div class="brand-section">
       <div class="logo-box">
-  <img src="../infor/logo.png" alt="Urban Edge Real Estate Logo" class="brand-logo">
-</div>
+        <img src="../infor/logo.png" alt="Urbanegdge Real Estate Logo" class="brand-logo">
+      </div>
       <div class="brand-title">
-        <h1>URBAN EDGE</h1>
+        <h1>URBANEGDGE</h1>
         <p>REAL ESTATE LTD.</p>
       </div>
     </div>
@@ -364,10 +353,10 @@
     </a>
   </header>
 
-  <!-- SELECT LOCATION DROPDOWN -->
+  <!-- SELECT LOCATION & SEARCH CONTROL BAR -->
   <div class="control-container">
     <div class="select-wrapper">
-      <label class="select-label" for="estateSelect">📍 Select Location / Estate:</label>
+      <label class="select-label" for="estateSelect">📍 Select Estate:</label>
       <select id="estateSelect" onchange="updateView(this.value)">
         <option value="ifeadigo">Ifeadigo Garden Estate — Awba Ofemili</option>
         <option value="urban_business">Urban Business — Igbariam</option>
@@ -376,6 +365,11 @@
         <option value="urban_haven">Urban Haven — Isiagu</option>
         <option value="urban_residence">Urban Residence — Agu-Awka</option>
       </select>
+    </div>
+
+    <div class="search-wrapper">
+      <label class="search-label" for="searchInput">🔍 Search:</label>
+      <input type="text" id="searchInput" placeholder="Search by name, landmark, or location..." oninput="handleSearch(this.value)">
     </div>
   </div>
 
@@ -394,7 +388,7 @@
     <div class="flyer-container">
 
       <!-- IFEADIGO GARDEN ESTATE -->
-      <div id="flyer-ifeadigo" class="flyer-card">
+      <div id="flyer-ifeadigo" class="flyer-card" data-keywords="ifeadigo garden estate awba ofemili awka">
         <span class="badge-price">₦4,500,000 / Plot</span>
         <h2 class="estate-title">Ifeadigo Garden Estate</h2>
         <p class="location-subtitle">📍 Awba Ofemili, Anambra State</p>
@@ -419,7 +413,7 @@
       </div>
 
       <!-- URBAN BUSINESS -->
-      <div id="flyer-urban_business" class="flyer-card">
+      <div id="flyer-urban garden" class="flyer-card" data-keywords="urban business igbariam university ebube muonso">
         <span class="badge-price">₦5,500,000 / Plot</span>
         <h2 class="estate-title">Urban Business</h2>
         <p class="location-subtitle">📍 Igbariam, Anambra State</p>
@@ -439,13 +433,12 @@
 
         <div class="action-row">
           <a href="tel:2349011157594" class="btn-action btn-primary">📞 Call Agent</a>
-         <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%2C%20I%20am%20interested%20in%20Urban%20Business%20(Igbariam).%20Please%20send%20me%20more%20details." target="_blank" class="btn-action btn-secondary">💬 WhatsApp</a>
+          <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%2C%20I%20am%20interested%20in%20Urban%20Business%20(Igbariam).%20Please%20send%20me%20more%20details." target="_blank" class="btn-action btn-secondary">💬 WhatsApp</a>
         </div>
       </div>
 
-
       <!-- URBAN VILLE -->
-      <div id="flyer-urban_ville" class="flyer-card">
+      <div id="flyer-urban_ville" class="flyer-card" data-keywords="urban ville ukwulu ojukwu university">
         <span class="badge-price">Promo: ₦2,500,000 <s style="font-size:0.8rem; opacity:0.8">₦3.5M</s></span>
         <h2 class="estate-title">Urban Ville</h2>
         <p class="location-subtitle">📍 Ukwulu, Anambra State</p>
@@ -464,14 +457,14 @@
           <div class="feature-card">Documentation Inclusive</div>
         </div>
 
-      <div class="action-row">
-  <a href="tel:+2349011157594" class="btn-action btn-primary">📞 Call Agent</a>
-  <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%2C%20I%20am%20interested%20in%20the%20promo%20for%20Urban%20Ville%20(Ukwulu).%20Please%20send%20me%20more%20details." target="_blank" class="btn-action btn-secondary">💬 WhatsApp</a>
-</div>
-
+        <div class="action-row">
+          <a href="tel:+2349011157594" class="btn-action btn-primary">📞 Call Agent</a>
+          <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%2C%20I%20am%20interested%20in%20the%20promo%20for%20Urban%20Ville%20(Ukwulu).%20Please%20send%20me%20more%20details." target="_blank" class="btn-action btn-secondary">💬 WhatsApp</a>
+        </div>
+      </div>
 
       <!-- NEW HAVEN LAYOUT -->
-      <div id="flyer-new_haven" class="flyer-card">
+      <div id="flyer-new haven" class="flyer-card" data-keywords="new haven layout mgbakwu purity fm polytechnic">
         <span class="badge-price">₦1,800,000 / Plot</span>
         <h2 class="estate-title">New Haven Layout</h2>
         <p class="location-subtitle">📍 Mgbakwu, Anambra State</p>
@@ -489,14 +482,14 @@
           <div class="feature-card">Registered Survey Plan</div>
         </div>
 
-       <div class="action-row">
-  <a href="tel:+2349011157594" class="btn-action btn-primary">📞 Call Agent</a>
-  <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%2C%20I%20am%20interested%20in%20New%20Haven%20Layout%20(Mgbakwu).%20Please%20send%20me%20more%20details." target="_blank" class="btn-action btn-secondary">💬 WhatsApp</a>
-</div>
-
+        <div class="action-row">
+          <a href="tel:+2349011157594" class="btn-action btn-primary">📞 Call Agent</a>
+          <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%2C%20I%20am%20interested%20in%20New%20Haven%20Layout%20(Mgbakwu).%20Please%20send%20me%20more%20details." target="_blank" class="btn-action btn-secondary">💬 WhatsApp</a>
+        </div>
+      </div>
 
       <!-- URBAN HAVEN -->
-      <div id="flyer-urban_haven" class="flyer-card">
+      <div id="flyer-urban_haven" class="flyer-card" data-keywords="urban haven isiagu british spring college eke awka ubec">
         <span class="badge-price">₦6,500,000 / Plot</span>
         <h2 class="estate-title">Urban Haven</h2>
         <p class="location-subtitle">📍 Isiagu, Anambra State</p>
@@ -514,13 +507,14 @@
           <div class="feature-card">Registered Survey Plan</div>
         </div>
 
-       <div class="action-row">
-  <a href="tel:+2349011157594" class="btn-action btn-primary">📞 Call Agent</a>
-  <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%2C%20I%20am%20interested%20in%20Urban%20Haven%20(Isiagu).%20Please%20send%20me%20more%20details." target="_blank" class="btn-action btn-secondary">💬 WhatsApp</a>
-</div>
+        <div class="action-row">
+          <a href="tel:+2349011157594" class="btn-action btn-primary">📞 Call Agent</a>
+          <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%2C%20I%20am%20interested%20in%20Urban%20Haven%20(Isiagu).%20Please%20send%20me%20more%20details." target="_blank" class="btn-action btn-secondary">💬 WhatsApp</a>
+        </div>
+      </div>
 
       <!-- URBAN RESIDENCE -->
-      <div id="flyer-urban_residence" class="flyer-card">
+      <div id="flyer-urban_residence" class="flyer-card" data-keywords="urban residence agu-awka finotel unizik stanel">
         <span class="badge-price">₦25,000,000 / Plot</span>
         <h2 class="estate-title">Urban Residence</h2>
         <p class="location-subtitle">📍 Agu-Awka, Anambra State</p>
@@ -539,54 +533,92 @@
         </div>
 
         <div class="action-row">
-  <a href="tel:+2349011157594" class="btn-action btn-primary">📞 Call Agent</a>
-  <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%2C%20I%20am%20interested%20in%20Urban%20Residence%20(Agu-Awka).%20Please%20send%20me%20more%20details." target="_blank" class="btn-action btn-secondary">💬 WhatsApp</a>
-</div>
-
+          <a href="tel:+2349011157594" class="btn-action btn-primary">📞 Call Agent</a>
+          <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%2C%20I%20am%20interested%20in%20Urban%20Residence%20(Agu-Awka).%20Please%20send%20me%20more%20details." target="_blank" class="btn-action btn-secondary">💬 WhatsApp</a>
+        </div>
+      </div>
 
     </div>
 
   </main>
+<script>
+  // MAP DATA SOURCES
+  const mapUrls = {
+    ifeadigo: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63428.10098522304!2d6.983333!3d6.383333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1043818e6c7104d5%3A0x8bb11c13fb592f6d!2sAwba%20Ofemili%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
+    urban_business: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31714.00412354897!2d6.9388!3d6.3486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1043831818bd2f0b%3A0x6b402be4dd69d5fb!2sIgbariam%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
+    urban_ville: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31718.34902187313!2d6.9742!3d6.2925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104384b6f1ad123b%3A0x4a9d7cdbd7c5e533!2sUkwulu%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
+    urban_garden: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31719.55512312313!2d7.0822!3d6.2525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104385999999abcd%3A0x4a9d7cdbd7c5e533!2sAwka%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
+    new_haven: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31718.88902187313!2d7.0422!3d6.2825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104384f50123abcd%3A0x4a9d7cdbd7c5e533!2sMgbakwu%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
+    urban_haven: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31721.23412312313!2d7.0622!3d6.2125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104385123123abcd%3A0x4a9d7cdbd7c5e533!2sIsiagu%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
+    urban_residence: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31719.55512312313!2d7.0822!3d6.2525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104385999999abcd%3A0x4a9d7cdbd7c5e533!2sAgu-Awka%2C%20Awka%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng"
+  };
 
-  <script>
-    // GOOGLE MAPS EMBED URLS BY LOCATION
-    const mapUrls = {
-      ifeadigo: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63428.10098522304!2d6.983333!3d6.383333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1043818e6c7104d5%3A0x8bb11c13fb592f6d!2sAwba%20Ofemili%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
-      urban_business: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31714.00412354897!2d6.9388!3d6.3486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1043831818bd2f0b%3A0x6b402be4dd69d5fb!2sIgbariam%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
-      urban_ville: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31718.34902187313!2d6.9742!3d6.2925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104384b6f1ad123b%3A0x4a9d7cdbd7c5e533!2sUkwulu%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
-      new_haven: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31718.88902187313!2d7.0422!3d6.2825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104384f50123abcd%3A0x4a9d7cdbd7c5e533!2sMgbakwu%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
-      urban_haven: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31721.23412312313!2d7.0622!3d6.2125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104385123123abcd%3A0x4a9d7cdbd7c5e533!2sIsiagu%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
-      urban_residence: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31719.55512312313!2d7.0822!3d6.2525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104385999999abcd%3A0x4a9d7cdbd7c5e533!2sAgu-Awka%2C%20Awka%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng"
-    };
+  function updateView(locationKey) {
+    if (!locationKey) return;
 
-    function updateView(locationKey) {
-      // 1. Update Map source with a smooth fade
-      const mapIframe = document.getElementById('mapIframe');
-      mapIframe.style.opacity = '0';
-      setTimeout(() => {
-        mapIframe.src = mapUrls[locationKey];
-        mapIframe.style.opacity = '1';
-      }, 250);
+    // Convert hyphens to underscores for internal key matching
+    let key = locationKey.trim().toLowerCase().replace(/-/g, '_');
 
-      // 2. Hide active flyer with transition
-      const activeCard = document.querySelector('.flyer-card.active');
-      if (activeCard) {
-        activeCard.classList.remove('active');
-      }
+    // Handle known name variations
+    if (key === 'ifeadigo_layout') key = 'ifeadigo';
 
-      // 3. Reveal selected flyer card
-      setTimeout(() => {
-        const targetCard = document.getElementById(`flyer-${locationKey}`);
-        if (targetCard) {
-          targetCard.classList.add('active');
-        }
-      }, 250);
+    // 1. Update Dropdown Select Element
+    const selectElement = document.getElementById('estateSelect');
+    if (selectElement) {
+      selectElement.value = key;
     }
 
-    // Initialize with first estate on load
-    window.addEventListener('DOMContentLoaded', () => {
-      updateView('ifeadigo');
+    // 2. Update Google Maps
+    const mapIframe = document.getElementById('mapIframe');
+    if (mapIframe && mapUrls[key]) {
+      mapIframe.src = mapUrls[key];
+    }
+
+    // 3. Hide all Flyer Cards
+    const cards = document.querySelectorAll('.flyer-card');
+    cards.forEach(card => {
+      card.style.display = 'none';
+      card.classList.remove('active');
     });
-  </script>
+
+    // 4. Show Targeted Flyer Card
+    const targetCard = document.getElementById(`flyer-${key}`);
+    if (targetCard) {
+      targetCard.style.display = 'block';
+      void targetCard.offsetWidth; // Force layout recalculation
+      targetCard.classList.add('active');
+    }
+  }
+
+  // SEARCH FUNCTIONALITY
+  function handleSearch(query) {
+    const filter = query.toLowerCase().trim();
+    if (!filter) return;
+
+    const cards = document.querySelectorAll('.flyer-card');
+    for (let card of cards) {
+      const keywords = card.getAttribute('data-keywords') || '';
+      const cardId = card.id.replace('flyer-', '');
+      
+      if (keywords.toLowerCase().includes(filter) || cardId.includes(filter)) {
+        updateView(cardId);
+        break;
+      }
+    }
+  }
+
+  // INITIALIZATION ON PAGE LOAD
+  window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const rawId = urlParams.get('id');
+
+    if (rawId) {
+      updateView(rawId);
+    } else {
+      updateView('ifeadigo');
+    }
+  });
+</script>
+
 </body>
-</html>
+</html>b

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Ville Ukwulu - Subscription Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; font-size: 12px; }
+      .print-shadow-none { box-shadow: none !important; border: 1px solid #ccc !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 font-sans pb-12">
+
+  <!-- TOP HEADER / BRANDING -->
+  <header class="bg-emerald-900 text-white shadow-lg sticky top-0 z-50 no-print">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="bg-emerald-500 text-white p-2 rounded-lg font-bold text-xl tracking-wider">
+          URBAN EDGE
+        </div>
+        <div>
+          <h1 class="font-bold text-lg leading-tight">URBANEDGE REAL ESTATE LTD</h1>
+          <p class="text-xs text-emerald-200">Urban Ville Ukwulu / Subscription Portal</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 shadow">
+          <i class="fas fa-print"></i> Print Form
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-6xl mx-auto px-4 mt-8">
+    
+    <!-- PAGE TITLE BANNER -->
+    <div class="bg-white rounded-xl shadow-md p-6 mb-8 border-l-8 border-emerald-600 print-shadow-none">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div>
+          <span class="bg-emerald-100 text-emerald-800 text-xs font-bold uppercase px-3 py-1 rounded-full">Official Application</span>
+          <h2 class="text-2xl font-extrabold text-slate-900 mt-2">URBAN VILLE UKWULU — SUBSCRIPTION FORM</h2>
+          <p class="text-slate-500 text-sm mt-1">Situated at Olipa Adagbe Village Ukwulu, Dunukofia LGA, Anambra State.</p>
+        </div>
+        <div class="text-right border-t md:border-t-0 pt-3 md:pt-0 border-slate-200">
+          <p class="text-xs text-slate-500">Bank Account Details for Payment:</p>
+          <p class="font-bold text-emerald-900 text-sm">URBAN EGDGE REAL ESTATE LTD</p>
+          <p class="font-extrabold text-emerald-700 text-base">UBA BANK — 1030683450</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN FORM BLOCK -->
+    <form id="subscriptionForm" onsubmit="event.preventDefault(); alert('Form submitted successfully!');" class="space-y-8">
+      
+      <!-- SECTION 1: SUBSCRIBER DETAILS -->
+      <section class="bg-white rounded-xl shadow-md p-6 sm:p-8 print-shadow-none">
+        <div class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
+          <h3 class="text-lg font-bold text-emerald-900 flex items-center gap-2">
+            <span class="w-7 h-7 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center text-sm font-bold">1</span>
+            Subscriber's Details
+          </h3>
+          <span class="text-xs text-slate-400">* Mandatory fields</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- TITLE & SURNAME -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Title *</label>
+            <div class="flex gap-4 items-center pt-2">
+              <label class="flex items-center gap-1.5 text-sm"><input type="radio" name="title" value="Mr" required class="text-emerald-600 focus:ring-emerald-500"> Mr.</label>
+              <label class="flex items-center gap-1.5 text-sm"><input type="radio" name="title" value="Mrs" class="text-emerald-600 focus:ring-emerald-500"> Mrs.</label>
+              <label class="flex items-center gap-1.5 text-sm"><input type="radio" name="title" value="Miss" class="text-emerald-600 focus:ring-emerald-500"> Miss.</label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Surname *</label>
+            <input type="text" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none uppercase" placeholder="SURNAME">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Other Names *</label>
+            <input type="text" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none uppercase" placeholder="FIRST & MIDDLE NAME">
+          </div>
+
+          <!-- SPOUSE & PERSONAL INFO -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Name of Spouse (If Applicable)</label>
+            <input type="text" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none uppercase" placeholder="SPOUSE FULL NAME">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Date of Birth *</label>
+            <input type="date" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Gender *</label>
+            <select required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Marital Status *</label>
+            <select required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+              <option value="">Select Status</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Widowed">Widowed</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nationality *</label>
+            <input type="text" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="e.g. Nigerian">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Country of Residence *</label>
+            <input type="text" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="e.g. Nigeria">
+          </div>
+
+          <!-- WORK & CONTACT -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Occupation</label>
+            <input type="text" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Employer's Name</label>
+            <input type="text" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Language Spoken</label>
+            <input type="text" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Residential Address *</label>
+            <input type="text" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Full street address, city, state">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Email Address *</label>
+            <input type="email" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="example@domain.com">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Mobile Number *</label>
+            <input type="tel" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="+234...">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Telephone Number</label>
+            <input type="tel" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Identification Card Type *</label>
+            <select required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+              <option value="">Select ID Type</option>
+              <option value="National ID Card">National ID Card</option>
+              <option value="Driver's Licence">Driver's Licence</option>
+              <option value="International Passport">International Passport</option>
+              <option value="Voters Card">Voters Card</option>
+            </select>
+          </div>
+
+          <!-- PEP QUESTION -->
+          <div class="md:col-span-3 bg-amber-50 p-4 rounded-lg border border-amber-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <p class="text-sm font-bold text-amber-900">Are you a Politically Exposed Person (PEP)? *</p>
+              <p class="text-xs text-amber-700">Senior government official, political figure, or close associate/family member.</p>
+            </div>
+            <div class="flex items-center gap-6">
+              <label class="flex items-center gap-2 text-sm font-semibold"><input type="radio" name="pep" value="YES" onclick="togglePepCategory(true)" class="text-emerald-600"> YES</label>
+              <label class="flex items-center gap-2 text-sm font-semibold"><input type="radio" name="pep" value="NO" checked onclick="togglePepCategory(false)" class="text-emerald-600"> NO</label>
+            </div>
+          </div>
+
+          <div id="pepCategoryBox" class="hidden md:col-span-3">
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">If YES, specify category:</label>
+            <input type="text" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Provide category details">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 2: NEXT OF KIN -->
+      <section class="bg-white rounded-xl shadow-md p-6 sm:p-8 print-shadow-none">
+        <div class="border-b border-slate-200 pb-4 mb-6">
+          <h3 class="text-lg font-bold text-emerald-900 flex items-center gap-2">
+            <span class="w-7 h-7 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center text-sm font-bold">2</span>
+            Next of Kin
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name *</label>
+            <input type="text" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none uppercase">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Phone Number *</label>
+            <input type="tel" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Email Address</label>
+            <input type="email" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Address *</label>
+            <input type="text" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: PURCHASE & PAYMENT CALCULATION -->
+      <section class="bg-white rounded-xl shadow-md p-6 sm:p-8 print-shadow-none">
+        <div class="border-b border-slate-200 pb-4 mb-6">
+          <h3 class="text-lg font-bold text-emerald-900 flex items-center gap-2">
+            <span class="w-7 h-7 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center text-sm font-bold">3</span>
+            Property & Payment Selection
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- PLOT TYPE -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Type of Plot *</label>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 text-sm">
+                <input type="radio" name="plotType" value="residential" checked onchange="calculateTotal()" class="text-emerald-600">
+                Residential (464 SQM)
+              </label>
+              <label class="flex items-center gap-2 text-sm">
+                <input type="radio" name="plotType" value="commercial" onchange="calculateTotal()" class="text-emerald-600">
+                Commercial (+10% surcharge)
+              </label>
+              <label class="flex items-center gap-2 text-sm">
+                <input type="checkbox" id="cornerPiece" onchange="calculateTotal()" class="rounded text-emerald-600">
+                Corner Piece (+10% surcharge)
+              </label>
+            </div>
+          </div>
+
+          <!-- PAYMENT PLAN -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Payment Plan *</label>
+            <select id="paymentPlan" onchange="calculateTotal()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+              <option value="outright">Outright Payment (₦2,500,000 / plot)</option>
+              <option value="3months">3 Months Instalment</option>
+              <option value="6months">6 Months Instalment (+20% surcharge)</option>
+            </select>
+          </div>
+
+          <!-- NUMBER OF PLOTS -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Number of Plots *</label>
+            <input type="number" id="plotCount" min="1" value="1" onchange="calculateTotal()" onkeyup="calculateTotal()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none font-bold">
+          </div>
+
+        </div>
+
+        <!-- ESTIMATED PRICING DISPLAY BOX -->
+        <div class="mt-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div>
+            <p class="text-xs font-bold text-emerald-900 uppercase">Estimated Total Cost</p>
+            <p class="text-2xl font-black text-emerald-800" id="totalPriceDisplay">₦2,500,000</p>
+            <p class="text-xs text-emerald-600" id="priceBreakdownText">Base price: ₦2,500,000 per plot</p>
+          </div>
+          <div class="text-right">
+            <p class="text-xs text-slate-500">Development Levy: <b>₦800,000 / plot</b></p>
+            <p class="text-xs text-slate-500">Documentation/Survey Fee: <i>Payable before physical allocation</i></p>
+          </div>
+        </div>
+
+        <!-- PROPOSED DEVELOPMENT TIMELINE -->
+        <div class="mt-6 border-t border-slate-200 pt-4">
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Proposed timeline to commence development on plot(s): *</label>
+          <div class="flex flex-wrap gap-6">
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="timeline" value="6 months" required class="text-emerald-600"> 6 Months</label>
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="timeline" value="1 year" class="text-emerald-600"> 1 Year</label>
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="timeline" value="2 years" class="text-emerald-600"> 2 Years</label>
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="timeline" value="3 years" class="text-emerald-600"> 3 Years</label>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SECTION 4: REFERRAL & DECLARATION -->
+      <section class="bg-white rounded-xl shadow-md p-6 sm:p-8 print-shadow-none">
+        <div class="border-b border-slate-200 pb-4 mb-6">
+          <h3 class="text-lg font-bold text-emerald-900 flex items-center gap-2">
+            <span class="w-7 h-7 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center text-sm font-bold">4</span>
+            Referral & Subscriber Declaration
+          </h3>
+        </div>
+
+        <!-- REFERRAL DETAILS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 pb-6 border-b border-slate-100">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Referral Name</label>
+            <input type="text" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Referral Phone Number</label>
+            <input type="tel" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Referral Email</label>
+            <input type="email" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+        </div>
+
+        <!-- DECLARATION CHECKBOX -->
+        <div class="space-y-4">
+          <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
+            <input type="checkbox" required class="mt-1 rounded text-emerald-600 focus:ring-emerald-500">
+            <span class="text-xs text-slate-700 leading-relaxed">
+              I hereby affirm that all information provided as a requirement for the land in <b>Urban Ville Ukwulu, Awka North, Anambra State</b> is true. I understand that any false or inaccurate information given by me may result in the decline of my application, and I accept all Terms & Conditions attached to this purchase.
+            </span>
+          </label>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Subscriber Name *</label>
+              <input type="text" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none uppercase">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Date *</label>
+              <input type="date" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <div class="mt-8 text-right no-print">
+          <button type="submit" class="bg-emerald-800 hover:bg-emerald-700 text-white font-bold px-8 py-3 rounded-lg shadow-lg transition">
+            Submit Subscription Application <i class="fas fa-paper-plane ml-2"></i>
+          </button>
+        </div>
+      </section>
+
+    </form>
+
+    <!-- SECTION 5: FREQUENTLY ASKED QUESTIONS & TERMS OF PURCHASE -->
+    <section class="mt-12 bg-white rounded-xl shadow-md p-6 sm:p-8 print-shadow-none">
+      <div class="border-b border-slate-200 pb-4 mb-6">
+        <h3 class="text-xl font-extrabold text-emerald-900">Frequently Asked Questions & Terms of Purchase</h3>
+        <p class="text-xs text-slate-500">Urban Ville Ukwulu, Dunukofia LGA, Anambra State</p>
+      </div>
+
+      <div class="space-y-4 text-sm text-slate-700">
+        
+        <details class="group bg-slate-50 p-4 rounded-lg border border-slate-200" open>
+          <summary class="font-bold text-emerald-900 cursor-pointer flex justify-between items-center">
+            Q1. Where is Urban Ville Ukwulu located?
+            <i class="fas fa-chevron-down text-xs transition group-open:rotate-180"></i>
+          </summary>
+          <p class="mt-2 text-xs text-slate-600 leading-relaxed">
+            Situated at Olipa Adagbe Village Ukwulu, Dunukofia LGA, Anambra State. Free inspections hold Mondays to Saturdays from 10:00 AM, and Sundays on special arrangement.
+          </p>
+        </details>
+
+        <details class="group bg-slate-50 p-4 rounded-lg border border-slate-200">
+          <summary class="font-bold text-emerald-900 cursor-pointer flex justify-between items-center">
+            Q2. Title & Owner/Developer
+            <i class="fas fa-chevron-down text-xs transition group-open:rotate-180"></i>
+          </summary>
+          <p class="mt-2 text-xs text-slate-600 leading-relaxed">
+            <b>Developer:</b> URBANEDGE REAL ESTATE LTD.<br>
+            <b>Title:</b> Registered Survey & Deed of Assignment. Free from government acquisitions or encumbrances.
+          </p>
+        </details>
+
+        <details class="group bg-slate-50 p-4 rounded-lg border border-slate-200">
+          <summary class="font-bold text-emerald-900 cursor-pointer flex justify-between items-center">
+            Q3. Payment Plans & Charges
+            <i class="fas fa-chevron-down text-xs transition group-open:rotate-180"></i>
+          </summary>
+          <ul class="mt-2 text-xs text-slate-600 list-disc pl-5 space-y-1">
+            <li><b>Outright Payment:</b> ₦2,500,000 per plot.</li>
+            <li><b>3 Months Instalment:</b> Flexible 3-month payment window.</li>
+            <li><b>6 Months Instalment:</b> Attracts a 20% surcharge on total cost.</li>
+            <li><b>Default Charge:</b> 10% penalty on monthly payment for delayed instalments.</li>
+            <li><b>Surcharges:</b> Commercial plots (+10%), Corner piece plots (+10%).</li>
+          </ul>
+        </details>
+
+        <details class="group bg-slate-50 p-4 rounded-lg border border-slate-200">
+          <summary class="font-bold text-emerald-900 cursor-pointer flex justify-between items-center">
+            Q4. Ancillary Fees & Infrastructure
+            <i class="fas fa-chevron-down text-xs transition group-open:rotate-180"></i>
+          </summary>
+          <p class="mt-2 text-xs text-slate-600 leading-relaxed">
+            <b>Development Levy:</b> ₦800,000 per plot (Covers perimeter fencing, gatehouse, and earth roads).<br>
+            <i>Note: Development fee unpaid within 12 months of allocation attracts a 2.5% monthly appreciation surcharge due to rising material costs.</i>
+          </p>
+        </details>
+
+        <details class="group bg-slate-50 p-4 rounded-lg border border-slate-200">
+          <summary class="font-bold text-emerald-900 cursor-pointer flex justify-between items-center">
+            Q5. Building Conditions, Re-sale & Refund Policy
+            <i class="fas fa-chevron-down text-xs transition group-open:rotate-180"></i>
+          </summary>
+          <ul class="mt-2 text-xs text-slate-600 list-disc pl-5 space-y-1">
+            <li><b>Building Commencement:</b> Possession/fencing must begin within 6 months of physical allocation. High-rise buildings and "Face-me-I-face-you" structures are strictly prohibited.</li>
+            <li><b>Re-sale:</b> Allowed after full payment. Buyer pays a 10% transfer documentation fee to the company.</li>
+            <li><b>Refund:</b> Applicable only before plot allocation upon 90 days notice (+60 days extension if required). Refunds are subject to a 40% administrative charge.</li>
+          </ul>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-8 text-center text-xs text-slate-500 border-t border-slate-200 pt-6">
+      <p class="font-bold text-slate-700">URBANEDGE REAL ESTATE LTD</p>
+      <p>1st Floor, Ebube Dike Shopping Plaza, Off Goodwill Junction, Okpuno Awka, Anambra State.</p>
+      <p>Email: URBANEGDGE@GMAIL.COM | Payment Account: UBA BANK (1030683450)</p>
+    </footer>
+
+  </main>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    function togglePepCategory(isPep) {
+      const box = document.getElementById('pepCategoryBox');
+      if (isPep) {
+        box.classList.remove('hidden');
+      } else {
+        box.classList.add('hidden');
+      }
+    }
+
+    function calculateTotal() {
+      const basePrice = 2500000;
+      let count = parseInt(document.getElementById('plotCount').value) || 1;
+      if (count < 1) count = 1;
+
+      let plotPrice = basePrice;
+
+      // Commercial Plot Surcharge (+10%)
+      const isCommercial = document.querySelector('input[name="plotType"][value="commercial"]').checked;
+      if (isCommercial) {
+        plotPrice += basePrice * 0.10;
+      }
+
+      // Corner Piece Surcharge (+10%)
+      const isCorner = document.getElementById('cornerPiece').checked;
+      if (isCorner) {
+        plotPrice += basePrice * 0.10;
+      }
+
+      // Payment Plan Surcharge
+      const plan = document.getElementById('paymentPlan').value;
+      if (plan === '6months') {
+        plotPrice *= 1.20; // +20% for 6 months
+      }
+
+      const total = plotPrice * count;
+
+      // Update UI Display
+      document.getElementById('totalPriceDisplay').innerText = '₦' + total.toLocaleString();
+      document.getElementById('priceBreakdownText').innerText = 
+        `₦${(plotPrice).toLocaleString()} per plot (${count} plot${count > 1 ? 's' : ''})`;
+    }
+  </script>
+</body>
+</html>

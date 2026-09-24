@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt Generator & Security Tracker - Urban Edge Real Estate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome, JsBarcode, & html2pdf Libraries -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; padding: 0 !important; }
+      .print-container { width: 100% !important; max-width: 100% !important; margin: 0 !important; }
+      .print-border { border: 2px solid #065f46 !important; box-shadow: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen font-sans pb-12">
+
+  <!-- HEADER -->
+  <header class="bg-emerald-900 text-white shadow-lg sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center space-x-3">
+       <img src="../infor/logo.png" alt="UE Logo" class="bg-emerald-500 text-white p-2 rounded-lg font-bold text-xl w-10 h-10 object-contain">
+        <div>
+          <h1 class="font-bold text-lg leading-tight">URBANEDGE REAL ESTATE LTD</h1>
+          <p class="text-xs text-emerald-200">Official Secure Receipt Generator & Verification</p>
+        </div>
+      </div>
+      
+      <!-- ACTION BUTTONS -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="downloadPDF()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 shadow">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </button>
+        <button onclick="shareWhatsApp()" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 shadow">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </button>
+        <button onclick="shareEmail()" class="bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 shadow">
+          <i class="fas fa-envelope"></i> Email
+        </button>
+        <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1 shadow">
+          <i class="fas fa-print"></i> Print
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 mt-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+      <!-- LEFT COLUMN: INPUT FORM (NO PRINT) -->
+      <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-md border border-slate-200 h-fit no-print">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+          <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
+            <i class="fas fa-edit text-emerald-700"></i> Enter Payment Details
+          </h2>
+          <button type="button" onclick="generateRandomTrackId()" class="text-xs bg-emerald-50 text-emerald-800 font-semibold px-2.5 py-1 rounded border border-emerald-200 hover:bg-emerald-100 transition">
+            <i class="fas fa-random mr-1"></i> New Track ID
+          </button>
+        </div>
+
+        <form id="receiptForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+          
+          <!-- TRACKING & TRANSACTION DETAILS -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Tracking ID Number</label>
+              <input type="text" id="inTrackId" value="TRK-892341" oninput="updateReceipt()" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono font-bold focus:ring-2 focus:ring-emerald-500 outline-none uppercase">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Receipt Date</label>
+              <input type="date" id="inDate" value="2026-09-24" oninput="updateReceipt()" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+          </div>
+
+          <!-- SUBSCRIBER INFO -->
+          <div class="border-t border-slate-100 pt-3">
+            <label class="block text-xs font-bold text-slate-600 mb-1">Full Name (Receipt Owner)</label>
+            <input type="text" id="inName" value="Chukwuemeka Okonkwo" oninput="updateReceipt()" required placeholder="e.g. Chukwuemeka Okonkwo" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+            <p class="text-[10px] text-emerald-600 mt-1"><i class="fas fa-barcode mr-1"></i> Encoded into scannable security barcode.</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Email Address</label>
+              <input type="email" id="inEmail" value="c.okonkwo@example.com" oninput="updateReceipt()" placeholder="client@email.com" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Phone / WhatsApp</label>
+              <input type="text" id="inPhone" value="+2348031234567" oninput="updateReceipt()" placeholder="+234..." class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+          </div>
+
+          <!-- PROPERTY DETAILS -->
+          <div class="border-t border-slate-100 pt-3">
+            <label class="block text-xs font-bold text-slate-600 mb-1">Estate Name</label>
+            <input type="text" id="inEstate" value="URBAN VILLE UKWULU" oninput="updateReceipt()" required placeholder="e.g. Urban Ville Ukwulu" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Plot Details / Location</label>
+            <input type="text" id="inPlotDetails" value="1 Plot(s) — Residential (464 SQM)" oninput="updateReceipt()" placeholder="e.g. 1 Plot(s) — Residential" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <!-- PAYMENT INFO -->
+          <div class="border-t border-slate-100 pt-3 grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Payment Method</label>
+              <select id="inMethod" onchange="updateReceipt()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+                <option value="Direct Bank Transfer">Direct Bank Transfer</option>
+                <option value="Bank Draft / Cheque">Bank Draft / Cheque</option>
+                <option value="POS / Card Payment">POS / Card Payment</option>
+                <option value="Cash Payment">Cash Payment</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Bank Reference</label>
+              <input type="text" id="inRef" value="UBA-REF-998231" oninput="updateReceipt()" placeholder="e.g. UBA-REF-998" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+          </div>
+
+          <!-- FINANCIALS -->
+          <div class="border-t border-slate-100 pt-3">
+            <label class="block text-xs font-bold text-slate-600 mb-1">Payment Description</label>
+            <input type="text" id="inItemTitle" value="Urban Ville Ukwulu (Outright Purchase Deposit)" oninput="updateReceipt()" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Quantity</label>
+              <input type="number" id="inQty" value="1" min="1" oninput="updateReceipt()" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Amount Paid (₦)</label>
+              <input type="number" id="inAmount" value="2500000" step="500" oninput="updateReceipt()" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono font-bold focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-emerald-800 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg text-xs uppercase tracking-wider transition shadow-md mt-4">
+            <i class="fas fa-check-circle mr-1"></i> Finalize & Generate Receipt
+          </button>
+        </form>
+      </div>
+
+      <!-- RIGHT COLUMN: LIVE RECEIPT PREVIEW (PRINTABLE / DOWNLOADABLE AREA) -->
+      <div class="lg:col-span-7 print-container">
+        <div id="receiptContainer" class="bg-white rounded-2xl shadow-xl p-8 border-2 border-emerald-800 print-border relative overflow-hidden">
+          
+          <!-- WATERMARK BACKGROUND -->
+          <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none">
+            <span class="text-8xl font-black text-emerald-900">URBAN EDGE</span>
+          </div>
+
+          <!-- RECEIPT TOP HEADER -->
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b-2 border-slate-100 pb-6 mb-6 gap-4">
+            <div>
+              <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold uppercase px-3 py-1 rounded-full">Official Payment Receipt</span>
+              <h2 class="text-xl font-black text-slate-900 mt-2">URBANEDGE REAL ESTATE LTD</h2>
+              <p class="text-[11px] text-slate-500">1st Floor, Ebube Dike Plaza, Off Goodwill Junction, Okpuno Awka, Anambra State</p>
+              <p class="text-[11px] text-slate-500">Email: URBANEGDGE@GMAIL.COM | Phone: +234 800 000 0000</p>
+            </div>
+            
+            <!-- STATUS BADGE & TRACKING ID -->
+            <div class="text-right sm:border-l sm:pl-6 border-slate-200 w-full sm:w-auto">
+              <div class="inline-block bg-emerald-600 text-white text-[10px] font-bold uppercase px-2.5 py-1 rounded-md mb-2 shadow-sm">
+                <i class="fas fa-check-circle mr-1"></i> Payment Verified
+              </div>
+              <p class="text-[10px] text-slate-400 uppercase font-bold">Tracking ID Number</p>
+              <p id="outTrackId" class="text-base font-mono font-black text-emerald-900 tracking-wider">TRK-892341</p>
+            </div>
+          </div>
+
+          <!-- RECEIPT METADATA GRID -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200 mb-6 text-[11px]">
+            <div>
+              <span class="text-slate-400 uppercase font-bold block text-[9px]">Receipt Date</span>
+              <span id="outDate" class="font-bold text-slate-800">Sept 24, 2026</span>
+            </div>
+            <div>
+              <span class="text-slate-400 uppercase font-bold block text-[9px]">Payment Method</span>
+              <span id="outMethod" class="font-bold text-slate-800">Direct Bank Transfer</span>
+            </div>
+            <div>
+              <span class="text-slate-400 uppercase font-bold block text-[9px]">Bank Reference</span>
+              <span id="outRef" class="font-bold text-slate-800 font-mono">UBA-REF-998231</span>
+            </div>
+            <div>
+              <span class="text-slate-400 uppercase font-bold block text-[9px]">Payment Status</span>
+              <span class="font-bold text-emerald-700">COMPLETED</span>
+            </div>
+          </div>
+
+          <!-- SUBSCRIBER & PROPERTY INFORMATION -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="border border-slate-200 p-3.5 rounded-xl">
+              <h3 class="text-[10px] font-bold uppercase text-emerald-900 border-b border-slate-100 pb-1.5 mb-2">Subscriber Information</h3>
+              <p class="text-xs font-extrabold text-slate-800 uppercase" id="outName">CHUKWUEMEKA OKONKWO</p>
+              <p class="text-[11px] text-slate-600 mt-1" id="outEmail"><i class="fas fa-envelope mr-1 text-slate-400"></i> c.okonkwo@example.com</p>
+              <p class="text-[11px] text-slate-600 mt-1" id="outPhone"><i class="fas fa-phone mr-1 text-slate-400"></i> +234 803 123 4567</p>
+            </div>
+
+            <div class="border border-slate-200 p-3.5 rounded-xl">
+              <h3 class="text-[10px] font-bold uppercase text-emerald-900 border-b border-slate-100 pb-1.5 mb-2">Property Allocation</h3>
+              <p class="text-xs font-extrabold text-slate-800 uppercase" id="outEstate">URBAN VILLE UKWULU</p>
+              <p class="text-[11px] text-slate-600 mt-1" id="outPlotDetails">1 Plot(s) — Residential (464 SQM)</p>
+            </div>
+          </div>
+
+          <!-- PAYMENT BREAKDOWN TABLE -->
+          <div class="overflow-x-auto mb-6">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-emerald-900 text-white text-[10px] uppercase">
+                  <th class="p-2.5 rounded-tl-lg">Item Description</th>
+                  <th class="p-2.5 text-center">Qty</th>
+                  <th class="p-2.5 text-right">Unit Price</th>
+                  <th class="p-2.5 text-right rounded-tr-lg">Total Amount</th>
+                </tr>
+              </thead>
+              <tbody class="text-[11px] border-b border-slate-200 divide-y divide-slate-100">
+                <tr>
+                  <td class="p-2.5 font-semibold text-slate-800" id="outItemTitle">Urban Ville Ukwulu (Outright Purchase Deposit)</td>
+                  <td class="p-2.5 text-center" id="outQty">1</td>
+                  <td class="p-2.5 text-right font-mono" id="outUnitPrice">₦2,500,000</td>
+                  <td class="p-2.5 text-right font-mono font-bold text-slate-900" id="outTotal">₦2,500,000</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 text-slate-600">Documentation & Processing Fee</td>
+                  <td class="p-2.5 text-center">1</td>
+                  <td class="p-2.5 text-right font-mono">₦0</td>
+                  <td class="p-2.5 text-right font-mono">INCLUDED</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- GRAND TOTAL DISPLAY -->
+          <div class="flex flex-col sm:flex-row justify-between items-center bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
+            <div>
+              <p class="text-[10px] font-bold text-emerald-900 uppercase">Total Amount Paid</p>
+              <p class="text-[10px] text-emerald-700">Payment received into UBA Account: 1030683450</p>
+            </div>
+            <div class="text-right mt-1 sm:mt-0">
+              <p class="text-2xl font-black text-emerald-900 font-mono" id="outGrandTotal">₦2,500,000</p>
+            </div>
+          </div>
+
+          <!-- SIGNATURE & OFFICIAL SECURITY STAMP SECTION -->
+          <div class="grid grid-cols-2 gap-8 border-t border-slate-200 pt-6 mt-6 relative">
+            
+            <!-- SUBSCRIBER SIGNATURE -->
+            <div class="text-center">
+              <div class="h-10 border-b border-dashed border-slate-400 flex items-end justify-center pb-1">
+                <span id="outSigName" class="font-serif italic text-slate-500 text-xs">C. Okonkwo</span>
+              </div>
+              <p class="text-[10px] font-bold text-slate-700 mt-1 uppercase">Subscriber Signature</p>
+            </div>
+
+            <!-- AUTHORIZED SIGNATURE & STAMP -->
+            <div class="text-center relative">
+              <div class="h-10 border-b border-dashed border-slate-400 flex items-end justify-center pb-1">
+                <span class="font-serif italic text-emerald-900 font-bold text-xs">UrbanEdge Official Seal</span>
+              </div>
+              <p class="text-[10px] font-bold text-slate-700 mt-1 uppercase">Authorized Officer Signature</p>
+
+              <!-- OFFICIAL CIRCULAR PAID STAMP WITH DYNAMIC TRACKING ID -->
+              <div class="absolute -top-14 right-2 transform rotate-[-12deg] pointer-events-none select-none opacity-90">
+                <div class="w-28 h-28 border-4 border-emerald-700 rounded-full flex flex-col items-center justify-center text-center p-1 bg-white/40 shadow-sm backdrop-blur-[1px]">
+                  <div class="w-[100px] h-[100px] border border-dashed border-emerald-700 rounded-full flex flex-col items-center justify-center p-1">
+                    <span class="text-[6.5px] font-black text-emerald-800 uppercase tracking-tighter">UrbanEdge Real Estate</span>
+                    <span class="text-[11px] font-black text-emerald-900 bg-emerald-100 px-1.5 py-0.5 my-0.5 rounded border border-emerald-600 tracking-widest">OFFICIAL PAID</span>
+                    
+                    <span id="stampTrackId" class="text-[7.5px] font-mono font-extrabold text-emerald-900 bg-emerald-50 px-1 border border-emerald-300 my-[1px]">
+                      TRK-892341
+                    </span>
+                    
+                    <span id="stampDate" class="text-[6.5px] font-bold text-emerald-800 font-mono">24 SEP 2026</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- BARCODE & FOOTER NOTE -->
+          <div class="mt-8 pt-4 border-t border-slate-100 flex flex-col items-center justify-center text-center">
+            <svg id="barcode" class="max-h-12 max-w-full mb-1"></svg>
+            <p class="text-[9px] text-slate-400">
+              Scan barcode above to verify subscriber name on security database.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function formatNaira(amount) {
+      return new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 }).format(amount);
+    }
+
+    function formatDate(dateStr) {
+      if(!dateStr) return '';
+      const opts = { year: 'numeric', month: 'short', day: 'numeric' };
+      return new Date(dateStr).toLocaleDateString('en-US', opts);
+    }
+
+    function formatStampDate(dateStr) {
+      if(!dateStr) return '';
+      const d = new Date(dateStr);
+      const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+    }
+
+    function generateRandomTrackId() {
+      const rand = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('inTrackId').value = 'TRK-' + rand;
+      updateReceipt();
+    }
+
+    function updateReceipt() {
+      const trackId = document.getElementById('inTrackId').value.trim().toUpperCase() || 'TRK-XXXXXX';
+      const dateVal = document.getElementById('inDate').value;
+      const name = document.getElementById('inName').value.trim() || 'SUBSCRIBER NAME';
+      const email = document.getElementById('inEmail').value.trim() || 'N/A';
+      const phone = document.getElementById('inPhone').value.trim() || 'N/A';
+      const estate = document.getElementById('inEstate').value.trim() || 'ESTATE NAME';
+      const plotDetails = document.getElementById('inPlotDetails').value.trim() || 'N/A';
+      const method = document.getElementById('inMethod').value;
+      const ref = document.getElementById('inRef').value.trim().toUpperCase() || 'N/A';
+      const itemTitle = document.getElementById('inItemTitle').value.trim() || 'Payment Description';
+      const qty = parseInt(document.getElementById('inQty').value) || 1;
+      const rawAmount = parseFloat(document.getElementById('inAmount').value) || 0;
+
+      document.getElementById('outTrackId').innerText = trackId;
+      document.getElementById('stampTrackId').innerText = trackId;
+      
+      document.getElementById('outDate').innerText = formatDate(dateVal);
+      document.getElementById('stampDate').innerText = formatStampDate(dateVal);
+      document.getElementById('outName').innerText = name.toUpperCase();
+      document.getElementById('outEmail').innerHTML = `<i class="fas fa-envelope mr-1 text-slate-400"></i> ${email}`;
+      document.getElementById('outPhone').innerHTML = `<i class="fas fa-phone mr-1 text-slate-400"></i> ${phone}`;
+      document.getElementById('outEstate').innerText = estate.toUpperCase();
+      document.getElementById('outPlotDetails').innerText = plotDetails;
+      document.getElementById('outMethod').innerText = method;
+      document.getElementById('outRef').innerText = ref;
+      document.getElementById('outItemTitle').innerText = itemTitle;
+      document.getElementById('outQty').innerText = qty;
+
+      const formattedTotal = formatNaira(rawAmount);
+      const unitPrice = rawAmount / (qty > 0 ? qty : 1);
+      
+      document.getElementById('outUnitPrice').innerText = formatNaira(unitPrice);
+      document.getElementById('outTotal').innerText = formattedTotal;
+      document.getElementById('outGrandTotal').innerText = formattedTotal;
+
+      const nameParts = name.split(' ');
+      let sig = name;
+      if (nameParts.length > 1) {
+        sig = `${nameParts[0].charAt(0)}. ${nameParts.slice(1).join(' ')}`;
+      }
+      document.getElementById('outSigName').innerText = sig;
+
+      try {
+        const barcodeVal = name.toUpperCase() || "UNKNOWN SUBSCRIBER";
+        JsBarcode("#barcode", barcodeVal, {
+          format: "CODE128",
+          width: 1.4,
+          height: 35,
+          displayValue: true,
+          text: `RECEIPT HOLDER: ${barcodeVal}`,
+          fontSize: 9,
+          fontOptions: "bold",
+          lineColor: "#065f46"
+        });
+      } catch (e) {
+        console.error("Barcode generation error:", e);
+      }
+    }
+
+    // DOWNLOAD RECEIPT AS PDF FILE
+    function downloadPDF() {
+      const element = document.getElementById('receiptContainer');
+      const trackId = document.getElementById('inTrackId').value.trim() || 'TRK-RECEIPT';
+      
+      const opt = {
+        margin:       0.2,
+        filename:     `UrbanEdge-Receipt-${trackId}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+    }
+
+    // SHARE RECEIPT SUMMARY VIA WHATSAPP
+    function shareWhatsApp() {
+      const trackId = document.getElementById('inTrackId').value.trim();
+      const name = document.getElementById('inName').value.trim();
+      const estate = document.getElementById('inEstate').value.trim();
+      const amount = document.getElementById('outGrandTotal').innerText;
+      const rawPhone = document.getElementById('inPhone').value.trim().replace(/[^0-9]/g, '');
+
+      const message = `*URBANEDGE REAL ESTATE LTD - PAYMENT RECEIPT*\n` +
+                      `------------------------------------\n` +
+                      `*Tracking ID:* ${trackId}\n` +
+                      `*Subscriber:* ${name}\n` +
+                      `*Estate:* ${estate}\n` +
+                      `*Amount Paid:* ${amount}\n` +
+                      `*Status:* Payment Verified & Completed\n` +
+                      `------------------------------------\n` +
+                      `Thank you for securing your property with UrbanEdge Real Estate.`;
+
+      const encodedMsg = encodeURIComponent(message);
+      const url = rawPhone ? `https://wa.me/${rawPhone}?text=${encodedMsg}` : `https://wa.me/?text=${encodedMsg}`;
+      window.open(url, '_blank');
+    }
+
+    // SHARE RECEIPT DETAILS VIA EMAIL
+    function shareEmail() {
+      const email = document.getElementById('inEmail').value.trim();
+      const trackId = document.getElementById('inTrackId').value.trim();
+      const name = document.getElementById('inName').value.trim();
+      const estate = document.getElementById('inEstate').value.trim();
+      const amount = document.getElementById('outGrandTotal').innerText;
+
+      const subject = encodeURIComponent(`Payment Receipt [${trackId}] - UrbanEdge Real Estate`);
+      const body = encodeURIComponent(
+        `Dear ${name},\n\n` +
+        `Thank you for your payment to UrbanEdge Real Estate Ltd.\n\n` +
+        `RECEIPT SUMMARY:\n` +
+        `----------------------------------------\n` +
+        `Tracking ID: ${trackId}\n` +
+        `Subscriber Name: ${name}\n` +
+        `Estate Allocation: ${estate}\n` +
+        `Total Amount Paid: ${amount}\n` +
+        `Status: COMPLETED & VERIFIED\n` +
+        `----------------------------------------\n\n` +
+        `Kind regards,\n` +
+        `UrbanEdge Real Estate Ltd`
+      );
+
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      updateReceipt();
+      downloadPDF();
+    }
+
+    window.onload = updateReceipt;
+  </script>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official Invoice Generator - Urban Edge Real Estate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome, JsBarcode, & html2pdf Libraries -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; padding: 0 !important; }
+      .print-container { width: 100% !important; max-width: 100% !important; margin: 0 !important; }
+      .print-border { border: 2px solid #065f46 !important; box-shadow: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen font-sans pb-12">
+
+  <!-- HEADER -->
+  <header class="bg-emerald-900 text-white shadow-lg sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center space-x-3">
+        <a href="#" class="bg-emerald-500 text-white p-2 rounded-lg font-bold text-xl inline-block hover:bg-emerald-600 transition">UE</a>
+        <div>
+          <h1 class="font-bold text-lg leading-tight">URBANEDGE REAL ESTATE LTD REG:9389918</h1>
+          <p class="text-xs text-emerald-200">Official Payment Request & Invoice Generator</p>
+        </div>
+      </div>
+      
+      <!-- ACTION BUTTONS -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="downloadPDF()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 shadow">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </button>
+        <button onclick="shareWhatsApp()" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 shadow">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </button>
+        <button onclick="openEmailModal()" class="bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 shadow">
+          <i class="fas fa-envelope"></i> Email Invoice
+        </button>
+        <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1 shadow">
+          <i class="fas fa-print"></i> Print
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 mt-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+      <!-- LEFT COLUMN: INPUT FORM (NO PRINT) -->
+      <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-md border border-slate-200 h-fit no-print">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+          <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
+            <i class="fas fa-file-invoice-dollar text-emerald-700"></i> Enter Invoice Details
+          </h2>
+          <button type="button" onclick="generateRandomInvoiceNum()" class="text-xs bg-emerald-50 text-emerald-800 font-semibold px-2.5 py-1 rounded border border-emerald-200 hover:bg-emerald-100 transition">
+            <i class="fas fa-random mr-1"></i> New Invoice #
+          </button>
+        </div>
+
+        <form id="invoiceForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+          
+          <!-- INVOICE METADATA -->
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Invoice Number</label>
+              <input type="text" id="inInvoiceNum" value="INV-2026-089" oninput="updateInvoice()" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-2 text-xs font-mono font-bold focus:ring-2 focus:ring-emerald-500 outline-none uppercase">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Issue Date</label>
+              <input type="date" id="inIssueDate" value="2026-09-24" oninput="updateInvoice()" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Due Date</label>
+              <input type="date" id="inDueDate" value="2026-10-08" oninput="updateInvoice()" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+          </div>
+
+          <!-- CLIENT INFO -->
+          <div class="border-t border-slate-100 pt-3">
+            <label class="block text-xs font-bold text-slate-600 mb-1">Billed To (Client Name)</label>
+            <input type="text" id="inName" value="Chukwuemeka Okonkwo" oninput="updateInvoice()" required placeholder="e.g. Chukwuemeka Okonkwo" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Email Address</label>
+              <input type="email" id="inEmail" value="c.okonkwo@example.com" oninput="updateInvoice()" placeholder="client@email.com" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Phone Number</label>
+              <input type="text" id="inPhone" value="+2348031234567" oninput="updateInvoice()" placeholder="+234..." class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+          </div>
+
+          <!-- PROPERTY / ITEM DETAILS -->
+          <div class="border-t border-slate-100 pt-3">
+            <label class="block text-xs font-bold text-slate-600 mb-1">Property / Service Description</label>
+            <input type="text" id="inItemTitle" value="Urban Ville Ukwulu - Initial Plot Deposit" oninput="updateInvoice()" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Quantity / Units</label>
+              <input type="number" id="inQty" value="1" min="1" oninput="updateInvoice()" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Unit Price (₦)</label>
+              <input type="number" id="inUnitPrice" value="2500000" step="500" oninput="updateInvoice()" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono font-bold focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Documentation Fee (₦)</label>
+              <input type="number" id="inDocFee" value="150000" step="500" oninput="updateInvoice()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Survey & Legal Fee (₦)</label>
+              <input type="number" id="inSurveyFee" value="100000" step="500" oninput="updateInvoice()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+          </div>
+
+          <!-- PAYMENT TERMS -->
+          <div class="border-t border-slate-100 pt-3">
+            <label class="block text-xs font-bold text-slate-600 mb-1">Payment Plan Note</label>
+            <input type="text" id="inTerms" value="Initial 50% deposit required. Balance spread across 3 months." oninput="updateInvoice()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <button type="submit" class="w-full bg-emerald-800 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg text-xs uppercase tracking-wider transition shadow-md mt-4">
+            <i class="fas fa-check-circle mr-1"></i> Update & Preview Invoice
+          </button>
+        </form>
+      </div>
+
+      <!-- RIGHT COLUMN: LIVE INVOICE PREVIEW -->
+      <div class="lg:col-span-7 print-container">
+        <div id="invoiceContainer" class="bg-white rounded-2xl shadow-xl p-8 border-2 border-emerald-800 print-border relative overflow-hidden">
+          
+          <!-- WATERMARK BACKGROUND -->
+          <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none">
+            <span class="text-8xl font-black text-emerald-900">URBAN EDGE</span>
+          </div>
+
+          <!-- INVOICE HEADER -->
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b-2 border-slate-100 pb-6 mb-6 gap-4">
+            <div>
+              <span class="bg-amber-100 text-amber-800 text-xs font-extrabold uppercase px-3 py-1 rounded-full">Official Payment Request</span>
+              <h2 class="text-xl font-black text-slate-900 mt-2">URBANEDGE REAL ESTATE LTD</h2>
+              <p class="text-[11px] text-slate-500">1st Floor, Ebube Dike Plaza, Off Goodwill Junction, Okpuno Awka, Anambra State</p>
+              <p class="text-[11px] text-slate-500">Email: URBANEGDGE@GMAIL.COM | Phone: +234 800 000 0000</p>
+            </div>
+            
+            <div class="text-right sm:border-l sm:pl-6 border-slate-200 w-full sm:w-auto">
+              <p class="text-xs font-bold text-slate-400 uppercase">Invoice Number</p>
+              <p id="outInvoiceNum" class="text-lg font-mono font-black text-emerald-900 tracking-wider">INV-2026-089</p>
+              <div class="inline-block bg-amber-500 text-white text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-md mt-1 shadow-sm">
+                <i class="fas fa-clock mr-1"></i> Payment Pending
+              </div>
+            </div>
+          </div>
+
+          <!-- INVOICE METADATA & CLIENT INFO -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+            <div class="border border-slate-200 p-3.5 rounded-xl bg-slate-50/50">
+              <h3 class="text-[10px] font-bold uppercase text-emerald-900 border-b border-slate-200 pb-1.5 mb-2">Billed To (Subscriber)</h3>
+              <p class="text-xs font-extrabold text-slate-800 uppercase" id="outName">CHUKWUEMEKA OKONKWO</p>
+              <p class="text-[11px] text-slate-600 mt-1" id="outEmail"><i class="fas fa-envelope mr-1 text-slate-400"></i> c.okonkwo@example.com</p>
+              <p class="text-[11px] text-slate-600 mt-1" id="outPhone"><i class="fas fa-phone mr-1 text-slate-400"></i> +234 803 123 4567</p>
+            </div>
+
+            <div class="border border-slate-200 p-3.5 rounded-xl bg-slate-50/50 flex flex-col justify-between">
+              <div>
+                <h3 class="text-[10px] font-bold uppercase text-emerald-900 border-b border-slate-200 pb-1.5 mb-2">Billing Schedule</h3>
+                <div class="grid grid-cols-2 gap-2 text-[11px]">
+                  <div>
+                    <span class="text-slate-400 block text-[9px] uppercase font-bold">Issue Date</span>
+                    <span id="outIssueDate" class="font-bold text-slate-800">Sept 24, 2026</span>
+                  </div>
+                  <div>
+                    <span class="text-slate-400 block text-[9px] uppercase font-bold">Payment Due Date</span>
+                    <span id="outDueDate" class="font-bold text-amber-700">Oct 08, 2026</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ITEMIZED BREAKDOWN TABLE -->
+          <div class="overflow-x-auto mb-6">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-emerald-900 text-white text-[10px] uppercase">
+                  <th class="p-2.5 rounded-tl-lg">Description</th>
+                  <th class="p-2.5 text-center">Qty</th>
+                  <th class="p-2.5 text-right">Unit Price</th>
+                  <th class="p-2.5 text-right rounded-tr-lg">Amount</th>
+                </tr>
+              </thead>
+              <tbody class="text-[11px] border-b border-slate-200 divide-y divide-slate-100">
+                <tr>
+                  <td class="p-2.5 font-semibold text-slate-800" id="outItemTitle">Urban Ville Ukwulu - Initial Plot Deposit</td>
+                  <td class="p-2.5 text-center" id="outQty">1</td>
+                  <td class="p-2.5 text-right font-mono" id="outUnitPrice">₦2,500,000</td>
+                  <td class="p-2.5 text-right font-mono font-bold text-slate-900" id="outItemTotal">₦2,500,000</td>
+                </tr>
+                <tr id="rowDocFee">
+                  <td class="p-2.5 text-slate-600">Documentation & Processing Fee</td>
+                  <td class="p-2.5 text-center">1</td>
+                  <td class="p-2.5 text-right font-mono" id="outDocFeePrice">₦150,000</td>
+                  <td class="p-2.5 text-right font-mono text-slate-900" id="outDocFeeTotal">₦150,000</td>
+                </tr>
+                <tr id="rowSurveyFee">
+                  <td class="p-2.5 text-slate-600">Survey Plan & Legal Documentation</td>
+                  <td class="p-2.5 text-center">1</td>
+                  <td class="p-2.5 text-right font-mono" id="outSurveyFeePrice">₦100,000</td>
+                  <td class="p-2.5 text-right font-mono text-slate-900" id="outSurveyFeeTotal">₦100,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- GRAND TOTAL & TERMS -->
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
+            <div class="sm:col-span-7 text-xs text-emerald-900">
+              <p class="font-bold uppercase text-[10px] text-emerald-800">Payment Terms & Instructions:</p>
+              <p id="outTerms" class="text-[11px] text-slate-600 mt-0.5">Initial 50% deposit required. Balance spread across 3 months.</p>
+            </div>
+            <div class="sm:col-span-5 text-right border-t sm:border-t-0 sm:border-l border-emerald-200 pt-2 sm:pt-0 sm:pl-4">
+              <p class="text-[10px] font-bold text-emerald-900 uppercase">Total Amount Due</p>
+              <p class="text-2xl font-black text-emerald-900 font-mono" id="outGrandTotal">₦2,750,000</p>
+            </div>
+          </div>
+
+          <!-- BANK ACCOUNT DETAILS FOR PAYMENT -->
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 mb-6">
+            <h4 class="text-[10px] font-bold uppercase text-slate-700 mb-2 flex items-center gap-1.5">
+              <i class="fas fa-university text-emerald-700"></i> Official Bank Remittance Account
+            </h4>
+            <div class="grid grid-cols-3 gap-2 text-[11px]">
+              <div>
+                <span class="text-slate-400 block text-[9px] uppercase font-bold">Bank Name</span>
+                <span class="font-bold text-slate-800">United Bank for Africa (UBA)</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[9px] uppercase font-bold">Account Name</span>
+                <span class="font-bold text-slate-800">UrbanEdge Real Estate Ltd</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[9px] uppercase font-bold">Account Number</span>
+                <span class="font-bold text-emerald-900 font-mono text-xs">1030683450</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AUTHORIZED SIGNATURE -->
+          <div class="grid grid-cols-2 gap-8 border-t border-slate-200 pt-6 mt-6">
+            <div class="text-left text-[10px] text-slate-400">
+              <p class="font-bold text-slate-600">NOTICE:</p>
+              <p>Invoices are valid for 14 days from issue date. Kindly include Invoice # as transaction narrative.</p>
+            </div>
+            <div class="text-center">
+              <div class="h-10 border-b border-dashed border-slate-400 flex items-end justify-center pb-1">
+                <span class="font-serif italic text-emerald-900 font-bold text-xs">UrbanEdge Accounts Dept.</span>
+              </div>
+              <p class="text-[10px] font-bold text-slate-700 mt-1 uppercase">Authorized Billing Signature</p>
+            </div>
+          </div>
+
+          <!-- BARCODE FOOTER -->
+          <div class="mt-8 pt-4 border-t border-slate-100 flex flex-col items-center justify-center text-center">
+            <svg id="barcode" class="max-h-12 max-w-full mb-1"></svg>
+            <p class="text-[9px] text-slate-400">
+              Official payment invoice generated by UrbanEdge Real Estate.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- EMAIL MODAL DIALOG (NO-PRINT) -->
+  <div id="emailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden no-print p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 border border-slate-200 relative">
+      <button onclick="closeEmailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+        <i class="fas fa-times text-lg"></i>
+      </button>
+
+      <div class="flex items-center gap-3 border-b border-slate-100 pb-3 mb-4">
+        <div class="bg-sky-100 text-sky-700 p-2.5 rounded-lg">
+          <i class="fas fa-paper-plane text-lg"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-800 text-base">Send Invoice via Email</h3>
+          <p class="text-xs text-slate-500">Choose webmail provider or copy invoice summary</p>
+        </div>
+      </div>
+
+      <!-- PREVIEW OF EMAIL BODY -->
+      <div class="mb-4">
+        <label class="block text-xs font-bold text-slate-600 mb-1">Email Body Preview:</label>
+        <textarea id="emailPreviewText" readonly class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs font-mono text-slate-700 h-36 outline-none focus:ring-0 resize-none"></textarea>
+      </div>
+
+      <!-- DIRECT WEBMAIL LINKS -->
+      <div class="space-y-2 mb-4">
+        <label class="block text-xs font-bold text-slate-600">Open directly in webmail:</label>
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="openGmail()" class="bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-2 transition">
+            <i class="fab fa-google"></i> Open in Gmail
+          </button>
+          <button onclick="openOutlook()" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-2 transition">
+            <i class="fab fa-microsoft"></i> Open in Outlook
+          </button>
+        </div>
+      </div>
+
+      <!-- COPY TO CLIPBOARD BUTTON -->
+      <div class="pt-2 border-t border-slate-100 flex gap-2">
+        <button onclick="copyEmailToClipboard()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 rounded-lg text-xs flex items-center justify-center gap-2 transition">
+          <i class="fas fa-copy"></i> Copy Text to Clipboard
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function formatNaira(amount) {
+      return new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 }).format(amount);
+    }
+
+    function formatDate(dateStr) {
+      if(!dateStr) return '';
+      const opts = { year: 'numeric', month: 'short', day: 'numeric' };
+      return new Date(dateStr).toLocaleDateString('en-US', opts);
+    }
+
+    function generateRandomInvoiceNum() {
+      const rand = Math.floor(100 + Math.random() * 900);
+      document.getElementById('inInvoiceNum').value = 'INV-2026-' + rand;
+      updateInvoice();
+    }
+
+    function updateInvoice() {
+      const invoiceNum = document.getElementById('inInvoiceNum').value.trim().toUpperCase() || 'INV-2026-000';
+      const issueDate = document.getElementById('inIssueDate').value;
+      const dueDate = document.getElementById('inDueDate').value;
+      const name = document.getElementById('inName').value.trim() || 'CLIENT NAME';
+      const email = document.getElementById('inEmail').value.trim() || 'N/A';
+      const phone = document.getElementById('inPhone').value.trim() || 'N/A';
+      const itemTitle = document.getElementById('inItemTitle').value.trim() || 'Item Description';
+      const qty = parseInt(document.getElementById('inQty').value) || 1;
+      const unitPrice = parseFloat(document.getElementById('inUnitPrice').value) || 0;
+      const docFee = parseFloat(document.getElementById('inDocFee').value) || 0;
+      const surveyFee = parseFloat(document.getElementById('inSurveyFee').value) || 0;
+      const terms = document.getElementById('inTerms').value.trim();
+
+      document.getElementById('outInvoiceNum').innerText = invoiceNum;
+      document.getElementById('outIssueDate').innerText = formatDate(issueDate);
+      document.getElementById('outDueDate').innerText = formatDate(dueDate);
+      document.getElementById('outName').innerText = name.toUpperCase();
+      document.getElementById('outEmail').innerHTML = `<i class="fas fa-envelope mr-1 text-slate-400"></i> ${email}`;
+      document.getElementById('outPhone').innerHTML = `<i class="fas fa-phone mr-1 text-slate-400"></i> ${phone}`;
+      document.getElementById('outItemTitle').innerText = itemTitle;
+      document.getElementById('outQty').innerText = qty;
+
+      const itemTotal = qty * unitPrice;
+      document.getElementById('outUnitPrice').innerText = formatNaira(unitPrice);
+      document.getElementById('outItemTotal').innerText = formatNaira(itemTotal);
+
+      // Doc Fee
+      document.getElementById('outDocFeePrice').innerText = formatNaira(docFee);
+      document.getElementById('outDocFeeTotal').innerText = formatNaira(docFee);
+      document.getElementById('rowDocFee').style.display = docFee > 0 ? 'table-row' : 'none';
+
+      // Survey Fee
+      document.getElementById('outSurveyFeePrice').innerText = formatNaira(surveyFee);
+      document.getElementById('outSurveyFeeTotal').innerText = formatNaira(surveyFee);
+      document.getElementById('rowSurveyFee').style.display = surveyFee > 0 ? 'table-row' : 'none';
+
+      // Grand Total
+      const grandTotal = itemTotal + docFee + surveyFee;
+      document.getElementById('outGrandTotal').innerText = formatNaira(grandTotal);
+      document.getElementById('outTerms').innerText = terms;
+
+      try {
+        JsBarcode("#barcode", invoiceNum, {
+          format: "CODE128",
+          width: 1.4,
+          height: 35,
+          displayValue: true,
+          text: `INVOICE REFERENCE: ${invoiceNum}`,
+          fontSize: 9,
+          fontOptions: "bold",
+          lineColor: "#065f46"
+        });
+      } catch (e) {
+        console.error("Barcode generation error:", e);
+      }
+    }
+
+    // DOWNLOAD INVOICE AS PDF FILE
+    function downloadPDF() {
+      const element = document.getElementById('invoiceContainer');
+      const invoiceNum = document.getElementById('inInvoiceNum').value.trim() || 'INVOICE';
+      
+      const opt = {
+        margin:       0.2,
+        filename:     `UrbanEdge-Invoice-${invoiceNum}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+    }
+
+    // SHARE INVOICE VIA WHATSAPP
+    function shareWhatsApp() {
+      const invoiceNum = document.getElementById('inInvoiceNum').value.trim();
+      const name = document.getElementById('inName').value.trim();
+      const dueDate = formatDate(document.getElementById('inDueDate').value);
+      const amount = document.getElementById('outGrandTotal').innerText;
+      const rawPhone = document.getElementById('inPhone').value.trim().replace(/[^0-9]/g, '');
+
+      const message = `*URBANEDGE REAL ESTATE LTD - PAYMENT INVOICE*\n` +
+                      `------------------------------------\n` +
+                      `*Invoice #:* ${invoiceNum}\n` +
+                      `*Subscriber:* ${name}\n` +
+                      `*Total Due:* ${amount}\n` +
+                      `*Payment Due Date:* ${dueDate}\n` +
+                      `*Bank Account:* UBA | 1030683450\n` +
+                      `------------------------------------\n` +
+                      `Kindly send proof of payment once transfer is completed. Thank you!`;
+
+      const encodedMsg = encodeURIComponent(message);
+      const url = rawPhone ? `https://wa.me/${rawPhone}?text=${encodedMsg}` : `https://wa.me/?text=${encodedMsg}`;
+      window.open(url, '_blank');
+    }
+
+    // EMAIL MODAL HELPERS & WEBMAIL HANDLERS
+    function buildEmailDetails() {
+      const email = document.getElementById('inEmail').value.trim();
+      const invoiceNum = document.getElementById('inInvoiceNum').value.trim();
+      const name = document.getElementById('inName').value.trim();
+      const dueDate = formatDate(document.getElementById('inDueDate').value);
+      const amount = document.getElementById('outGrandTotal').innerText;
+
+      const subject = `Payment Invoice [${invoiceNum}] - UrbanEdge Real Estate`;
+      const body = `Dear ${name},\n\n` +
+                   `Please find below the payment request details for your real estate transaction with UrbanEdge Real Estate Ltd.\n\n` +
+                   `INVOICE SUMMARY:\n` +
+                   `----------------------------------------\n` +
+                   `Invoice Number: ${invoiceNum}\n` +
+                   `Subscriber Name: ${name}\n` +
+                   `Total Amount Payable: ${amount}\n` +
+                   `Due Date: ${dueDate}\n` +
+                   `----------------------------------------\n\n` +
+                   `REMITTANCE BANK DETAILS:\n` +
+                   `Bank: United Bank for Africa (UBA)\n` +
+                   `Account Name: UrbanEdge Real Estate Ltd\n` +
+                   `Account Number: 1030683450\n\n` +
+                   `Kind regards,\n` +
+                   `UrbanEdge Real Estate Ltd`;
+
+      return { email, subject, body, invoiceNum };
+    }
+
+    function openEmailModal() {
+      const { body } = buildEmailDetails();
+      document.getElementById('emailPreviewText').value = body;
+      document.getElementById('emailModal').classList.remove('hidden');
+    }
+
+    function closeEmailModal() {
+      document.getElementById('emailModal').classList.add('hidden');
+    }
+
+    function openGmail() {
+      const { email, subject, body } = buildEmailDetails();
+      const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(url, '_blank');
+    }
+
+    function openOutlook() {
+      const { email, subject, body } = buildEmailDetails();
+      const url = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(url, '_blank');
+    }
+
+    function copyEmailToClipboard() {
+      const text = document.getElementById('emailPreviewText').value;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Invoice summary copied to clipboard!");
+      }).catch(err => {
+        console.error("Copy failed: ", err);
+      });
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      updateInvoice();
+      downloadPDF();
+    }
+
+    window.onload = updateInvoice;
+  </script>
+</body>
+</html>

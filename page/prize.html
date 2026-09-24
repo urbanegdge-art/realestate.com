@@ -11,11 +11,11 @@
 
     <meta
         name="description"
-        content="Urban Edge Real Estate Extravaganza — Sell More. Win More. Get Rewarded."
+        content="Urbanegdge Real Estate Extravaganza — Sell More. Win More. Get Rewarded."
     >
 
     <title>
-        Urban Edge Extravaganza | Sell & Win Like Mad!
+        Urbanegdge Extravaganza | Sell & Win Like Mad!
     </title>
      <link
     rel="stylesheet"
@@ -282,6 +282,13 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        .campaign-registration {
+            color: #d8d8d8;
+            font-size: 10px;
+            letter-spacing: 0;
+            white-space: nowrap;
         }
 
 
@@ -1092,6 +1099,25 @@
                 font-size: 3.2rem;
             }
 
+
+            .cta-box {
+                padding: 50px 18px;
+            }
+
+
+            .cta-box .btn {
+                display: flex;
+                width: 100%;
+                max-width: 100%;
+                align-items: center;
+                justify-content: center;
+                padding: 14px 16px;
+                line-height: 1.35;
+                text-align: center;
+                white-space: normal;
+                overflow-wrap: anywhere;
+            }
+
         }
 
     </style>
@@ -1113,7 +1139,7 @@
             <div class="loader-logo"></div>
 
             <div class="loader-text">
-                URBAN EDGE EXTRAVAGANZA
+                URBANEGDGE EXTRAVAGANZA
             </div>
 
         </div>
@@ -1140,7 +1166,9 @@
 
                 <i class="fa-solid fa-fire"></i>
 
-                URBAN EDGE REAL ESTATE
+                URBANEGDGE REAL ESTATE
+
+                <span class="campaign-registration">Reg:: 9389918</span>
 
                 <i class="fa-solid fa-fire"></i>
 
@@ -1163,7 +1191,7 @@
                 Welcome to the
 
                 <strong>
-                    URBAN EDGE EXTRAVAGANZA
+                    URBANEGDGE EXTRAVAGANZA
                 </strong>.
 
                 Don't just sell properties —
@@ -1396,7 +1424,7 @@
 
                     <p>
                         This is where ordinary sales
-                        champions become Urban Edge
+                        champions become Urbanegdge
                         legends.
                     </p>
 
@@ -1533,7 +1561,7 @@
                     </h3>
 
                     <p>
-                        Register as an Urban Edge
+                        Register as an Urbanegdge
                         Realtor / Sales Partner and
                         officially join the team.
                     </p>
@@ -1552,7 +1580,7 @@
                     </h3>
 
                     <p>
-                        Promote Urban Edge properties,
+                        Promote Urbanegdge properties,
                         connect buyers with genuine
                         opportunities and close deals.
                     </p>
@@ -1720,7 +1748,7 @@
                     <i class="fa-solid fa-medal"></i>
 
                     <span>
-                        Become an official Urban Edge
+                        Become an official Urbanegdge
                         Sales Ambassador
                     </span>
 
@@ -1770,7 +1798,7 @@
             </h2>
 
             <p>
-                Register today, start promoting Urban Edge
+                Register today, start promoting Urbanegdge
                 properties and turn every successful deal
                 into another opportunity to win.
             </p>
@@ -1828,7 +1856,7 @@
 
                     <div class="faq-answer">
 
-                        Registered Urban Edge Real Estate
+                        Registered Urbanegdge Real Estate
                         Realtors and Sales Partners who
                         meet the applicable promotion
                         requirements can participate.
@@ -1853,7 +1881,7 @@
                         You qualify by reaching the stated
                         sales milestone. All sales must be
                         properly verified and approved by
-                        Urban Edge Real Estate.
+                        Urbanegdge Real Estate.
 
                     </div>
 
@@ -1894,7 +1922,7 @@
                     <div class="faq-answer">
 
                         Sales milestones and eligibility will
-                        be verified by Urban Edge Real Estate
+                        be verified by Urbanegdge Real Estate
                         before applicable rewards are awarded.
 
                     </div>
@@ -1915,7 +1943,7 @@
     <footer>
 
         <strong>
-            URBAN EDGE REAL ESTATE
+            URBANEGDGE REAL ESTATE
         </strong>
 
         <br><br>
@@ -1925,7 +1953,7 @@
 
         <br><br>
 
-        © 2026 Urban Edge Real Estate.
+        © 2026 Urbanegdge Real Estate.
         All rights reserved.
 
     </footer>
@@ -1933,7 +1961,7 @@
     <div class="footer-bottom">
 
         <span>
-            © 2026 Urban Edge Real Estate.
+            © 2026 Urbanegdge Real Estate.
             All Rights Reserved.
         </span>
 
@@ -1957,7 +1985,7 @@
     class="floating-whatsapp"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Chat with Urban Edge Real Estate on WhatsApp"
+    aria-label="Chat with Urbanegdge Real Estate on WhatsApp"
 >
     <i class="fa-brands fa-whatsapp"></i>
 </a>
@@ -2150,15 +2178,27 @@
 
         /* =====================================================
            COUNTDOWN
-           
-           CHANGE THIS DATE TO YOUR REAL
-           PROMOTION END DATE.
         ====================================================== */
 
+        const countdownStorageKey =
+            "urbanegdge-promotion-end";
+
+        const savedPromotionEnd =
+            Number(
+                localStorage.getItem(
+                    countdownStorageKey
+                )
+            );
+
         const promotionEnd =
-            new Date(
-                "December 31, 2026 23:59:59"
-            ).getTime();
+            savedPromotionEnd > Date.now()
+                ? savedPromotionEnd
+                : Date.now() + (8 * 24 * 60 * 60 * 1000);
+
+        localStorage.setItem(
+            countdownStorageKey,
+            String(promotionEnd)
+        );
 
 
         function updateCountdown() {

@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         {
             progress: 100,
-            text: "WELCOME TO URBAN EDGE"
+            text: "WELCOME TO URBANEGDGE"
         }
 
     ];

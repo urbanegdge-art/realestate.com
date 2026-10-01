@@ -228,12 +228,6 @@
                   <td class="p-2.5 text-right font-mono" id="outUnitPrice">₦2,500,000</td>
                   <td class="p-2.5 text-right font-mono font-bold text-slate-900" id="outTotal">₦2,500,000</td>
                 </tr>
-                <tr>
-                  <td class="p-2.5 text-slate-600">Documentation & Processing Fee</td>
-                  <td class="p-2.5 text-center">1</td>
-                  <td class="p-2.5 text-right font-mono">₦0</td>
-                  <td class="p-2.5 text-right font-mono">INCLUDED</td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -269,11 +263,31 @@
 
               <!-- OFFICIAL CIRCULAR PAID STAMP WITH DYNAMIC TRACKING ID -->
               <div class="absolute -top-14 right-2 transform rotate-[-12deg] pointer-events-none select-none opacity-90">
-                <div class="w-28 h-28 border-4 border-emerald-700 rounded-full flex flex-col items-center justify-center text-center p-1 bg-white/40 shadow-sm backdrop-blur-[1px]">
-                  <div class="w-[100px] h-[100px] border border-dashed border-emerald-700 rounded-full flex flex-col items-center justify-center p-1">
-                    <span class="text-[6.5px] font-black text-emerald-800 uppercase tracking-tighter">UrbanEdge Real Estate</span>
-                    <span class="text-[11px] font-black text-emerald-900 bg-emerald-100 px-1.5 py-0.5 my-0.5 rounded border border-emerald-600 tracking-widest">OFFICIAL PAID</span>
+                <div class="relative w-28 h-28 border-4 border-emerald-700 rounded-full flex flex-col items-center justify-center text-center p-1 bg-white/40 shadow-sm backdrop-blur-[1px]">
+                  
+                  <!-- INNER STAMP CIRCLE -->
+                  <div class="w-[100px] h-[100px] border border-dashed border-emerald-700 rounded-full flex flex-col items-center justify-center p-1 relative">
                     
+                    <!-- COMPANY NAME HEADER -->
+                    <span class="text-[6.5px] font-black text-emerald-800 uppercase tracking-tighter">
+                      UrbanEdge Real Estate
+                    </span>
+
+                    <!-- OFFICIAL PAID BADGE WITH CHECK ICON -->
+                    <span class="inline-flex items-center gap-1 text-[9px] font-black text-emerald-900 bg-emerald-100/90 px-1.5 py-0.5 my-0.5 rounded border border-emerald-600 tracking-widest z-10">
+                      <svg class="w-2.5 h-2.5 text-emerald-700 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                      </svg>
+                      OFFICIAL PAID
+                    </span>
+
+                    <!-- LARGER DIRECTOR SIGNATURE OVERLAY -->
+                    <img 
+                      src="../signature.png" 
+                      alt="Director Signature" 
+                      class="absolute -top-3 -left-4 w-36 h-20 max-w-none object-contain pointer-events-none z-20 mix-blend-multiply" 
+                    />
+
                     <span id="stampTrackId" class="text-[7.5px] font-mono font-extrabold text-emerald-900 bg-emerald-50 px-1 border border-emerald-300 my-[1px]">
                       TRK-892341
                     </span>
@@ -282,6 +296,7 @@
                   </div>
                 </div>
               </div>
+
             </div>
 
           </div>

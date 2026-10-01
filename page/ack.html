@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URBANEGDGE REAL ESTATE LTD - Formal Acknowledgment Letter Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+    :root {
+      --primary: #15803d;
+      --primary-dark: #14532d;
+      --accent: #22c55e;
+      --bg: #f1f5f9;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: #1e293b;
+    }
+
+    .font-serif-doc {
+      font-family: 'Merriweather', serif;
+    }
+
+    .font-cinzel {
+      font-family: 'Cinzel', serif;
+    }
+
+    /* Print Setup */
+    @media print {
+      body {
+        background-color: white !important;
+        padding: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-full-width {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .letter-shadow {
+        box-shadow: none !important;
+        border: none !important;
+      }
+    }
+
+    .signature-canvas {
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    .font-signature {
+      font-family: 'Cinzel', cursive, Georgia, serif;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="min-h-screen p-4 md:p-6">
+
+  <div class="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- LEFT SIDEBAR: CONTROLS & INPUT FORM -->
+    <div class="lg:col-span-5 xl:col-span-4 space-y-4 no-print">
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-5 max-h-[92vh] overflow-y-auto">
+        
+        <div class="border-b border-slate-200 pb-3 space-y-3">
+          <div>
+            <h1 class="font-bold text-lg text-emerald-800 uppercase tracking-wide">Document Reader</h1>
+            <p class="text-xs text-slate-500">Reconcile Receipts & Generate Official Letter</p>
+          </div>
+          
+          <!-- ACTION BUTTONS GRID -->
+          <div class="grid grid-cols-3 gap-1.5">
+            <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-800 text-white font-semibold text-[11px] py-2 px-2 rounded-lg transition-all shadow-sm flex items-center justify-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+              Print
+            </button>
+            <button onclick="downloadPDF()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-[11px] py-2 px-2 rounded-lg transition-all shadow-sm flex items-center justify-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              PDF
+            </button>
+            <button onclick="downloadHTML()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-[11px] py-2 px-2 rounded-lg transition-all shadow-sm flex items-center justify-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              HTML
+            </button>
+          </div>
+        </div>
+
+        <!-- SECTION: Subscriber Details -->
+        <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200 space-y-3">
+          <h2 class="text-xs font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+            Subscriber Details
+          </h2>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="col-span-2">
+              <label class="block font-medium text-slate-600 mb-1">Subscriber Full Name</label>
+              <input type="text" id="inClient" value="Chief Chidi Okonkwo" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-600 outline-none">
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Telephone</label>
+              <input type="text" id="inPhone" value="08031234567" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-600 outline-none">
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Letter Date</label>
+              <input type="date" id="inDate" value="2026-10-01" onchange="updateDocument()" class="w-full p-2 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-600 outline-none">
+            </div>
+            <div class="col-span-2">
+              <label class="block font-medium text-slate-600 mb-1">Property Description</label>
+              <input type="text" id="inProperty" value="Plot 14, Prime Estate Phase 2, Awka" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-600 outline-none">
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Our Ref No.</label>
+              <input type="text" id="inRefNo" value="UE/ACK/2026/0188" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-600 outline-none">
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Stamp Tracking ID</label>
+              <input type="text" id="inTrackId" value="TRK-892341" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-600 outline-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION: 1. Land Receipt -->
+        <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200 space-y-2">
+          <h2 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">1. Land Receipt Data</h2>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Land Receipt #</label>
+              <input type="text" id="inLandRecNo" value="LR-9982" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded">
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Land Paid (₦)</label>
+              <input type="number" id="inLandAmt" value="5000000" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded">
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION: 2. Documentation Receipt -->
+        <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200 space-y-2">
+          <h2 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">2. Documentation Receipt Data</h2>
+          <div class="grid grid-cols-3 gap-2 text-xs">
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Doc Receipt #</label>
+              <input type="text" id="inDocRecNo" value="DR-3041" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded">
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Legal Fee (₦)</label>
+              <input type="number" id="inDocAmt" value="350000" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded">
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Survey Fee (₦)</label>
+              <input type="number" id="inSurveyAmt" value="150000" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded">
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION: 3. Invoice Details -->
+        <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200 space-y-2">
+          <h2 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">3. Proforma Invoice Data</h2>
+          <div class="grid grid-cols-3 gap-2 text-xs">
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Invoice #</label>
+              <input type="text" id="inInvNo" value="INV-2026-102" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded">
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Contract Total (₦)</label>
+              <input type="number" id="inTotalContract" value="6000000" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded">
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Outstanding (₦)</label>
+              <input type="number" id="inBalance" value="500000" oninput="updateDocument()" class="w-full p-2 border border-slate-300 rounded">
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Signature Pad -->
+        <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200 space-y-2">
+          <div class="flex justify-between items-center">
+            <h2 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Client Interactive Signature Pad</h2>
+            <div class="flex gap-1">
+              <button onclick="clearCanvas()" class="px-2 py-0.5 text-[10px] bg-red-100 text-red-700 hover:bg-red-200 rounded font-semibold">Clear Manual</button>
+              <button onclick="resetToTypedSignature()" class="px-2 py-0.5 text-[10px] bg-emerald-100 text-emerald-800 hover:bg-emerald-200 rounded font-semibold">Sync Typed Name</button>
+            </div>
+          </div>
+          <div class="border border-slate-300 rounded bg-white overflow-hidden">
+            <canvas id="sigPad" class="signature-canvas w-full h-24"></canvas>
+          </div>
+          <p class="text-[10px] text-slate-500 italic">Signature updates automatically as you type the subscriber's name. You can also draw over it or clear it to draw manually.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT PREVIEW AREA: FORMAL ACKNOWLEDGMENT LETTER -->
+    <div class="lg:col-span-7 xl:col-span-8 print-full-width">
+      <div id="letterContainer" class="bg-white border border-slate-200 rounded-xl shadow-lg p-8 md:p-12 max-w-[900px] mx-auto letter-shadow relative min-h-[1050px] flex flex-col justify-between">
+        
+        <div>
+          <!-- Company Letterhead Header -->
+          <div class="flex justify-between items-start border-b-2 border-emerald-800 pb-4 mb-6">
+            <div class="flex items-center gap-3">
+              <img src="../infor/logo.png" alt="URBANEGDGE Logo" class="h-20 w-auto object-contain" onerror="this.src='https://placehold.co/120x80/15803d/ffffff?text=URBANEGDGE'">
+            </div>
+            <div class="text-right">
+              <h1 class="font-cinzel text-xl md:text-2xl font-bold text-emerald-800 tracking-wide">URBANEGDGE REAL ESTATE LTD.</h1>
+              <p class="text-xs font-bold text-slate-700">RC Reg. No: 9389918</p>
+              <p class="text-[11px] text-slate-600 leading-tight mt-1">
+                1st Floor, Ebube Dike Plaza, Off Goodwill Junction,<br>
+                Okpuno, Awka, Anambra State.<br>
+                <span class="font-semibold text-emerald-800">Tel:</span> 09011157594 | <span class="font-semibold text-emerald-800">Email:</span> urbanegdge@gmail.com
+              </p>
+            </div>
+          </div>
+
+          <!-- Letter Meta -->
+          <div class="flex justify-between items-center text-xs text-slate-700 mb-6 font-medium">
+            <div><strong>Our Ref:</strong> <span id="outRefNo" class="font-mono text-emerald-900">UE/ACK/2026/0188</span></div>
+            <div><strong>Date:</strong> <span id="outDate">October 1, 2026</span></div>
+          </div>
+
+          <!-- Recipient Block -->
+          <div class="text-xs text-slate-800 mb-6 leading-relaxed">
+            <p class="font-bold text-sm text-slate-900" id="outClient">Chief Chidi Okonkwo</p>
+            <p>Tel: <span id="outPhone">08031234567</span></p>
+            <p class="italic text-slate-600">Subscriber / Property Allottee</p>
+          </div>
+
+          <!-- Formal Subject Line -->
+          <div class="text-center font-bold text-xs md:text-sm text-emerald-900 uppercase underline tracking-wider mb-6 px-4 py-2 bg-emerald-50/60 rounded border border-emerald-100">
+            Letter of Acknowledgment and Financial Reconciliation for <span id="outProperty">Plot 14, Prime Estate Phase 2, Awka</span>
+          </div>
+
+          <!-- Letter Body Paragraphs -->
+          <div class="text-xs md:text-sm font-serif-doc text-slate-800 space-y-3.5 text-justify leading-relaxed">
+            <p>Dear Sir/Madam,</p>
+            <p>
+              We present our compliments to you on behalf of the Board and Management of <strong>URBANEGDGE REAL ESTATE LTD</strong>. We formally write to acknowledge receipt of payments made towards your real estate allocation as referenced above.
+            </p>
+            <p>
+              Following a comprehensive reconciliation of records extracted from your issued <strong>Land Receipt</strong>, <strong>Documentation Receipt</strong>, and <strong>Proforma Invoice</strong>, we hereby confirm receipt of the financial considerations detailed in the table below:
+            </p>
+          </div>
+
+          <!-- Consolidated Financial Reconciliation Table -->
+          <div class="my-5 overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="bg-emerald-800 text-white uppercase text-[10px] tracking-wider">
+                  <th class="p-2.5 border border-emerald-800">Source Document</th>
+                  <th class="p-2.5 border border-emerald-800">Doc Ref #</th>
+                  <th class="p-2.5 border border-emerald-800">Purpose / Description</th>
+                  <th class="p-2.5 border border-emerald-800 text-right">Amount Paid</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 text-slate-800">
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2 border border-slate-300 font-semibold text-emerald-900">Land Receipt</td>
+                  <td class="p-2 border border-slate-300 font-mono" id="outLandRecNo">LR-9982</td>
+                  <td class="p-2 border border-slate-300">Land Allocation Consideration</td>
+                  <td class="p-2 border border-slate-300 text-right font-bold" id="outLandAmt">₦5,000,000.00</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2 border border-slate-300 font-semibold text-emerald-900">Documentation Receipt</td>
+                  <td class="p-2 border border-slate-300 font-mono" id="outDocRecNo">DR-3041</td>
+                  <td class="p-2 border border-slate-300">Legal Fee & Deed of Assignment</td>
+                  <td class="p-2 border border-slate-300 text-right font-bold" id="outDocAmt">₦350,000.00</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2 border border-slate-300 font-semibold text-emerald-900">Documentation Receipt</td>
+                  <td class="p-2 border border-slate-300 font-mono" id="outDocRecNo2">DR-3041</td>
+                  <td class="p-2 border border-slate-300">Survey Plan & Mapping</td>
+                  <td class="p-2 border border-slate-300 text-right font-bold" id="outSurveyAmt">₦150,000.00</td>
+                </tr>
+                <tr class="bg-emerald-50/80 font-bold text-slate-900">
+                  <td colspan="3" class="p-2.5 border border-slate-300 text-right uppercase text-[11px] text-emerald-950">Total Payments Received & Acknowledged:</td>
+                  <td class="p-2.5 border border-slate-300 text-right text-emerald-900 text-sm" id="outTotalReceived">₦5,500,000.00</td>
+                </tr>
+                <tr class="bg-slate-50 text-slate-700 text-[11px]">
+                  <td colspan="2" class="p-2 border border-slate-300"><strong>Invoice Ref:</strong> <span id="outInvNo" class="font-mono">INV-2026-102</span></td>
+                  <td class="p-2 border border-slate-300 text-right">Agreed Contract Value:</td>
+                  <td class="p-2 border border-slate-300 text-right font-bold" id="outTotalContract">₦6,000,000.00</td>
+                </tr>
+                <tr class="bg-red-50/60 text-red-900 text-[11px] font-bold">
+                  <td colspan="3" class="p-2 border border-slate-300 text-right uppercase">Outstanding Balance Due:</td>
+                  <td class="p-2 border border-slate-300 text-right text-red-700 text-xs" id="outBalance">₦500,000.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="text-xs md:text-sm font-serif-doc text-slate-800 space-y-3 text-justify leading-relaxed">
+            <p>
+              This document serves as corporate confirmation that the total sum of <strong id="outTotalText" class="text-emerald-900">₦5,500,000.00</strong> has been successfully received and credited to our account. Final execution and physical handover of property title documents remain subject to settlement of the outstanding balance of <strong id="outBalanceText" class="text-red-700">₦500,000.00</strong>.
+            </p>
+            <p>We appreciate your patronage and commitment to <strong>URBANEGDGE REAL ESTATE LTD</strong>.</p>
+          </div>
+        </div>
+
+        <!-- Closing & Signatures Section -->
+        <div class="mt-8 pt-4 border-t border-slate-200">
+          <p class="text-xs text-slate-700">Yours faithfully,</p>
+          <p class="text-xs font-bold text-emerald-900 mb-6">For: URBANEGDGE REAL ESTATE LTD.</p>
+
+          <div class="grid grid-cols-2 gap-8 items-end">
+            
+            <!-- Subscriber Signature Box -->
+            <div class="text-center">
+              <div class="h-16 border-b border-slate-400 flex items-center justify-center pb-1">
+                <img id="outSigImg" src="" alt="Client Signature" class="max-h-14 object-contain">
+              </div>
+              <p class="text-[11px] font-bold text-slate-700 mt-1 uppercase">Subscriber / Client Signature</p>
+            </div>
+
+            <!-- AUTHORIZED SIGNATURE & OFFICIAL CIRCULAR PAID STAMP -->
+            <div class="text-center relative">
+              <div class="h-10 border-b border-dashed border-slate-400 flex items-end justify-center pb-1">
+                <span class="font-serif italic text-emerald-900 font-bold text-xs">UrbanEdge Official Seal</span>
+              </div>
+              <p class="text-[10px] font-bold text-slate-700 mt-1 uppercase">Authorized Officer Signature</p>
+
+              <!-- OFFICIAL CIRCULAR PAID STAMP WITH DYNAMIC TRACKING ID -->
+              <div class="absolute -top-14 right-2 transform rotate-[-12deg] pointer-events-none select-none opacity-90">
+                <div class="relative w-28 h-28 border-4 border-emerald-700 rounded-full flex flex-col items-center justify-center text-center p-1 bg-white/40 shadow-sm backdrop-blur-[1px]">
+                  
+                  <!-- INNER STAMP CIRCLE -->
+                  <div class="w-[100px] h-[100px] border border-dashed border-emerald-700 rounded-full flex flex-col items-center justify-center p-1 relative">
+                    
+                    <!-- COMPANY NAME HEADER -->
+                    <span class="text-[6.5px] font-black text-emerald-800 uppercase tracking-tighter">
+                      UrbanEdge Real Estate
+                    </span>
+
+                    <!-- OFFICIAL PAID BADGE WITH CHECK ICON -->
+                    <span class="inline-flex items-center gap-1 text-[9px] font-black text-emerald-900 bg-emerald-100/90 px-1.5 py-0.5 my-0.5 rounded border border-emerald-600 tracking-widest z-10">
+                      <svg class="w-2.5 h-2.5 text-emerald-700 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                      </svg>
+                      OFFICIAL PAID
+                    </span>
+
+                    <!-- LARGER DIRECTOR SIGNATURE OVERLAY -->
+                     <img 
+                      src="../signature.png" 
+                      alt="Director Signature" 
+                      class="absolute -top-3 -left-4 w-36 h-20 max-w-none object-contain pointer-events-none z-20 mix-blend-multiply" 
+                    />
+
+                    <span id="stampTrackId" class="text-[7.5px] font-mono font-extrabold text-emerald-900 bg-emerald-50 px-1 border border-emerald-300 my-[1px]">
+                      TRK-892341
+                    </span>
+                    
+                    <span id="stampDate" class="text-[6.5px] font-bold text-emerald-800 font-mono">01 OCT 2026</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Bottom Verification Codes -->
+          <div class="mt-8 pt-3 border-t border-slate-200 flex justify-between items-end">
+            <div class="flex flex-col items-start">
+              <img id="barcodeImg" src="" alt="Barcode Verification" class="h-9">
+              <span class="text-[9px] font-mono text-slate-500 mt-0.5" id="barPill">UE/ACK/2026/0188</span>
+            </div>
+            <div class="text-center">
+              <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Official Document Verification</p>
+            </div>
+            <div class="flex flex-col items-center">
+              <img id="qrImg" src="" alt="QR Code Verification" class="w-12 h-12">
+              <span class="text-[8px] text-slate-500 font-sans mt-0.5">Scan to Verify</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const canvas = document.getElementById('sigPad');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let isUserDrawn = false;
+
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = 96;
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#14532d';
+      
+      if (!isUserDrawn) {
+        drawTypedSignature();
+      }
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function startDrawing(e) {
+      if (!isUserDrawn) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        isUserDrawn = true;
+      }
+      isDrawing = true;
+      ctx.beginPath();
+      const pos = getPos(e);
+      ctx.moveTo(pos.x, pos.y);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const pos = getPos(e);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      syncSignature();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseleave', stopDrawing);
+
+    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDrawing(e); }, { passive: false });
+    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); }, { passive: false });
+    canvas.addEventListener('touchend', stopDrawing);
+
+    function clearCanvas() {
+      isUserDrawn = true;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      syncSignature();
+    }
+
+    function drawTypedSignature() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const clientName = document.getElementById('inClient').value.trim() || 'Subscriber';
+      
+      ctx.font = "italic bold 26px 'Cinzel', Georgia, serif";
+      ctx.fillStyle = "#14532d";
+      ctx.fillText(clientName, 20, 58);
+      
+      ctx.beginPath();
+      ctx.moveTo(15, 68);
+      ctx.quadraticCurveTo(canvas.width / 2, 78, canvas.width - 30, 65);
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = "#15803d";
+      ctx.stroke();
+
+      syncSignature();
+    }
+
+    function resetToTypedSignature() {
+      isUserDrawn = false;
+      drawTypedSignature();
+    }
+
+    function syncSignature() {
+      document.getElementById('outSigImg').src = canvas.toDataURL();
+    }
+
+    function updateDocument() {
+      const client = document.getElementById('inClient').value;
+      const phone = document.getElementById('inPhone').value;
+      const property = document.getElementById('inProperty').value;
+      const refNo = document.getElementById('inRefNo').value;
+      const trackId = document.getElementById('inTrackId').value;
+      const inputDate = document.getElementById('inDate').value;
+
+      document.getElementById('outClient').innerText = client;
+      document.getElementById('outPhone').innerText = phone;
+      document.getElementById('outProperty').innerText = property;
+      document.getElementById('outRefNo').innerText = refNo;
+      document.getElementById('stampTrackId').innerText = trackId;
+      document.getElementById('barPill').innerText = refNo;
+
+      if (!isUserDrawn) {
+        drawTypedSignature();
+      }
+
+      if (inputDate) {
+        const d = new Date(inputDate);
+        const options = { day: '2-digit', month: 'short', year: 'numeric' };
+        const formatted = d.toLocaleDateString('en-GB', options);
+        document.getElementById('outDate').innerText = formatted;
+        document.getElementById('stampDate').innerText = formatted.toUpperCase();
+      }
+
+      const landNo = document.getElementById('inLandRecNo').value;
+      const landAmt = parseFloat(document.getElementById('inLandAmt').value || 0);
+      document.getElementById('outLandRecNo').innerText = landNo;
+      document.getElementById('outLandAmt').innerText = formatNGN(landAmt);
+
+      const docNo = document.getElementById('inDocRecNo').value;
+      const docAmt = parseFloat(document.getElementById('inDocAmt').value || 0);
+      const surveyAmt = parseFloat(document.getElementById('inSurveyAmt').value || 0);
+      document.getElementById('outDocRecNo').innerText = docNo;
+      document.getElementById('outDocRecNo2').innerText = docNo;
+      document.getElementById('outDocAmt').innerText = formatNGN(docAmt);
+      document.getElementById('outSurveyAmt').innerText = formatNGN(surveyAmt);
+
+      const totalReceived = landAmt + docAmt + surveyAmt;
+      document.getElementById('outTotalReceived').innerText = formatNGN(totalReceived);
+      document.getElementById('outTotalText').innerText = formatNGN(totalReceived);
+
+      const invNo = document.getElementById('inInvNo').value;
+      const totalContract = parseFloat(document.getElementById('inTotalContract').value || 0);
+      const balance = parseFloat(document.getElementById('inBalance').value || 0);
+
+      document.getElementById('outInvNo').innerText = invNo;
+      document.getElementById('outTotalContract').innerText = formatNGN(totalContract);
+      document.getElementById('outBalance').innerText = formatNGN(balance);
+      document.getElementById('outBalanceText').innerText = formatNGN(balance);
+
+      const barcodeUrl = `https://bwipjs-api.metafloor.com/?bcid=code128&text=${encodeURIComponent(refNo)}&scale=2&height=10&textsize=0`;
+      document.getElementById('barcodeImg').src = barcodeUrl;
+
+      const qrPayload = `URBANEGDGE REAL ESTATE\nRef: ${refNo}\nTrackID: ${trackId}\nSubscriber: ${client}\nPaid: NGN ${totalReceived}\nBalance: NGN ${balance}`;
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(qrPayload)}`;
+      document.getElementById('qrImg').src = qrUrl;
+    }
+
+    function formatNGN(val) {
+      return '₦' + val.toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // 1. Download PDF Function using html2pdf.js
+    function downloadPDF() {
+      const element = document.getElementById('letterContainer');
+      const clientName = document.getElementById('inClient').value.trim() || 'Subscriber';
+      const refNo = document.getElementById('inRefNo').value.trim().replace(/\//g, '_');
+
+      const opt = {
+        margin:       [0.2, 0.2, 0.2, 0.2],
+        filename:     `UrbanEdge_Acknowledgment_${refNo}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+    }
+
+    // 2. Download HTML Source Function
+    function downloadHTML() {
+      const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'UrbanEdge_Acknowledgment_Letter.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    window.onload = function() {
+      resizeCanvas();
+      updateDocument();
+    };
+  </script>
+</body>
+</html>

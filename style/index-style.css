@@ -7111,3 +7111,65 @@ header.scrolled {
   color: #0056b3;
 }
 
+
+/* Container for cards */
+.testimonial-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap; /* Wraps cleanly on mobile devices */
+  margin-top: 30px;
+}
+
+/* Individual card sizing */
+.testimonial-card {
+  flex: 1 1 calc(33.333% - 20px); /* 3 cards per row minus grid gaps */
+  min-width: 280px;               /* Keeps cards readable on smaller screens */
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Compact typography */
+.testimonial-stars {
+  color: #f59e0b;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.testimonial-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #4b5563;
+  margin-bottom: 20px;
+}
+
+/* Client info footer */
+.testimonial-client {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.client-image img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.client-info h4 {
+  font-size: 0.95rem;
+  margin: 0;
+  color: #1f2937;
+}
+
+.client-info span {
+  font-size: 0.8rem;
+  color: #6b7280;
+}

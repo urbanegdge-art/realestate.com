@@ -10,7 +10,7 @@
 
     <style>
         /* =====================================================
-           ROOT & BASE STYLES
+            ROOT & BASE STYLES
         ====================================================== */
         :root {
             --green: #005a2b;
@@ -54,7 +54,7 @@
         }
 
         /* =====================================================
-           HEADER
+            HEADER
         ====================================================== */
         header {
             position: sticky;
@@ -118,6 +118,7 @@
             flex: 1;
             max-width: 600px;
             margin: 0 30px;
+            position: relative; /* Container for search dropdown */
         }
 
         .search-bar {
@@ -155,6 +156,51 @@
             background: var(--green-dark);
         }
 
+        /* Search Results Dropdown Hooks */
+        .search-dropdown {
+            position: absolute;
+            top: 48px;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-height: 350px;
+            overflow-y: auto;
+            z-index: 7000;
+            display: none;
+        }
+
+        .search-dropdown.active {
+            display: block;
+        }
+
+        .search-dropdown-item {
+            padding: 12px 18px;
+            font-size: 13px;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s ease;
+        }
+
+        .search-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-dropdown-item:hover {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .search-dropdown-item i {
+            color: var(--green);
+        }
+
         .header-right {
             display: flex;
             align-items: center;
@@ -177,7 +223,7 @@
         }
 
         /* =====================================================
-           APP CONTAINER & SIDEBAR
+            APP CONTAINER & SIDEBAR
         ====================================================== */
         .app-container {
             display: flex;
@@ -226,7 +272,7 @@
         }
 
         /* =====================================================
-           MAIN CONTENT
+            MAIN CONTENT
         ====================================================== */
         main {
             flex: 1;
@@ -390,49 +436,8 @@
             padding-top: 15px;
         }
 
-        /* Contact Box Card */
-        .contact-box {
-            background: var(--green-dark);
-            color: white;
-            border-radius: 14px;
-            padding: 30px;
-            margin-top: 40px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .contact-box-text h3 {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-
-        .contact-box-text p {
-            font-size: 13px;
-            opacity: 0.85;
-            line-height: 1.5;
-        }
-
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            font-size: 13px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px 20px;
-            border-radius: 8px;
-        }
-
-        .contact-details span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
         /* =====================================================
-           FOOTER & FLOATING ACTIONS
+            FOOTER & FLOATING ACTIONS
         ====================================================== */
         footer {
             background: var(--green-dark);
@@ -508,7 +513,7 @@
         }
 
         /* =====================================================
-           RESPONSIVE MOBILE STYLES
+            RESPONSIVE MOBILE STYLES
         ====================================================== */
         @media (max-width: 768px) {
             header {
@@ -541,11 +546,6 @@
             .page-heading h1 {
                 font-size: 24px;
             }
-
-            .contact-box {
-                flex-direction: column;
-                align-items: flex-start;
-            }
         }
     </style>
 </head>
@@ -553,7 +553,7 @@
 <body>
 
     <!-- =====================================================
-         HEADER
+          HEADER
     ====================================================== -->
     <header>
         <div class="header-left">
@@ -567,10 +567,12 @@
         </div>
 
         <div class="header-center">
-            <form class="search-bar" id="faqSearchForm">
+            <form class="search-bar" id="faqSearchForm" onsubmit="return false;">
                 <input type="search" id="faqSearchInput" placeholder="Search questions (e.g. CAC, survey, deposit)..." autocomplete="off">
-                <button type="submit">Search</button>
+                <button type="button">Search</button>
             </form>
+            <!-- Dropdown hooks list -->
+            <div class="search-dropdown" id="searchDropdown"></div>
         </div>
 
         <div class="header-right">
@@ -581,7 +583,7 @@
     </header>
 
     <!-- =====================================================
-         APP CONTAINER
+          APP CONTAINER
     ====================================================== -->
     <div class="app-container">
 
@@ -776,23 +778,13 @@
                         </div>
                     </div>
 
-                    <div class="faq-item" id="faq-promo-doc">
+                    <div class="faq-item" id="faq-afterpay" id="faq-afterpay">
                         <button class="faq-question">
-                            <span>What is the current UrbanEdge documentation promotion?</span>
+                            <span>What happens after payment?</span>
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
                         <div class="faq-answer">
-                            <p>UrbanEdge currently has a limited promotional offer on qualifying properties where clients can receive a Deed of Assignment and Registered Survey at no additional cost, subject to the terms and duration of the promotion.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item" id="faq-promo-deadline">
-                        <button class="faq-question">
-                            <span>Is there a deadline for the free documentation offer?</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes. Promotional offers are time-limited. The current offer is available for 60 days, subject to the stated terms and conditions. Clients are encouraged to confirm eligibility before making a purchase.</p>
+                            <p>Once payment or initial deposit is confirmed, you receive your payment receipts, contract documents, and onboarding instructions outlining your next stages toward physical allocation and documentation.</p>
                         </div>
                     </div>
                 </div>
@@ -841,225 +833,102 @@
                         </div>
                     </div>
 
-                    <div class="faq-item" id="faq-price-doc">
+                    <div class="faq-item" id="faq-contact">
                         <button class="faq-question">
-                            <span>Does the price include documentation?</span>
+                            <span>How can I contact UrbanEdge?</span>
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
                         <div class="faq-answer">
-                            <p>This depends on the particular property and promotion. For example, UrbanEdge may run promotional offers where selected documentation is provided free of charge for a limited period. Always confirm the current offer and its terms with our official sales team.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item" id="faq-afterpay">
-                        <button class="faq-question">
-                            <span>What happens after I make payment?</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Once payment is confirmed, the transaction proceeds according to the agreed terms. You will receive the applicable payment acknowledgment/receipt and the documentation process will commence according to the property's documentation structure.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item" id="faq-behalf">
-                        <button class="faq-question">
-                            <span>Can someone buy property on my behalf?</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes. A client may purchase through an authorised representative, subject to proper identification, authorisation, and completion of the required documentation.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5. DEVELOPMENT & RESALE -->
-                <div class="faq-category">
-                    <h2 class="category-title"><i class="fa-solid fa-trowel-bricks"></i> Development & Resale</h2>
-
-                    <div class="faq-item" id="faq-build">
-                        <button class="faq-question">
-                            <span>Can I build immediately after buying?</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>This depends on the property's documentation, estate development status, applicable planning regulations, and whether the necessary approvals have been obtained. Our team will advise you on the applicable requirements.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item" id="faq-dev-help">
-                        <button class="faq-question">
-                            <span>Can UrbanEdge help me develop my property?</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes. Depending on the project, UrbanEdge can provide or coordinate relevant real estate development and management services. Speak with our team about the development options available for your property.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item" id="faq-resell">
-                        <button class="faq-question">
-                            <span>Can I resell my land after buying it?</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Generally, a client may be able to transfer or resell their interest, subject to the terms of the purchase agreement, applicable documentation, and any required consent or administrative process.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item" id="faq-complaint">
-                        <button class="faq-question">
-                            <span>What if I have a complaint about my property?</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>We encourage clients to contact our customer service or management team immediately. Every complaint should be properly documented and reviewed so that UrbanEdge can provide an appropriate resolution based on the transaction documents and applicable terms.</p>
+                            <p>You can reach us through our direct WhatsApp link, corporate phone numbers, email channels, or visit our office location. Our support team is always glad to assist you with any inquiries.</p>
                         </div>
                     </div>
                 </div>
 
             </div>
-
-            <!-- CONTACT FOOTER CARD -->
-            <div class="contact-box" id="faq-contact">
-                <div class="contact-box-text">
-                    <h3>Still Have Questions?</h3>
-                    <p>Our sales and legal advisory team is available to assist you with property enquiries, site inspections, and title verification.</p>
-                </div>
-                <div class="contact-details">
-                    <span><i class="fa-solid fa-building"></i> UrbanEdge Real Estate Company Ltd.</span>
-                    <span><i class="fa-solid fa-location-dot"></i> 1st Floor, Ebube Dike Plaza, Goodwill Junction, Okpuno, Awka, Anambra State.</span>
-                    <span><i class="fa-solid fa-envelope"></i> Urbanegdge@gmail.com</span>
-                </div>
-            </div>
-
         </main>
     </div>
 
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-    <footer>
-        <div class="footer-bottom">
-            <span>© 2026 Urbanegdge Real Estate Company Ltd. All Rights Reserved.</span>
-            <span>Transparency • Trust • Professionalism</span>
-        </div>
-    </footer>
-
-    <!-- =====================================================
-         FLOATING ACTIONS
-    ====================================================== -->
-    <div class="floating-actions">
-        <a href="https://wa.me/2348102601114" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat with Urbanegdge Real Estate on WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
-
-        <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
-            <i class="fa-solid fa-arrow-up"></i>
-        </button>
-    </div>
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
+    <!-- JavaScript for Accordion & Search Dropdown Hook functionality -->
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-
-        // Sidebar Elements
-        const menuBtn = document.getElementById("menuBtn");
-        const menuIcon = document.getElementById("menuIcon");
-        const sidebar = document.getElementById("sidebar");
-        const backToTop = document.getElementById("backToTop");
-        const inspectionLink = document.getElementById("inspectionLink");
-
         // Accordion functionality
-        const faqItems = document.querySelectorAll(".faq-item");
+        const faqItems = document.querySelectorAll('.faq-item');
 
         faqItems.forEach(item => {
-            const questionBtn = item.querySelector(".faq-question");
-            questionBtn.addEventListener("click", () => {
-                const isActive = item.classList.contains("active");
+            const questionBtn = item.querySelector('.faq-question');
+            questionBtn.addEventListener('click', () => {
+                const isOpen = item.classList.contains('active');
                 
-                // Close all items
-                faqItems.forEach(i => i.classList.remove("active"));
+                // Optional: close others
+                faqItems.forEach(i => i.classList.remove('active'));
 
-                // Toggle current if it wasn't active
-                if (!isActive) {
-                    item.classList.add("active");
+                if (!isOpen) {
+                    item.classList.add('active');
                 }
             });
         });
 
-        // Search Filter functionality
-        const searchInput = document.getElementById("faqSearchInput");
-        const searchForm = document.getElementById("faqSearchForm");
-
-        function filterFaqs() {
-            const query = searchInput.value.toLowerCase().trim();
-
-            faqItems.forEach(item => {
-                const qText = item.querySelector(".faq-question span").textContent.toLowerCase();
-                const aText = item.querySelector(".faq-answer p").textContent.toLowerCase();
-
-                if (qText.includes(query) || aText.includes(query)) {
-                    item.style.display = "block";
-                    if (query.length > 2) {
-                        item.classList.add("active");
-                    }
-                } else {
-                    item.style.display = "none";
-                    item.classList.remove("active");
-                }
-            });
+        // Scroll to specific FAQ and open it
+        function scrollToFaq(faqId) {
+            const targetItem = document.getElementById(faqId);
+            if (targetItem) {
+                faqItems.forEach(i => i.classList.remove('active'));
+                targetItem.classList.add('active');
+                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            document.getElementById('searchDropdown').classList.remove('active');
         }
 
-        searchInput.addEventListener("input", filterFaqs);
-        searchForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            filterFaqs();
+        // Live Search Dropdown Hook Integration
+        const searchInput = document.getElementById('faqSearchInput');
+        const searchDropdown = document.getElementById('searchDropdown');
+
+        // Gather all FAQ questions mapping
+        const allFaqs = Array.from(faqItems).map(item => {
+            return {
+                id: item.id,
+                question: item.querySelector('.faq-question span').textContent.trim()
+            };
         });
 
-        // Sidebar Toggle
-        menuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isHidden = window.getComputedStyle(sidebar).display === 'none';
-            if (isHidden) {
-                sidebar.style.display = 'flex';
-                if (menuIcon) menuIcon.className = "fa-solid fa-xmark";
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            searchDropdown.innerHTML = '';
+
+            if (query.length === 0) {
+                searchDropdown.classList.remove('active');
+                return;
+            }
+
+            const matches = allFaqs.filter(faq => faq.question.toLowerCase().includes(query));
+
+            if (matches.length > 0) {
+                matches.forEach(match => {
+                    const div = document.createElement('div');
+                    div.className = 'search-dropdown-item';
+                    div.innerHTML = `<i class="fa-solid fa-circle-question"></i> ${match.question}`;
+                    div.addEventListener('click', () => {
+                        scrollToFaq(match.id);
+                        searchInput.value = '';
+                        searchDropdown.classList.remove('active');
+                    });
+                    searchDropdown.appendChild(div);
+                });
+                searchDropdown.classList.add('active');
             } else {
-                sidebar.style.display = 'none';
-                if (menuIcon) menuIcon.className = "fa-solid fa-bars";
+                const div = document.createElement('div');
+                div.className = 'search-dropdown-item';
+                div.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> No matching questions found`;
+                searchDropdown.appendChild(div);
+                searchDropdown.classList.add('active');
             }
         });
 
-        // Back to top scroll button
-        window.addEventListener("scroll", function () {
-            if (window.scrollY > 300) {
-                backToTop.classList.add("show");
-            } else {
-                backToTop.classList.remove("show");
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!document.querySelector('.header-center').contains(e.target)) {
+                searchDropdown.classList.remove('active');
             }
         });
-
-        backToTop.addEventListener("click", function () {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-
-        if (inspectionLink) {
-            inspectionLink.addEventListener("click", function (e) {
-                e.preventDefault();
-                window.open("https://wa.me/2348102601114?text=Hello%20Urbanegdge%20Real%20Estate%2C%0A%0AI%20would%20like%20to%20book%20a%20property%20inspection.", "_blank");
-            });
-        }
-    });
-
-    // Quick Scroll and open FAQ function for Top 10 grid
-    function scrollToFaq(faqId) {
-        const target = document.getElementById(faqId);
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            target.classList.add('active');
-        }
-    }
     </script>
 </body>
 </html>

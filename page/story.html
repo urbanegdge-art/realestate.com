@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - UrbanEdge Real Estate Ltd</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#005a2b',
+                            dark: '#003d1e',
+                            light: '#e6f4ed',
+                            gold: '#d4af37',
+                            goldHover: '#b89528',
+                            slate: '#1f2937',
+                            muted: '#6b7280'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom animations & fine-tuned glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .glass-dark {
+            background: rgba(0, 30, 15, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #d4af37 0%, #fff3ad 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .green-gradient-bg {
+            background: linear-gradient(135deg, #003d1e 0%, #005a2b 100%);
+        }
+
+        .slide-fade {
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+
+        .chapter-btn.active {
+            border-color: #d4af37;
+            background-color: rgba(212, 175, 55, 0.15);
+            color: #ffffff;
+        }
+
+        /* Smooth custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #005a2b;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-slate-50 text-brand-slate antialiased overflow-x-hidden">
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="../infor/logo.png" alt="UrbanEdge Logo" class="w-10 h-10 rounded-xl object-cover shadow-md group-hover:scale-105 transition-transform">
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-lg tracking-wider text-brand-dark leading-tight">URBANEDGE</span>
+                    <span class="text-[10px] font-bold tracking-widest text-brand-gold uppercase">Real Estate Ltd Reg: 9389918</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700">
+                <a href="#story-hero" class="text-brand-green font-bold">Our Story</a>
+                <a href="#pillars" class="hover:text-brand-green transition-colors">Core Pillars</a>
+                <a href="#impact" class="hover:text-brand-green transition-colors">Why UrbanEdge</a>
+                <a href="#mission-vision" class="hover:text-brand-green transition-colors">Mission & Vision</a>
+            </nav>
+
+            <!-- CTA Actions -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="https://wa.me/2348102601114?text=Hello%20UrbanEdge%2C%20I%20read%20your%20story%20and%20would%20like%20to%20know%20more%20about%20your%20properties." 
+                   target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider px-4 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span>Chat With Agent</span>
+                </a>
+                <button onclick="toggleModal(true)" 
+                        class="bg-brand-green hover:bg-brand-dark text-white font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all border border-brand-gold/30">
+                    Full Narrative
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-brand-dark hover:bg-brand-light focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#story-hero" class="block px-3 py-2 rounded-md font-semibold text-brand-green bg-brand-light">Our Story</a>
+            <a href="#pillars" class="block px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50">Core Pillars</a>
+            <a href="#impact" class="block px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50">Why UrbanEdge</a>
+            <a href="#mission-vision" class="block px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50">Mission & Vision</a>
+            <div class="pt-2 flex flex-col gap-2">
+                <a href="https://wa.me/2348102601114" target="_blank" class="w-full text-center bg-emerald-600 text-white font-bold py-2.5 rounded-lg">
+                    <i class="fa-brands fa-whatsapp mr-1"></i> Chat via WhatsApp
+                </a>
+                <button onclick="toggleModal(true)" class="w-full bg-brand-green text-white font-bold py-2.5 rounded-lg">
+                    Read Our Full Story
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="story-hero" class="relative min-h-[90vh] bg-brand-dark text-white overflow-hidden flex items-center py-12 lg:py-0">
+        
+        <!-- SLIDER BACKGROUND IMAGES CONTAINER -->
+        <div id="sliderBackgrounds" class="absolute inset-0 z-0">
+            <!-- Slide 1 Image -->
+            <div class="slide-bg absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out bg-cover bg-center"
+                 style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1920&auto=format&fit=crop');">
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-black/40"></div>
+            </div>
+            <!-- Slide 2 Image -->
+            <div class="slide-bg absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out bg-cover bg-center"
+                 style="background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=1920&auto=format&fit=crop');">
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-black/40"></div>
+            </div>
+            <!-- Slide 3 Image -->
+            <div class="slide-bg absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out bg-cover bg-center"
+                 style="background-image: url('https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?q=80&w=1920&auto=format&fit=crop');">
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-black/40"></div>
+            </div>
+            <!-- Slide 4 Image -->
+            <div class="slide-bg absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out bg-cover bg-center"
+                 style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1920&auto=format&fit=crop');">
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-black/40"></div>
+            </div>
+        </div>
+
+        <!-- HERO CONTENT GRID -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- LEFT COLUMN: Main Story Headline & Chapter Narrative -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <!-- Tagline Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold/40 backdrop-blur-md">
+                        <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+                        <span class="text-xs font-bold tracking-widest text-brand-gold uppercase">Building Your Tomorrow, Today</span>
+                    </div>
+
+                    <!-- Main Title -->
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                        From Experience to Excellence: <br class="hidden sm:inline">
+                        <span class="gold-gradient-text font-serif italic font-normal">The Story of UrbanEdge</span>
+                    </h1>
+
+                    <!-- Dynamic Story Chapter Card -->
+                    <div class="glass-dark p-6 sm:p-8 rounded-2xl border border-brand-gold/20 shadow-2xl relative overflow-hidden">
+                        
+                        <!-- Chapter Label -->
+                        <div class="flex items-center justify-between mb-3 border-b border-white/10 pb-3">
+                            <span id="chapterNumber" class="text-xs font-bold text-brand-gold uppercase tracking-wider">
+                                Chapter 01 of 04
+                            </span>
+                            <span id="chapterBadge" class="text-[11px] bg-brand-green/80 text-white font-semibold px-2.5 py-0.5 rounded-md border border-emerald-400/30">
+                                The Insight
+                            </span>
+                        </div>
+
+                        <!-- Dynamic Title -->
+                        <h2 id="chapterTitle" class="text-xl sm:text-2xl font-bold text-white mb-3">
+                            6 Years Observing Real Estate Challenges
+                        </h2>
+
+                        <!-- Dynamic Content Paragraph -->
+                        <p id="chapterText" class="text-slate-200 text-sm sm:text-base leading-relaxed min-h-[90px]">
+                            After six years of working as realtors and staff in another real estate company, we witnessed firsthand critical shortcomings in the industry—from poor documentation and delayed land allocations to a concerning lack of transparency for clients.
+                        </p>
+
+                        <!-- Key Takeaway Banner -->
+                        <div class="mt-4 p-3 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
+                            <i class="fa-solid fa-quote-left text-brand-gold text-lg mt-0.5"></i>
+                            <p id="chapterQuote" class="text-xs sm:text-sm italic text-emerald-100 font-medium">
+                                "We saw buyers left waiting for years without receiving the lands they paid for, exposing an urgent need for industry reform."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CALL TO ACTION BUTTON GROUP -->
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <a href="https://wa.me/2348102601114?text=Hello%20UrbanEdge%20Team%2C%20I%20would%20like%20to%20book%20a%20land%20inspection."
+                           target="_blank" rel="noopener noreferrer"
+                           class="bg-brand-gold hover:bg-brand-goldHover text-brand-dark font-extrabold text-sm px-7 py-3.5 rounded-full shadow-lg hover:shadow-brand-gold/20 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <span>Book Land Inspection</span>
+                        </a>
+
+                        <button onclick="toggleModal(true)" 
+                                class="bg-white/10 hover:bg-white/20 text-white font-bold text-sm px-6 py-3.5 rounded-full border border-white/20 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-book-open"></i>
+                            <span>Read Full Story</span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN: Interactive Story Timeline & Visual Chapter Selector -->
+                <div class="lg:col-span-5 space-y-4">
+                    
+                    <div class="glass-dark p-6 rounded-2xl border border-brand-gold/30 shadow-2xl">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-timeline text-brand-gold"></i>
+                                <span>Journey Navigation</span>
+                            </h3>
+                            <span class="text-xs text-slate-300">Select a chapter below</span>
+                        </div>
+
+                        <!-- CHAPTER BUTTON SELECTORS -->
+                        <div class="space-y-2.5" id="chapterButtons">
+                            
+                            <!-- Chapter 1 Button -->
+                            <button onclick="goToSlide(0)" class="chapter-btn active w-full text-left p-3.5 rounded-xl border border-white/10 hover:border-brand-gold/50 transition-all flex items-start gap-3 group">
+                                <div class="w-8 h-8 rounded-lg bg-brand-gold/20 text-brand-gold font-bold flex items-center justify-center text-xs flex-shrink-0 group-hover:bg-brand-gold group-hover:text-brand-dark transition-colors">
+                                    01
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="text-sm font-bold text-white truncate">The Insight & Observations</h4>
+                                        <i class="fa-solid fa-arrow-right text-xs text-brand-gold opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                    </div>
+                                    <p class="text-xs text-slate-300 truncate">6 years observing industry shortcomings</p>
+                                </div>
+                            </button>
+
+                            <!-- Chapter 2 Button -->
+                            <button onclick="goToSlide(1)" class="chapter-btn w-full text-left p-3.5 rounded-xl border border-white/10 hover:border-brand-gold/50 transition-all flex items-start gap-3 group">
+                                <div class="w-8 h-8 rounded-lg bg-white/10 text-white font-bold flex items-center justify-center text-xs flex-shrink-0 group-hover:bg-brand-gold group-hover:text-brand-dark transition-colors">
+                                    02
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="text-sm font-bold text-white truncate">The Turning Point</h4>
+                                        <i class="fa-solid fa-arrow-right text-xs text-brand-gold opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                    </div>
+                                    <p class="text-xs text-slate-300 truncate">Building on trust, accountability & care</p>
+                                </div>
+                            </button>
+
+                            <!-- Chapter 3 Button -->
+                            <button onclick="goToSlide(2)" class="chapter-btn w-full text-left p-3.5 rounded-xl border border-white/10 hover:border-brand-gold/50 transition-all flex items-start gap-3 group">
+                                <div class="w-8 h-8 rounded-lg bg-white/10 text-white font-bold flex items-center justify-center text-xs flex-shrink-0 group-hover:bg-brand-gold group-hover:text-brand-dark transition-colors">
+                                    03
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="text-sm font-bold text-white truncate">The Partnership</h4>
+                                        <i class="fa-solid fa-arrow-right text-xs text-brand-gold opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                    </div>
+                                    <p class="text-xs text-slate-300 truncate">Protecting sellers, buyers & investors</p>
+                                </div>
+                            </button>
+
+                            <!-- Chapter 4 Button -->
+                            <button onclick="goToSlide(3)" class="chapter-btn w-full text-left p-3.5 rounded-xl border border-white/10 hover:border-brand-gold/50 transition-all flex items-start gap-3 group">
+                                <div class="w-8 h-8 rounded-lg bg-white/10 text-white font-bold flex items-center justify-center text-xs flex-shrink-0 group-hover:bg-brand-gold group-hover:text-brand-dark transition-colors">
+                                    04
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="text-sm font-bold text-white truncate">UrbanEdge Today</h4>
+                                        <i class="fa-solid fa-arrow-right text-xs text-brand-gold opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                    </div>
+                                    <p class="text-xs text-slate-300 truncate">Creating wealth & homeownership dreams</p>
+                                </div>
+                            </button>
+
+                        </div>
+
+                        <!-- SLIDER CONTROLS BAR -->
+                        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <!-- Play / Pause Toggle -->
+                            <button id="playPauseBtn" onclick="toggleAutoplay()" class="text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-2">
+                                <i class="fa-solid fa-pause text-brand-gold" id="playIcon"></i>
+                                <span id="playStateText">Auto-playing Story</span>
+                            </button>
+
+                            <!-- Manual Arrow Controls -->
+                            <div class="flex items-center gap-2">
+                                <button onclick="prevSlide()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-gold hover:text-brand-dark text-white flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                                </button>
+                                <button onclick="nextSlide()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-gold hover:text-brand-dark text-white flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="w-full bg-white/10 h-1 rounded-full mt-4 overflow-hidden">
+                            <div id="progressBar" class="bg-brand-gold h-full w-1/4 transition-all duration-300"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="pillars" class="py-16 lg:py-24 bg-white relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-extrabold text-brand-green uppercase tracking-widest bg-brand-light px-3 py-1 rounded-full border border-brand-green/20">
+                    Built On Trust & Transparency
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">
+                    The Pillars Born From Our Journey
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    Our past experiences shaped our present standard. Here is how UrbanEdge Real Estate Ltd guarantees peace of mind for every buyer and seller.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Pillar 1 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 hover:border-brand-green/40 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-xl bg-brand-light text-brand-green flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all">
+                        <i class="fa-solid fa-file-shield"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-2">Verified Documentation</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Say goodbye to incomplete paperwork. Every property undergoes rigorous legal vetting to guarantee genuine titles before listing.
+                    </p>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 hover:border-brand-green/40 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-xl bg-brand-light text-brand-green flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-2">Prompt Land Allocation</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        We eliminate long waiting periods. Once payment terms are fulfilled, physical plot allocations are executed without delays.
+                    </p>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 hover:border-brand-green/40 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-xl bg-brand-light text-brand-green flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-2">Total Transparency</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Zero hidden fees or ambiguous terms. We maintain clear, honest communications from initial inquiry to final handover.
+                    </p>
+                </div>
+
+                <!-- Pillar 4 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 hover:border-brand-green/40 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-xl bg-brand-light text-brand-green flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-2">Sustainable Wealth</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Strategic locations selected specifically for rapid appreciation, empowering families and investors to build lasting wealth.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="impact" class="py-16 green-gradient-bg text-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
+            <i class="fa-solid fa-quote-left text-brand-gold text-4xl opacity-80"></i>
+            <blockquote class="text-xl sm:text-2xl lg:text-3xl font-serif italic leading-relaxed text-emerald-50">
+                "What started as a friendship and a genuine desire to protect and help our families, friends, and communities has grown into UrbanEdge Real Estate Ltd—a brand committed to delivering trust, value, transparency, and lasting impact to society."
+            </blockquote>
+            <div class="pt-4 flex flex-col items-center">
+                <span class="font-extrabold text-brand-gold tracking-wider text-base uppercase">The Executive Team</span>
+                <span class="text-xs text-emerald-200">UrbanEdge Real Estate Ltd</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         MISSION & VISION SECTION
+    ====================================================== -->
+    <section id="mission-vision" class="py-16 lg:py-24 bg-slate-100/70 border-t border-slate-200/60 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-extrabold text-brand-green uppercase tracking-widest bg-brand-light px-3.5 py-1 rounded-full border border-brand-green/20">
+                    OUR PURPOSE & AMBITION
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">
+                    Driven By Purpose, Guided By Vision
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    At UrbanEdge Real Estate Ltd, our daily decisions and long-term goals are anchored in two clear commitments to our clients and investors.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto">
+                
+                <!-- MISSION CARD -->
+                <div class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-lg hover:shadow-2xl hover:border-brand-green/40 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-brand-light/60 rounded-full blur-2xl group-hover:bg-brand-green/10 transition-all"></div>
+                    
+                    <div>
+                        <div class="w-16 h-16 rounded-2xl bg-brand-green text-brand-gold flex items-center justify-center text-2xl mb-6 shadow-md group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <span class="text-xs font-bold text-brand-gold uppercase tracking-widest block mb-2">Our Foundation</span>
+                        <h3 class="text-2xl font-extrabold text-brand-dark mb-4">OUR MISSION</h3>
+                        <p class="text-slate-600 text-base leading-relaxed">
+                            To provide secure, affordable, and value-driven real estate solutions while delivering exceptional customer satisfaction with integrity and professionalism.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-brand-green">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Integrity & Professionalism First</span>
+                    </div>
+                </div>
+
+                <!-- VISION CARD -->
+                <div class="bg-brand-dark text-white rounded-3xl p-8 sm:p-10 border border-brand-gold/30 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-brand-gold/10 rounded-full blur-2xl group-hover:bg-brand-gold/20 transition-all"></div>
+
+                    <div>
+                        <div class="w-16 h-16 rounded-2xl bg-brand-gold text-brand-dark flex items-center justify-center text-2xl mb-6 shadow-md group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <span class="text-xs font-bold text-brand-gold uppercase tracking-widest block mb-2">Our Destination</span>
+                        <h3 class="text-2xl font-extrabold text-white mb-4">OUR VISION</h3>
+                        <p class="text-emerald-100 text-base leading-relaxed">
+                            To become one of Nigeria's most trusted and innovative real estate companies, empowering people through profitable property investments.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-white/10 flex items-center gap-2 text-xs font-bold text-brand-gold">
+                        <i class="fa-solid fa-star"></i>
+                        <span>Empowering Nigeria's Future</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FULL STORY MODAL -->
+    <div id="storyModal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white text-slate-800 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 p-6 sm:p-10 relative animate-fadeIn">
+            
+            <!-- Close Modal Button -->
+            <button onclick="toggleModal(false)" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 hover:bg-brand-green hover:text-white text-slate-600 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Content Header -->
+            <div class="border-b border-slate-100 pb-4 mb-6">
+                <span class="text-xs font-bold text-brand-green uppercase tracking-widest">Full Company Story</span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-brand-dark mt-1">
+                    OUR STORY: Building Your Tomorrow, Today
+                </h3>
+            </div>
+
+            <!-- Full Narrative Text -->
+            <div class="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+                <p>
+                    After six years of working as realtors and staff in another real estate company, we had the opportunity to witness firsthand some of the challenges and shortcomings within the real estate industry—particularly issues surrounding documentation, land allocation, transparency, and customer service.
+                </p>
+                <p>
+                    We saw clients treated poorly, exposed to fraudulent practices, given inadequate documentation, and, in some cases, left waiting for years without receiving the lands they had paid for.
+                </p>
+                <p>
+                    These experiences opened our eyes to a critical need: <strong>a real estate company built on trust, transparency, accountability, and genuine concern for the people we serve.</strong>
+                </p>
+                <p>
+                    Driven by this vision, a group of like-minded individuals came together to form a partnership with one common goal: to build a real estate community where sellers can confidently bring their properties to the market without fear of being scammed, and where buyers can trust the entire process—from purchase and documentation to allocation and ultimately, wealth creation.
+                </p>
+                <p>
+                    What started as a friendship and a genuine desire to protect and help our families, friends, and communities has grown into <strong>UrbanEdge Real Estate Ltd</strong>—a brand committed to delivering trust, value, transparency, and lasting impact to society.
+                </p>
+                <p class="font-semibold text-brand-dark bg-brand-light p-4 rounded-xl border border-brand-green/20">
+                    Today, our mission goes beyond selling land. We are building confidence, creating opportunities, and helping people achieve their homeownership and wealth-creation dreams through real estate.
+                </p>
+            </div>
+
+            <!-- Modal Action Footer -->
+            <div class="mt-8 pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
+                <span class="text-xs text-brand-muted font-bold">UrbanEdge Real Estate Ltd — CAC Registered</span>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleModal(false)" class="px-5 py-2.5 rounded-full text-slate-600 hover:bg-slate-100 text-xs font-bold uppercase">
+                        Close
+                    </button>
+                    <a href="https://wa.me/2348102601114?text=Hello%20UrbanEdge%20Real%20Estate%2C%20I%20have%20read%20your%20full%20story%20and%20would%20like%20to%20consult%20an%20agent." 
+                       target="_blank" class="px-6 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i> Speak With Us
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FLOATING ACTIONS (WhatsApp & Back-to-Top) -->
+    <div class="fixed right-5 bottom-5 z-40 flex flex-col items-center gap-3">
+        <!-- WhatsApp Floating Button -->
+        <a href="https://wa.me/2348102601114?text=Hello%20UrbanEdge%2C%20I%20want%20to%20inquire%20about%20your%20properties." 
+           target="_blank" rel="noopener noreferrer" 
+           class="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center text-3xl shadow-xl hover:scale-110 hover:-translate-y-1 transition-all duration-300"
+           aria-label="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+
+        <!-- Back to Top Button -->
+        <button id="backToTopBtn" onclick="scrollToTop()" 
+                class="w-12 h-12 rounded-full bg-white text-brand-green border border-brand-green/20 flex items-center justify-center text-lg shadow-xl opacity-0 invisible translate-y-4 hover:bg-brand-green hover:text-white transition-all duration-300"
+                aria-label="Back to Top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <footer class="bg-brand-dark text-slate-400 py-8 border-t border-white/10 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-white tracking-wider">URBANEDGE REAL ESTATE LTD</span>
+                <span>© 2026 All Rights Reserved.</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#story-hero" class="hover:text-brand-gold transition-colors">Our Story</a>
+                <a href="#pillars" class="hover:text-brand-gold transition-colors">Core Pillars</a>
+                <a href="#mission-vision" class="hover:text-brand-gold transition-colors">Mission & Vision</a>
+                <a href="FAQ.html" class="hover:text-brand-gold transition-colors">Client FAQ</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FOR SLIDER, MODAL & FLOATING BUTTONS -->
+    <script>
+        // Story Chapters Data
+        const chapters = [
+            {
+                number: "Chapter 01 of 04",
+                badge: "The Insight",
+                title: "6 Years Observing Real Estate Challenges",
+                text: "After six years of working as realtors and staff in another real estate company, we witnessed firsthand critical shortcomings in the industry—from poor documentation and delayed land allocations to a concerning lack of transparency for clients.",
+                quote: "We saw buyers left waiting for years without receiving the lands they paid for, exposing an urgent need for industry reform."
+            },
+            {
+                number: "Chapter 02 of 04",
+                badge: "The Turning Point",
+                title: "Witnessing Client Injustices",
+                text: "We saw clients treated poorly, exposed to fraudulent practices, given inadequate documentation, and left waiting for years without receiving the lands they had paid for. These experiences opened our eyes to a critical need for an honest approach.",
+                quote: "Real estate must be built on trust, transparency, accountability, and genuine concern for the people we serve."
+            },
+            {
+                number: "Chapter 03 of 04",
+                badge: "The Partnership",
+                title: "A Shared Vision for Reform",
+                text: "Driven by this vision, a group of like-minded individuals came together to form a partnership with one common goal: to build a real estate community where sellers can bring properties without fear of scams, and buyers can trust the entire journey.",
+                quote: "From purchase and documentation to allocation and ultimately, wealth creation, transparency guides every step."
+            },
+            {
+                number: "Chapter 04 of 04",
+                badge: "UrbanEdge Today",
+                title: "Building Your Tomorrow, Today",
+                text: "What started as a friendship and a genuine desire to protect families and communities has grown into UrbanEdge Real Estate Ltd—a brand committed to delivering trust, value, transparency, and lasting societal impact.",
+                quote: "Today, our mission goes beyond selling land. We are building confidence, creating opportunities, and making dreams a reality."
+            }
+        ];
+
+        let currentSlide = 0;
+        let isAutoplay = true;
+        let autoplayTimer = setInterval(nextSlide, 6000);
+
+        function updateSlideContent(index) {
+            const chap = chapters[index];
+            document.getElementById('chapterNumber').textContent = chap.number;
+            document.getElementById('chapterBadge').textContent = chap.badge;
+            document.getElementById('chapterTitle').textContent = chap.title;
+            document.getElementById('chapterText').textContent = chap.text;
+            document.getElementById('chapterQuote').textContent = `"${chap.quote}"`;
+
+            // Update background image opacities
+            const bgSlides = document.querySelectorAll('.slide-bg');
+            bgSlides.forEach((bg, idx) => {
+                if (idx === index) {
+                    bg.classList.remove('opacity-0');
+                    bg.classList.add('opacity-100');
+                } else {
+                    bg.classList.remove('opacity-100');
+                    bg.classList.add('opacity-0');
+                }
+            });
+
+            // Update chapter buttons styling
+            const btnElements = document.querySelectorAll('.chapter-btn');
+            btnElements.forEach((btn, idx) => {
+                const iconBox = btn.querySelector('div');
+                if (idx === index) {
+                    btn.classList.add('active');
+                    iconBox.classList.remove('bg-white/10', 'text-white');
+                    iconBox.classList.add('bg-brand-gold/20', 'text-brand-gold');
+                } else {
+                    btn.classList.remove('active');
+                    iconBox.classList.remove('bg-brand-gold/20', 'text-brand-gold');
+                    iconBox.classList.add('bg-white/10', 'text-white');
+                }
+            });
+
+            // Update progress bar width
+            const progressPercent = ((index + 1) / chapters.length) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % chapters.length;
+            updateSlideContent(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + chapters.length) % chapters.length;
+            updateSlideContent(currentSlide);
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlideContent(currentSlide);
+            resetAutoplay();
+        }
+
+        function toggleAutoplay() {
+            isAutoplay = !isAutoplay;
+            const playIcon = document.getElementById('playIcon');
+            const playStateText = document.getElementById('playStateText');
+
+            if (isAutoplay) {
+                autoplayTimer = setInterval(nextSlide, 6000);
+                playIcon.className = "fa-solid fa-pause text-brand-gold";
+                playStateText.textContent = "Auto-playing Story";
+            } else {
+                clearInterval(autoplayTimer);
+                playIcon.className = "fa-solid fa-play text-brand-gold";
+                playStateText.textContent = "Paused";
+            }
+        }
+
+        function resetAutoplay() {
+            if (isAutoplay) {
+                clearInterval(autoplayTimer);
+                autoplayTimer = setInterval(nextSlide, 6000);
+            }
+        }
+
+        // Modal Functionality
+        function toggleModal(show) {
+            const modal = document.getElementById('storyModal');
+            if (show) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Back to Top and Scroll Visibility
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+                backToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
+                backToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

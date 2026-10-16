@@ -16,6 +16,15 @@
       .print-container { width: 100% !important; max-width: 100% !important; margin: 0 !important; }
       .print-border { border: 2px solid #065f46 !important; box-shadow: none !important; }
     }
+
+    #receiptContainer,
+    #receiptContainer * {
+      box-sizing: border-box;
+    }
+
+    #receiptContainer tr {
+      break-inside: avoid;
+    }
   </style>
 </head>
 <body class="bg-slate-100 min-h-screen font-sans pb-12">
@@ -400,19 +409,41 @@
     }
 
     // DOWNLOAD RECEIPT AS PDF FILE
-    function downloadPDF() {
+    async function downloadPDF() {
       const element = document.getElementById('receiptContainer');
-      const trackId = document.getElementById('inTrackId').value.trim() || 'TRK-RECEIPT';
+      if (typeof html2pdf !== 'function') {
+        alert('The PDF download library could not be loaded. Please refresh the page and try again.');
+        return;
+      }
+
+      updateReceipt();
+      const trackId = document.getElementById('inTrackId').value.trim().replace(/[^a-zA-Z0-9_-]/g, '-') || 'TRK-RECEIPT';
       
       const opt = {
-        margin:       0.2,
+        margin:       [0.2, 0.2, 0.2, 0.2],
         filename:     `UrbanEdge-Receipt-${trackId}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        html2canvas:  {
+          scale: 2,
+          useCORS: true,
+          onclone: (pdfDocument) => {
+            const receipt = pdfDocument.getElementById('receiptContainer');
+            if (receipt) {
+              receipt.style.overflow = 'visible';
+              receipt.style.height = 'auto';
+            }
+          }
+        },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['css', 'legacy'], avoid: ['tr'] }
       };
 
-      html2pdf().set(opt).from(element).save();
+      try {
+        await html2pdf().set(opt).from(element).save();
+      } catch (error) {
+        console.error('Receipt PDF download failed:', error);
+        alert('The receipt PDF could not be generated. Please try again.');
+      }
     }
 
     // SHARE RECEIPT SUMMARY VIA WHATSAPP

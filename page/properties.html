@@ -10,7 +10,7 @@
 
     <style>
         /* =====================================================
-           ROOT & BASE
+            ROOT & BASE
         ====================================================== */
         :root {
             --green: #005a2b;
@@ -52,7 +52,7 @@
         }
 
         /* =====================================================
-           HEADER
+            HEADER
         ====================================================== */
         header {
             position: sticky;
@@ -117,7 +117,7 @@
         }
 
         .logo-registration {
-            color: var(--text-muted);
+            color: var(--muted);
             font-size: 10px;
             font-weight: 600;
             white-space: nowrap;
@@ -186,7 +186,7 @@
         }
 
         /* =====================================================
-           APP CONTAINER & SIDEBAR
+            APP CONTAINER & SIDEBAR
         ====================================================== */
         .app-container {
             display: flex;
@@ -228,8 +228,13 @@
             text-align: center;
         }
 
+        .sidebar-link.active {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
         /* =====================================================
-           MAIN CONTENT
+            MAIN CONTENT
         ====================================================== */
         main {
             flex: 1;
@@ -262,7 +267,7 @@
         }
 
         /* =====================================================
-           FILTER CHIPS
+            FILTER CHIPS
         ====================================================== */
         .filter-chips {
             display: flex;
@@ -298,7 +303,7 @@
         }
 
         /* =====================================================
-           PROPERTY GRID & CARDS
+            PROPERTY GRID & CARDS
         ====================================================== */
         .grid {
             display: grid;
@@ -439,7 +444,126 @@
         }
 
         /* =====================================================
-           FOOTER & FLOATING ACTIONS
+            POPUP FLYER MODAL STYLES
+        ====================================================== */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .popup-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background: white;
+            width: 100%;
+            max-width: 440px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: scale(0.85) translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .popup-overlay.show .popup-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .popup-close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: background 0.2s;
+        }
+
+        .popup-close-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .popup-image-box {
+            width: 100%;
+            height: 240px;
+            background: #eeeeee;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .popup-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .popup-body {
+            padding: 20px;
+        }
+
+        .popup-header-tag {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--green);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .popup-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .popup-actions a {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .popup-whatsapp {
+            background: #25D366;
+        }
+
+        .popup-details-btn {
+            background: var(--green);
+        }
+
+        /* =====================================================
+            FOOTER & FLOATING ACTIONS
         ====================================================== */
         footer {
             background: var(--green-dark);
@@ -517,7 +641,7 @@
         }
 
         /* =====================================================
-           RESPONSIVE MOBILE STYLES
+            RESPONSIVE MOBILE STYLES
         ====================================================== */
         @media (max-width: 768px) {
             header {
@@ -697,6 +821,7 @@
                 <button class="chip" type="button" data-filter="Ukwulu">Ukwulu</button>
                 <button class="chip" type="button" data-filter="Mgbakwu">Mgbakwu</button>
                 <button class="chip" type="button" data-filter="under5">Under ₦5M</button>
+                <button class="chip" type="button" data-filter="Ifite">Ifite-Ogwari</button>
             </div>
 
             <div class="grid" id="productGrid"></div>
@@ -720,11 +845,43 @@
         </button>
     </div>
 
+    <!-- 3-SECOND POPUP MODAL (IFITE-OGWARI PROMO) -->
+    <div id="ifitePopupOverlay" class="popup-overlay" onclick="closeIfitePopup(event)">
+        <div class="popup-content" onclick="event.stopPropagation()">
+            <button class="popup-close-btn" onclick="closeIfitePopup()" aria-label="Close popup">&times;</button>
+            
+            <div class="popup-image-box">
+                <span class="promo-badge">Hot Deal</span>
+                <span class="price-badge">₦1.2M</span>
+                <img src="../infor/ifte.png" alt="Saraka Farm Land" onerror="this.src='https://via.placeholder.com/440x240?text=Property+Image'">
+            </div>
+
+            <div class="popup-body">
+                <div class="popup-header-tag">Featured Special Offer</div>
+                <h3 class="card-title" style="font-size: 18px;">Saraka Farm Land</h3>
+                <div class="card-location" style="margin-bottom: 8px;"><i class="fa-solid fa-location-dot"></i> Ifite, Ogwari, Ayamelum, Anambra State</div>
+                <div class="card-meta" style="margin-bottom: 12px;">
+                    <span><i class="fa-solid fa-file-contract"></i> Deed of Assignment & Reg. Survey</span>
+                </div>
+                <p style="font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 15px;">
+                    Secure fertile agricultural plots with verified titles. Ideal for large-scale farming and high-yield investments.
+                </p>
+
+                <div class="popup-actions">
+                    <a href="location.html?id=Ifite-Ogwai" class="popup-details-btn">View Map & Details</a>
+                    <a href="https://wa.me/2349011157594?text=Hello%20Urbanegdge%20Real%20Estate,%20I%20saw%20the%20popup%20for%20Saraka%20Farm%20Land%20(Ifite-Ogwari).%20Please%20send%20me%20more%20details." target="_blank" class="popup-whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> Chat Agent
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
     document.addEventListener("DOMContentLoaded", function () {
 
         /* =================================================
-           ELEMENTS
+            ELEMENTS
         ================================================== */
         const gridContainer = document.getElementById("productGrid");
         const searchInput = document.getElementById("searchInput");
@@ -737,7 +894,7 @@
         const inspectionLink = document.getElementById("inspectionLink");
 
         /* =================================================
-           PROPERTY DATA
+            PROPERTY DATA
         ================================================== */
         const listings = [
             {
@@ -750,7 +907,7 @@
                 image: "../infor/p1.jpeg",
                 doc: "Deed of Assignment & Reg. Survey",
                 detailUrl: "location.html?id=ifeadigo"
-                        },
+            },
             {
                 id: "urban-residence",
                 title: "Urban Residence Prime Land",
@@ -776,7 +933,7 @@
             {
                 id: "urban garden",
                 title: "Urban Business Investment Plots",
-                location: "📍 Igbariam, Anambra State",
+                location: "Igbariam, Anambra State",
                 price: "₦5.5M",
                 numericPrice: 5500000,
                 promo: "Student Area",
@@ -809,20 +966,31 @@
             {
                 id: "urban_haven",
                 title: "New Haven",
-                location: "Mgbakwu  Anambra State ",
-                price: "₦1.8M",
-                numericPrice: 3800000,
+                location: "Mgbakwu Anambra State",
+                price: "₦3.0M",
+                numericPrice: 3000000,
                 promo: "Hot Deal",
                 image: "../infor/p3.jpeg",
                 doc: "Deed of Assignment & Reg. Survey",
                 detailUrl: "location.html?id=urban_haven"
+            },
+            {
+                id: "Ifite-Ogwai",
+                title: "Saraka Farm Land",
+                location: "Ifite, Ogwari, Ayamelum, Anambra State",
+                price: "₦1.2M",
+                numericPrice: 1200000,
+                promo: "Hot Deal",
+                image: "../infor/ifte.png",
+                doc: "Deed of Assignment & Reg. Survey",
+                detailUrl: "location.html?id=Ifite-Ogwai"
             }
         ];
 
         let activeFilter = "all";
 
         /* =================================================
-           RENDER CARDS
+            RENDER CARDS
         ================================================== */
         function renderListings(items) {
             gridContainer.innerHTML = "";
@@ -866,24 +1034,43 @@
         }
 
         /* =================================================
-           SEARCH & FILTERS
+            IMPROVED SEARCH & FILTERS ENGINE
         ================================================== */
+        function debounce(func, delay = 200) {
+            let timeoutId;
+            return function (...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        function normalizeStr(str) {
+            return (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        }
+
         function filterListings() {
-            const query = searchInput.value.toLowerCase().trim();
+            const query = normalizeStr(searchInput.value);
 
             const filtered = listings.filter(item => {
                 let matchesFilter = false;
+                const normalizedLocation = normalizeStr(item.location);
+                const normalizedFilter = normalizeStr(activeFilter);
+
                 if (activeFilter === "all") {
                     matchesFilter = true;
                 } else if (activeFilter === "under5") {
                     matchesFilter = item.numericPrice > 0 && item.numericPrice < 5000000;
                 } else {
-                    matchesFilter = item.location.toLowerCase().includes(activeFilter.toLowerCase());
+                    const primaryKeyword = activeFilter.split('-')[0].toLowerCase();
+                    matchesFilter = normalizedLocation.includes(normalizedFilter) || 
+                                    normalizedLocation.includes(normalizeStr(primaryKeyword));
                 }
 
-                const matchesSearch = item.title.toLowerCase().includes(query) || 
-                                      item.location.toLowerCase().includes(query) ||
-                                      item.doc.toLowerCase().includes(query);
+                const matchesSearch = !query || 
+                    normalizeStr(item.title).includes(query) || 
+                    normalizedLocation.includes(query) || 
+                    normalizeStr(item.doc).includes(query) ||
+                    normalizeStr(item.price).includes(query);
 
                 return matchesFilter && matchesSearch;
             });
@@ -900,7 +1087,7 @@
             });
         });
 
-        searchInput.addEventListener("input", filterListings);
+        searchInput.addEventListener("input", debounce(filterListings, 200));
 
         searchForm.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -908,11 +1095,10 @@
         });
 
         /* =================================================
-           SIDEBAR TOGGLE (DIRECT & CLEAN)
+            SIDEBAR TOGGLE
         ================================================== */
         menuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-
             const isHidden = window.getComputedStyle(sidebar).display === 'none';
 
             if (isHidden) {
@@ -925,7 +1111,7 @@
         });
 
         /* =================================================
-           SCROLL & OTHER ACTIONS
+            SCROLL & OTHER ACTIONS
         ================================================== */
         window.addEventListener("scroll", function () {
             if (window.scrollY > 300) {
@@ -950,10 +1136,26 @@
         }
 
         /* =================================================
-           INITIALIZE
+            INITIALIZE & POPUP TIMER
         ================================================== */
         renderListings(listings);
+
+        // Trigger Ifite-Ogwari modal popup after 3 seconds
+        setTimeout(() => {
+            const overlay = document.getElementById("ifitePopupOverlay");
+            if (overlay) {
+                overlay.classList.add("show");
+            }
+        }, 3000);
     });
+
+    // Global helper functions for popup modal closing
+    function closeIfitePopup(event) {
+        if (!event || event.target.id === 'ifitePopupOverlay' || event.target.classList.contains('popup-close-btn')) {
+            const overlay = document.getElementById('ifitePopupOverlay');
+            if (overlay) overlay.classList.remove('show');
+        }
+    }
     </script>
 </body>
 </html>

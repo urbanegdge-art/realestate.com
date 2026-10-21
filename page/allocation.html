@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allocation Letter Generator | Urban Edge Real Estate Ltd.</title>
+    
+    <!-- CDNs for Icons, PDF Generation, QR Code, and Signature Canvas -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+    <style>
+        :root {
+            --brand-green: #005a2b;
+            --brand-dark: #003d1e;
+            --brand-gold: #d4af37;
+            --bg-gray: #f1f5f9;
+            --border-color: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-gray);
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* TOOLBAR / HEADER */
+        .app-header {
+            background: var(--brand-dark);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-info h1 {
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-info span {
+            font-size: 0.8rem;
+            background: var(--brand-green);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-print { background: #0284c7; color: white; }
+        .btn-pdf { background: #dc2626; color: white; }
+        .btn-whatsapp { background: #25D366; color: white; }
+        .btn-email { background: #ea580c; color: white; }
+        .btn-share { background: #8b5cf6; color: white; }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* MAIN APP LAYOUT */
+        .app-layout {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 2rem;
+            max-width: 1600px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* EDITOR PANEL */
+        .editor-panel {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+            border: 1px solid var(--border-color);
+        }
+
+        .editor-panel h2 {
+            font-size: 1.1rem;
+            color: var(--brand-dark);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--brand-green);
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 0.3rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--brand-green);
+        }
+
+        .sig-canvas-box {
+            border: 1px dashed var(--border-color);
+            border-radius: 6px;
+            background: #f8fafc;
+            margin-top: 5px;
+        }
+
+        /* DOCUMENT PREVIEW CONTAINER */
+        .preview-panel {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* LETTERHEAD PRINT AREA */
+        .letter-paper {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            padding: 22mm 20mm;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        /* WATERMARK BACKGROUND */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .letter-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* HEADER BRANDING */
+        .letter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px double var(--brand-green);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .header-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-logo {
+            width: 75px;
+            height: auto;
+        }
+
+        .header-titles h1 {
+            font-size: 1.4rem;
+            color: var(--brand-green);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .header-titles p {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .reg-badge-box {
+            text-align: right;
+        }
+
+        .reg-badge-box .badge {
+            background: var(--brand-green);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 0.75rem;
+        }
+
+        .reg-badge-box p {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        /* LETTER BODY */
+        .doc-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .client-salutation {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #0f172a;
+        }
+
+        .doc-title {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--brand-green);
+            text-decoration: underline;
+            margin: 20px 0;
+            letter-spacing: 0.5px;
+        }
+
+        /* ALLOCATION DATA TABLE */
+        .allocation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .allocation-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        .allocation-table td.label {
+            font-weight: 700;
+            color: #475569;
+            width: 35%;
+        }
+
+        .allocation-table td.value {
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        /* NOTICE BOX */
+        .notice-box {
+            background: #f0fdf4;
+            border-left: 4px solid var(--brand-green);
+            padding: 12px 16px;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: #166534;
+            margin: 20px 0;
+        }
+
+        .body-paragraphs p {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: #334155;
+        }
+
+        /* SIGNATURE & STAMP SECTION */
+        .signatures-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 35px;
+            position: relative;
+        }
+
+        .sig-block {
+            text-align: center;
+            width: 45%;
+            position: relative;
+        }
+
+        .sig-image {
+            height: 55px;
+            object-fit: contain;
+            margin-bottom: -10px;
+        }
+
+        .sig-line {
+            border-top: 1.5px dashed #94a3b8;
+            padding-top: 6px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: #0f172a;
+        }
+
+        .sig-role {
+            font-size: 0.72rem;
+            color: #64748b;
+            font-weight: 700;
+        }
+
+        /* OFFICIAL STAMP SEAL */
+        .stamp-seal {
+            position: absolute;
+            top: -25px;
+            right: 15px;
+            width: 110px;
+            height: 110px;
+            border: 3px double var(--brand-green);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-green);
+            transform: rotate(-12deg);
+            opacity: 0.85;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: inset 0 0 0 2px var(--brand-green);
+        }
+
+        .stamp-seal .stamp-top { font-size: 0.55rem; font-weight: 800; letter-spacing: 0.5px; }
+        .stamp-seal .stamp-center { font-size: 0.7rem; font-weight: 900; margin: 2px 0; }
+        .stamp-seal .stamp-bottom { font-size: 0.5rem; font-weight: 700; }
+
+        /* FOOTER & BARCODE */
+        .letter-footer {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .footer-info {
+            font-size: 0.68rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        .barcode-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #qrcode img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .barcode-caption {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: #475569;
+            margin-top: 2px;
+        }
+
+        /* PRINT MEDIA STYLES */
+        @media print {
+            body { background: white; }
+            .app-header, .editor-panel { display: none !important; }
+            .app-layout { display: block; margin: 0; padding: 0; }
+            .letter-paper { box-shadow: none; border: none; width: 100%; min-height: 100vh; padding: 15mm 15mm; }
+        }
+
+        @media (max-width: 992px) {
+            .app-layout { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- APP HEADER TOOLBAR -->
+    <header class="app-header">
+        <div class="brand-info">
+            <h1>URBAN EDGE REAL ESTATE LTD.</h1>
+            <span>Allocations Admin</span>
+        </div>
+        <div class="action-bar">
+            <button class="btn btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+            <button class="btn btn-pdf" onclick="downloadPDF()"><i class="fa-solid fa-file-pdf"></i> Download PDF</button>
+            <button class="btn btn-whatsapp" onclick="shareWhatsApp()"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+            <button class="btn btn-email" onclick="shareEmail()"><i class="fa-solid fa-envelope"></i> Email</button>
+            <button class="btn btn-share" onclick="shareNative()"><i class="fa-solid fa-share-nodes"></i> Share</button>
+        </div>
+    </header>
+
+    <!-- MAIN EDITABLE LAYOUT -->
+    <div class="app-layout">
+
+        <!-- LEFT PANEL: EDITABLE INPUTS -->
+        <div class="editor-panel">
+            <h2><i class="fa-solid fa-pen-to-square"></i> Allocation Details</h2>
+            
+            <div class="form-group">
+                <label>Ref / Allocation Reg No:</label>
+                <input type="text" id="inRefNo" value="UE/ALO/2026/089" oninput="updateDocument()">
+            </div>
+
+            <div class="form-group">
+                <label>Issue Date:</label>
+                <input type="text" id="inIssueDate" value="30TH JULY 2026" oninput="updateDocument()">
+            </div>
+
+            <div class="form-group">
+                <label>Client Full Name:</label>
+                <input type="text" id="inClientName" value="ORJI CHIBUZOR ROLAND" oninput="updateDocument()">
+            </div>
+
+            <div class="form-group">
+                <label>Estate Name & Location:</label>
+                <input type="text" id="inEstateName" value="WONDERFUL ESTATE, ISIAGU" oninput="updateDocument()">
+            </div>
+
+            <div class="form-group">
+                <label>Number of Plots:</label>
+                <input type="text" id="inPlotCount" value="ONE (1)" oninput="updateDocument()">
+            </div>
+
+            <div class="form-group">
+                <label>Plot Type:</label>
+                <select id="inPlotType" onchange="updateDocument()">
+                    <option value="RESIDENTIAL" selected>RESIDENTIAL</option>
+                    <option value="COMMERCIAL">COMMERCIAL</option>
+                    <option value="AGRICULTURAL">AGRICULTURAL</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Plot Size:</label>
+                <input type="text" id="inPlotSize" value="464SQM EACH" oninput="updateDocument()">
+            </div>
+
+            <div class="form-group">
+                <label>Block & Plot Number Details:</label>
+                <input type="text" id="inPlotDetails" value="BLOCK B PLOT 5" oninput="updateDocument()">
+            </div>
+
+            <div class="form-group">
+                <label>Date of Allocation:</label>
+                <input type="text" id="inAllocDate" value="30TH AUGUST 2026" oninput="updateDocument()">
+            </div>
+
+            <h2 style="margin-top: 1.5rem;"><i class="fa-solid fa-signature"></i> Signatures</h2>
+
+            <div class="form-group">
+                <label>Admin/Secretary Name:</label>
+                <input type="text" id="inAdminName" value=" Nwite Nkechi Favour" oninput="updateDocument()">
+            </div>
+
+            <div class="form-group">
+                <label>Draw Admin Signature:</label>
+                <div class="sig-canvas-box">
+                    <canvas id="sigCanvas" width="320" height="90"></canvas>
+                </div>
+                <button type="button" style="margin-top:4px; font-size:0.75rem; padding:3px 8px; cursor:pointer;" onclick="clearAdminSig()">Clear Signature</button>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: REAL TIME PRINTABLE PREVIEW -->
+        <div class="preview-panel">
+            <div class="letter-paper" id="printableArea">
+                
+                <!-- BACKGROUND WATERMARK LOGO -->
+                <img src="../infor/logo 2.png" class="watermark" alt="Watermark Logo">
+
+                <div class="letter-content">
+                    
+                    <!-- HEADER -->
+                    <div class="letter-header">
+                        <div class="header-logo-container">
+                            <img src="../infor/logo 2.png" alt="Urban Edge Logo" class="header-logo">
+                            <div class="header-titles">
+                                <h1>URBAN EDGE REAL ESTATE LTD.</h1>
+                                <p>TRANSPARENCY • TRUST • PROFESSIONALISM</p>
+                            </div>
+                        </div>
+                        <div class="reg-badge-box">
+                            <span class="badge">Reg: 9389918</span>
+                            <p id="outRefNoText">UE/ALO/2026/089</p>
+                        </div>
+                    </div>
+
+                    <!-- META -->
+                    <div class="doc-meta">
+                        <div>DATE: <span id="outIssueDate">30TH JULY 2026</span></div>
+                    </div>
+
+                    <div class="client-salutation">
+                        DEAR <span id="outClientName">ORJI CHIBUZOR ROLAND</span>,
+                    </div>
+
+                    <div class="doc-title">PHYSICAL ALLOCATION NOTIFICATION</div>
+
+                    <p style="font-size:0.88rem; margin-bottom:10px;">You are hereby notified of your allocation as follows:</p>
+
+                    <!-- ALLOCATION TABLE -->
+                    <table class="allocation-table">
+                        <tr>
+                            <td class="label">Estate Name:</td>
+                            <td class="value" id="outEstateName">WONDERFUL ESTATE, ISIAGU</td>
+                        </tr>
+                        <tr>
+                            <td class="label">No of Plots:</td>
+                            <td class="value" id="outPlotCount">ONE (1)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Type of Plot:</td>
+                            <td class="value" id="outPlotType">RESIDENTIAL</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Size:</td>
+                            <td class="value" id="outPlotSize">464SQM EACH</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Plot Details:</td>
+                            <td class="value" id="outPlotDetails">BLOCK B PLOT 5</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Date of Allocation:</td>
+                            <td class="value" id="outAllocDate">30TH AUGUST 2026</td>
+                        </tr>
+                    </table>
+
+                    <!-- NOTE BOX -->
+                    <div class="notice-box">
+                        <strong>NB:</strong> This letter is <strong>ONLY</strong> authenticated upon the receipt of your survey plan, Payment of your Deed of Assignment and payment of your development fees respectively for your subscribed Plot(s).
+                    </div>
+
+                    <!-- BODY PARAGRAPHS -->
+                    <div class="body-paragraphs">
+                        <p>Subsequently, you are responsible for the clearing of your land after allocation if you have not started building. However, we want to encourage you to start building so that the development of the estate will be fast.</p>
+                        <p>Take note that we have free building plans that can help you with your building at market friendly prices. Kindly get back to our Customer Service department for how to start your building.</p>
+                        <p>Thank you for choosing <strong>URBAN EDGE REAL ESTATE LTD.</strong></p>
+                    </div>
+
+                    <!-- SIGNATURES & STAMP SEAL -->
+                    <div class="signatures-container">
+                        
+                        <!-- ADMIN / SECRETARY -->
+                        <div class="sig-block">
+                            <img id="outAdminSigImg" class="sig-image" style="display:none;" alt="Admin Signature">
+                            <div class="sig-line" id="outAdminName"> Nwite Nkechi Favour</div>
+                            <div class="sig-role">SECRETARY / ADMIN</div>
+                        </div>
+
+                        <!-- CHAIRMAN SIGNATURE & STAMP -->
+                        <div class="sig-block">
+                            <!-- CHAIRMAN PRE-LOADED SIGNATURE -->
+                            <img src="../signature.png" class="sig-image" alt="Chairman Signature">
+                            <div class="sig-line">EGBUNIKE FRANCISCA</div>
+                            <div class="sig-role">HOD, ADMIN / CHAIRMAN</div>
+
+                            <!-- DYNAMIC STAMP SEAL -->
+                            <div class="stamp-seal">
+                                <span class="stamp-top">URBAN EDGE REAL ESTATE</span>
+                                <span class="stamp-center">★ VERIFIED ★</span>
+                                <span class="stamp-bottom">ALLOCATED SEAL</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- FOOTER & QR CODE BARCODE -->
+                <div class="letter-footer">
+                    <div class="footer-info">
+                        <strong>Urban Edge Real Estate Ltd.</strong> (Reg: 9389918)<br>
+                        Head Office: Awka, Anambra State • Contact: +234 901 115 7594<br>
+                        Official Allocation Document • Scan QR for authenticity verification
+                    </div>
+
+                    <div class="barcode-box">
+                        <div id="qrcode"></div>
+                        <span class="barcode-caption">Scan To Verify</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        let signaturePad;
+        let qrCodeObj;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize Canvas Signature Pad
+            const canvas = document.getElementById('sigCanvas');
+            signaturePad = new SignaturePad(canvas, {
+                penColor: 'rgb(0, 55, 120)'
+            });
+
+            signaturePad.addEventListener("afterUpdateStroke", () => {
+                const dataUrl = signaturePad.toDataURL();
+                const sigImg = document.getElementById('outAdminSigImg');
+                sigImg.src = dataUrl;
+                sigImg.style.display = 'inline-block';
+            });
+
+            // Initialize Dynamic QR Code
+            qrCodeObj = new QRCode(document.getElementById("qrcode"), {
+                width: 60,
+                height: 60,
+                colorDark : "#005a2b",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            updateDocument();
+        });
+
+        function clearAdminSig() {
+            signaturePad.clear();
+            const sigImg = document.getElementById('outAdminSigImg');
+            sigImg.style.display = 'none';
+        }
+
+        // UPDATE DOCUMENT IN REAL TIME
+        function updateDocument() {
+            const refNo = document.getElementById("inRefNo").value;
+            const issueDate = document.getElementById("inIssueDate").value;
+            const clientName = document.getElementById("inClientName").value;
+            const estateName = document.getElementById("inEstateName").value;
+            const plotCount = document.getElementById("inPlotCount").value;
+            const plotType = document.getElementById("inPlotType").value;
+            const plotSize = document.getElementById("inPlotSize").value;
+            const plotDetails = document.getElementById("inPlotDetails").value;
+            const allocDate = document.getElementById("inAllocDate").value;
+            const adminName = document.getElementById("inAdminName").value;
+
+            // Update Text Elements
+            document.getElementById("outRefNoText").innerText = refNo;
+            document.getElementById("outIssueDate").innerText = issueDate;
+            document.getElementById("outClientName").innerText = clientName;
+            document.getElementById("outEstateName").innerText = estateName;
+            document.getElementById("outPlotCount").innerText = plotCount;
+            document.getElementById("outPlotType").innerText = plotType;
+            document.getElementById("outPlotSize").innerText = plotSize;
+            document.getElementById("outPlotDetails").innerText = plotDetails;
+            document.getElementById("outAllocDate").innerText = allocDate;
+            document.getElementById("outAdminName").innerText = adminName;
+
+            // Update QR Code Content (Encodes Ref No & Client Name)
+            const qrText = `ALLOCATION VERIFIED\nRef: ${refNo}\nClient: ${clientName}\nEstate: ${estateName}\nPlot: ${plotDetails}`;
+            qrCodeObj.clear();
+            qrCodeObj.makeCode(qrText);
+        }
+
+        // DOWNLOAD HIGH-QUALITY PDF
+        function downloadPDF() {
+            const element = document.getElementById('printableArea');
+            const clientName = document.getElementById("inClientName").value || 'Client';
+            
+            const opt = {
+                margin:       0,
+                filename:     `Allocation_Letter_${clientName.replace(/\s+/g, '_')}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+
+        // WHATSAPP SHARE
+        function shareWhatsApp() {
+            const clientName = document.getElementById("inClientName").value;
+            const estateName = document.getElementById("inEstateName").value;
+            const refNo = document.getElementById("inRefNo").value;
+            
+            const text = encodeURIComponent(`Hello ${clientName},\n\nYour Physical Allocation Notification Letter from Urban Edge Real Estate Ltd. is ready!\n\nRef No: ${refNo}\nEstate: ${estateName}\n\nPlease contact us for further details.`);
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        // EMAIL SHARE
+        function shareEmail() {
+            const clientName = document.getElementById("inClientName").value;
+            const estateName = document.getElementById("inEstateName").value;
+            const refNo = document.getElementById("inRefNo").value;
+
+            const subject = encodeURIComponent(`Physical Allocation Notification - Urban Edge Real Estate (${clientName})`);
+            const body = encodeURIComponent(`Dear ${clientName},\n\nPlease find the details of your physical allocation letter below:\n\nReference Number: ${refNo}\nEstate: ${estateName}\n\nBest Regards,\nUrban Edge Real Estate Ltd.`);
+            
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+
+        // NATIVE WEB SHARE
+        async function shareNative() {
+            const clientName = document.getElementById("inClientName").value;
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Allocation Letter - Urban Edge Real Estate',
+                        text: `Physical Allocation Notification for ${clientName}`,
+                        url: window.location.href
+                    });
+                } catch (err) {
+                    console.log('Error sharing:', err);
+                }
+            } else {
+                alert('Web Share API is not supported on this device. Use WhatsApp or Email options.');
+            }
+        }
+    </script>
+</body>
+</html>

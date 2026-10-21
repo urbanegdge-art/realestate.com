@@ -1,0 +1,1294 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Matriculation Portal | Welcome</title>
+
+
+
+<style>
+
+:root {
+
+  --green: #08783e;
+
+  --dark-green: #064d2b;
+
+  --light-green: #e9f7ee;
+
+  --white: #ffffff;
+
+  --text: #183526;
+
+  --muted: #718078;
+
+}
+
+
+
+* {
+
+  box-sizing: border-box;
+
+  margin: 0;
+
+  padding: 0;
+
+}
+
+
+
+body {
+
+  min-height: 100vh;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+
+  background: linear-gradient(135deg, #f5fff8, #dcefe3);
+
+  color: var(--text);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 24px;
+
+  overflow-x: hidden;
+
+}
+
+
+
+.background-circle {
+
+  position: fixed;
+
+  width: 350px;
+
+  height: 350px;
+
+  border-radius: 50%;
+
+  background: rgba(8, 120, 62, 0.08);
+
+  filter: blur(3px);
+
+  z-index: -1;
+
+}
+
+
+
+.circle-one {
+
+  top: -130px;
+
+  left: -100px;
+
+}
+
+
+
+.circle-two {
+
+  bottom: -170px;
+
+  right: -100px;
+
+}
+
+
+
+.portal {
+
+  width: 100%;
+
+  max-width: 460px;
+
+  background: var(--white);
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  box-shadow: 0 24px 70px rgba(6, 77, 43, 0.14);
+
+  animation: appear 0.7s ease;
+
+}
+
+
+
+.header {
+
+  background: linear-gradient(135deg, var(--dark-green), var(--green));
+
+  padding: 32px 28px;
+
+  text-align: center;
+
+  color: white;
+
+}
+
+
+
+.logo {
+
+  width: 88px;
+
+  height: 88px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  display: grid;
+
+  place-items: center;
+
+  margin: 0 auto 18px;
+
+  border: 3px solid rgba(255,255,255,.6);
+
+  overflow: hidden;
+
+}
+
+
+
+/* REPLACE THIS IMAGE SOURCE WITH YOUR COMPANY LOGO */
+
+.logo img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: contain;
+
+}
+
+
+
+.header h1 {
+
+  font-size: 25px;
+
+  margin-bottom: 8px;
+
+  letter-spacing: 0.3px;
+
+}
+
+
+
+.header p {
+
+  font-size: 13px;
+
+  color: #d9f3e2;
+
+  line-height: 1.6;
+
+}
+
+
+
+.content {
+
+  padding: 32px 30px;
+
+}
+
+
+
+.page {
+
+  display: none;
+
+}
+
+
+
+.page.active {
+
+  display: block;
+
+  animation: slideIn 0.4s ease;
+
+}
+
+
+
+.section-title {
+
+  font-size: 23px;
+
+  margin-bottom: 8px;
+
+  color: var(--dark-green);
+
+}
+
+
+
+.description {
+
+  color: var(--muted);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  margin-bottom: 25px;
+
+}
+
+
+
+.field {
+
+  margin-bottom: 19px;
+
+}
+
+
+
+.field label {
+
+  display: block;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  margin-bottom: 9px;
+
+}
+
+
+
+.input-wrap {
+
+  position: relative;
+
+}
+
+
+
+.input-wrap input {
+
+  width: 100%;
+
+  padding: 15px 45px 15px 15px;
+
+  border: 1px solid #dce7df;
+
+  border-radius: 11px;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: .25s;
+
+  background: #fbfdfb;
+
+  color: var(--text);
+
+}
+
+
+
+.input-wrap input:focus {
+
+  border-color: var(--green);
+
+  box-shadow: 0 0 0 4px rgba(8,120,62,.08);
+
+  background: white;
+
+}
+
+
+
+.field-icon {
+
+  position: absolute;
+
+  right: 15px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: var(--green);
+
+  font-size: 17px;
+
+  pointer-events: none;
+
+}
+
+
+
+.toggle-password {
+
+  position: absolute;
+
+  right: 13px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  background: none;
+
+  border: none;
+
+  cursor: pointer;
+
+  color: var(--green);
+
+  font-size: 12px;
+
+  font-weight: bold;
+
+}
+
+
+
+.input-wrap:has(.toggle-password) input {
+
+  padding-right: 58px;
+
+}
+
+
+
+.primary-btn {
+
+  width: 100%;
+
+  padding: 16px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background: linear-gradient(135deg, var(--green), var(--dark-green));
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: transform .2s, box-shadow .2s;
+
+  box-shadow: 0 8px 18px rgba(8,120,62,.17);
+
+}
+
+
+
+.primary-btn:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 12px 24px rgba(8,120,62,.25);
+
+}
+
+
+
+.primary-btn:disabled {
+
+  opacity: .7;
+
+  cursor: wait;
+
+}
+
+
+
+.notice {
+
+  padding: 13px;
+
+  margin-top: 17px;
+
+  border-radius: 9px;
+
+  background: var(--light-green);
+
+  color: var(--dark-green);
+
+  font-size: 12px;
+
+  text-align: center;
+
+  line-height: 1.7;
+
+}
+
+
+
+.footer {
+
+  border-top: 1px solid #edf2ee;
+
+  padding: 17px;
+
+  text-align: center;
+
+  font-size: 11px;
+
+  color: var(--muted);
+
+}
+
+
+
+.secure {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  font-size: 12px;
+
+  color: var(--green);
+
+  margin-top: 18px;
+
+}
+
+
+
+/* LOADING OVERLAY */
+
+.loading-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(255,255,255,.97);
+
+  z-index: 10;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  padding: 24px;
+
+}
+
+
+
+.loading-overlay.show {
+
+  display: flex;
+
+  animation: appear .3s ease;
+
+}
+
+
+
+.spinner {
+
+  width: 75px;
+
+  height: 75px;
+
+  border: 6px solid #d9f0e1;
+
+  border-top-color: var(--green);
+
+  border-right-color: var(--green);
+
+  border-radius: 50%;
+
+  animation: spin .8s linear infinite;
+
+  margin-bottom: 25px;
+
+}
+
+
+
+.loading-overlay h2 {
+
+  color: var(--dark-green);
+
+  font-size: 23px;
+
+  margin-bottom: 10px;
+
+  text-align: center;
+
+}
+
+
+
+.loading-overlay p {
+
+  color: var(--muted);
+
+  font-size: 14px;
+
+  text-align: center;
+
+}
+
+
+
+.loading-bar {
+
+  width: 220px;
+
+  max-width: 80%;
+
+  height: 5px;
+
+  background: #dcefe3;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  margin-top: 23px;
+
+}
+
+
+
+.loading-bar span {
+
+  display: block;
+
+  width: 45%;
+
+  height: 100%;
+
+  background: var(--green);
+
+  animation: progress 1.2s ease-in-out infinite alternate;
+
+}
+
+
+
+@keyframes spin {
+
+  to { transform: rotate(360deg); }
+
+}
+
+
+
+@keyframes progress {
+
+  from { transform: translateX(-10%); }
+
+  to { transform: translateX(140%); }
+
+}
+
+
+
+@keyframes appear {
+
+  from { opacity: 0; transform: translateY(12px); }
+
+  to { opacity: 1; transform: translateY(0); }
+
+}
+
+
+
+@keyframes slideIn {
+
+  from { opacity: 0; transform: translateX(12px); }
+
+  to { opacity: 1; transform: translateX(0); }
+
+}
+
+
+
+@media(max-width: 480px) {
+
+  body { padding: 12px; }
+
+  .portal { border-radius: 19px; }
+
+  .header { padding: 27px 18px; }
+
+  .content { padding: 27px 20px; }
+
+  .header h1 { font-size: 22px; }
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="background-circle circle-one"></div>
+
+<div class="background-circle circle-two"></div>
+
+
+
+<main class="portal">
+
+
+
+  <header class="header">
+
+    <div class="logo">
+
+      <!-- EDIT THIS IMAGE TAG TO ADD YOUR COMPANY LOGO -->
+
+      <img src="../infor/logo.png"
+
+           alt="Company Logo"
+
+           onerror="this.style.display='none'">
+
+    </div>
+
+
+
+    <h1>Matriculation Portal</h1>
+
+    <p>Welcome to our community of trusted partners</p>
+
+  </header>
+
+
+
+  <div class="content">
+
+
+
+    <!-- LOGIN PAGE -->
+
+    <section class="page active" id="loginPage">
+
+      <h2 class="section-title">Welcome Back</h2>
+
+      <p class="description">
+
+        Enter your phone number or email address and your password
+
+        to continue to the matriculation portal.
+
+      </p>
+
+
+
+      <form id="loginForm">
+
+        <div class="field">
+
+          <label for="identity">Phone Number or Email Address</label>
+
+          <div class="input-wrap">
+
+            <input
+
+              type="text"
+
+              id="identity"
+
+              placeholder="Enter phone number or email"
+
+              autocomplete="username"
+
+              required>
+
+            <span class="field-icon">✉</span>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="password">Password</label>
+
+          <div class="input-wrap">
+
+            <input
+
+              type="password"
+
+              id="password"
+
+              placeholder="Enter your password"
+
+              autocomplete="current-password"
+
+              required>
+
+            <button type="button"
+
+                    class="toggle-password"
+
+                    id="togglePassword">SHOW</button>
+
+          </div>
+
+        </div>
+
+
+
+        <button type="submit" class="primary-btn" id="loginButton">
+
+          Sign In &nbsp; →
+
+        </button>
+
+      </form>
+
+
+
+      <div class="notice">
+
+        <strong>Secure Access</strong><br>
+
+        Please use your approved login password to proceed.
+
+      </div>
+
+
+
+      <div class="secure">
+
+        <span>🔒</span>
+
+        <span>Protected portal access</span>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- REFERRAL PAGE -->
+
+    <section class="page" id="referralPage">
+
+      <h2 class="section-title">Referral Verification</h2>
+
+      <p class="description">
+
+        You are almost there! Enter the correct name of your
+
+        approved referral to receive access to the partner portal.
+
+      </p>
+
+
+
+      <form id="referralForm">
+
+        <div class="field">
+
+          <label for="referralName">Referral Name / Entry Code</label>
+
+          <div class="input-wrap">
+
+            <input
+
+              type="text"
+
+              id="referralName"
+
+              placeholder="Enter your referral name"
+
+              autocomplete="off"
+
+              required>
+
+            <span class="field-icon">✓</span>
+
+          </div>
+
+        </div>
+
+
+
+        <button type="submit" class="primary-btn" id="verifyButton">
+
+          Verify Referral &nbsp; →
+
+        </button>
+
+      </form>
+
+
+
+      <div class="notice">
+
+        Don't know your referral name or entry code?
+
+        Please contact your referral to obtain the correct details.
+
+      </div>
+
+
+
+      <button type="button"
+
+              id="backButton"
+
+              style="width:100%;margin-top:15px;background:white;
+
+              border:1px solid #dce7df;padding:13px;border-radius:10px;
+
+              cursor:pointer;color:#08783e;font-weight:600;">
+
+        ← Back to Login
+
+      </button>
+
+    </section>
+
+
+
+  </div>
+
+
+
+  <footer class="footer">
+
+    © <span id="year"></span> Matriculation Portal.
+
+    All rights reserved.
+
+  </footer>
+
+
+
+</main>
+
+
+
+<!-- GREEN LOADING ANIMATION -->
+
+<div class="loading-overlay" id="loadingOverlay">
+
+  <div class="spinner"></div>
+
+  <h2 id="loadingTitle">Verifying Your Details</h2>
+
+  <p id="loadingText">Please wait while we prepare your portal...</p>
+
+  <div class="loading-bar"><span></span></div>
+
+</div>
+
+
+
+<script>
+
+/*
+
+  FRONT-END DEMONSTRATION ONLY.
+
+
+
+  These names are kept here because they were supplied as
+
+  approved passwords. Anyone who can inspect this file can
+
+  see them. Use a secure server for a live portal.
+
+*/
+
+
+
+const approvedPasswords = [
+
+  "Mr ukwe kepher",
+
+  "Mr Ukwe Chima",
+
+  "Mr. Ugwuegbulam Kennedy",
+  
+  " Eucheria Ekenechukwu Egwuoba ",
+
+  " Nwokedi chioma Maryann Richard ",
+
+  " Nwite Nkechi Favour",
+  
+  " Emmanuel Chukwuemeka chima",
+
+  " Onyia Precious Chidera",
+
+
+];
+
+
+
+/*
+
+  Approved referral names.
+
+  Change this list if your referral names differ.
+
+*/
+
+const approvedReferrals = [
+
+  "Mr ukwe kepher",
+
+  "Mr Ukwe Chima",
+
+  "Mr Ugwuegbulam Kennedy",
+
+  " Eucheria Ekenechukwu Egwuoba ",
+
+  " Nwokedi chioma Maryann Richard ",
+
+  " Nwite Nkechi Favour",
+  
+  " Emmanuel Chukwuemeka chima",
+
+  " Onyia Precious Chidera",
+
+];
+
+
+
+const loginPage = document.getElementById("loginPage");
+
+const referralPage = document.getElementById("referralPage");
+
+const loadingOverlay = document.getElementById("loadingOverlay");
+
+const loadingTitle = document.getElementById("loadingTitle");
+
+const loadingText = document.getElementById("loadingText");
+
+
+
+document.getElementById("year").textContent =
+
+  new Date().getFullYear();
+
+
+
+function normalize(value) {
+
+  return value
+
+    .trim()
+
+    .toLowerCase()
+
+    .replace(/[.\s]+/g, " ");
+
+}
+
+
+
+function showLoading(title, message) {
+
+  loadingTitle.textContent = title;
+
+  loadingText.textContent = message;
+
+  loadingOverlay.classList.add("show");
+
+}
+
+
+
+function hideLoading() {
+
+  loadingOverlay.classList.remove("show");
+
+}
+
+
+
+function showPage(page) {
+
+  loginPage.classList.remove("active");
+
+  referralPage.classList.remove("active");
+
+  page.classList.add("active");
+
+}
+
+
+
+/*
+
+  Accept a phone number or a properly formatted email.
+
+  This checks format, not whether the contact actually exists.
+
+*/
+
+function validIdentity(value) {
+
+  const input = value.trim();
+
+
+
+  if (input.includes("@")) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input);
+
+  }
+
+
+
+  const digits = input.replace(/\D/g, "");
+
+
+
+  return /^[+()\d\s.-]+$/.test(input) &&
+
+         digits.length >= 7 &&
+
+         digits.length <= 15;
+
+}
+
+
+
+/* Show / hide password */
+
+document.getElementById("togglePassword")
+
+  .addEventListener("click", function () {
+
+    const passwordInput = document.getElementById("password");
+
+
+
+    if (passwordInput.type === "password") {
+
+      passwordInput.type = "text";
+
+      this.textContent = "HIDE";
+
+    } else {
+
+      passwordInput.type = "password";
+
+      this.textContent = "SHOW";
+
+    }
+
+  });
+
+
+
+/* LOGIN */
+
+document.getElementById("loginForm")
+
+  .addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+
+
+    const identity = document.getElementById("identity").value;
+
+    const password = document.getElementById("password").value;
+
+
+
+    if (!validIdentity(identity)) {
+
+      alert("Please enter a valid phone number or email address.");
+
+      return;
+
+    }
+
+
+
+    const passwordIsCorrect = approvedPasswords.some(
+
+      item => normalize(item) === normalize(password)
+
+    );
+
+
+
+    if (!passwordIsCorrect) {
+
+      alert("Incorrect password. Please enter your approved password.");
+
+      return;
+
+    }
+
+
+
+    showLoading(
+
+      "Login Successful!",
+
+      "Preparing your referral verification page..."
+
+    );
+
+
+
+    document.getElementById("loginButton").disabled = true;
+
+
+
+    setTimeout(() => {
+
+      hideLoading();
+
+      showPage(referralPage);
+
+      document.getElementById("referralName").focus();
+
+      document.getElementById("loginButton").disabled = false;
+
+    }, 1600);
+
+  });
+
+
+
+/* REFERRAL VERIFICATION + PAGE LOADER */
+
+document.getElementById("referralForm")
+
+  .addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+
+
+    const enteredReferral =
+
+      document.getElementById("referralName").value;
+
+
+
+    const referralIsCorrect = approvedReferrals.some(
+
+      name => normalize(name) === normalize(enteredReferral)
+
+    );
+
+
+
+    if (!referralIsCorrect) {
+
+      alert(
+
+        "Please contact your referral to get the correct entry code."
+
+      );
+
+      return;
+
+    }
+
+
+
+    // Show the green-and-white page loader
+
+    showLoading(
+
+      "Referral Verified!",
+
+      "Preparing your partner portal. Please wait..."
+
+    );
+
+
+
+    document.getElementById("verifyButton").disabled = true;
+
+
+
+    // Save the verified referral name and pass it to the registration page.
+    const verifiedName = enteredReferral.trim();
+    try {
+      sessionStorage.setItem("verifiedReferralName", verifiedName);
+    } catch (error) {
+      // The URL parameter below is a fallback if storage is unavailable.
+    }
+
+    // Open the matching registration page after the loader displays.
+    setTimeout(function () {
+      window.location.href =
+        "registration-page-name-fixed.html?referralName=" + encodeURIComponent(verifiedName);
+    }, 2500);
+
+  });
+
+
+
+
+
+/* BACK TO LOGIN */
+
+document.getElementById("backButton")
+
+  .addEventListener("click", function () {
+
+    document.getElementById("referralForm").reset();
+
+    showPage(loginPage);
+
+  });
+
+</script>
+
+
+
+</body>
+
+</html>

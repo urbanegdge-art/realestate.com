@@ -364,6 +364,7 @@
         <option value="new_haven">New Haven Layout — Mgbakwu</option>
         <option value="urban_haven">Urban Haven — Isiagu</option>
         <option value="urban_residence">Urban Residence — Agu-Awka</option>
+        <option value="Ifite-Ogwai">Saraka Farm Land — Ifite-Ogwari</option>
       </select>
     </div>
 
@@ -413,7 +414,7 @@
       </div>
 
       <!-- URBAN BUSINESS -->
-      <div id="flyer-urban garden" class="flyer-card" data-keywords="urban business igbariam university ebube muonso">
+      <div id="flyer-urban_business" class="flyer-card" data-keywords="urban business igbariam university ebube muonso">
         <span class="badge-price">₦5,500,000 / Plot</span>
         <h2 class="estate-title">Urban Business</h2>
         <p class="location-subtitle">📍 Igbariam, Anambra State</p>
@@ -464,7 +465,7 @@
       </div>
 
       <!-- NEW HAVEN LAYOUT -->
-      <div id="flyer-new haven" class="flyer-card" data-keywords="new haven layout mgbakwu purity fm polytechnic">
+      <div id="flyer-new_haven" class="flyer-card" data-keywords="new haven layout mgbakwu purity fm polytechnic">
         <span class="badge-price">₦1,800,000 / Plot</span>
         <h2 class="estate-title">New Haven Layout</h2>
         <p class="location-subtitle">📍 Mgbakwu, Anambra State</p>
@@ -538,40 +539,71 @@
         </div>
       </div>
 
+      <!-- SARAKA FARM LAND (IFITE-OGWARI) -->
+      <div id="flyer-Ifite-Ogwai" class="flyer-card" data-keywords="saraka farm land ifite ogwari ayamelum anambra state">
+        <span class="badge-price">₦1,200,000 / Plot</span>
+        <h2 class="estate-title">Saraka Farm Land</h2>
+        <p class="location-subtitle">📍 Ifite, Ogwari, Ayamelum, Anambra State</p>
+
+        <div class="section-title">Key Advantages</div>
+        <ul class="landmark-list">
+          <li class="landmark-item">🌾 Fertile Agricultural Terrain</li>
+          <li class="landmark-item">🚜 Suitable for Large-Scale Farming & Investment</li>
+          <li class="landmark-item">📈 High Return on Agricultural Yields</li>
+        </ul>
+
+        <div class="section-title">Documentation</div>
+        <div class="features-grid">
+          <div class="feature-card">Deed of Assignment</div>
+          <div class="feature-card">Registered Survey Plan</div>
+        </div>
+
+        <div class="action-row">
+          <a href="tel:+2349011157594" class="btn-action btn-primary">📞 Call Agent</a>
+          <a href="https://wa.me/2349011157594?text=Hello%20Urban%20Edge%2C%20I%20am%20interested%20in%20Saraka%20Farm%20Land%20(Ifite-Ogwari).%20Please%20send%20me%20more%20details." target="_blank" class="btn-action btn-secondary">💬 WhatsApp</a>
+        </div>
+      </div>
+
     </div>
 
   </main>
+
 <script>
-  // MAP DATA SOURCES
+  // MAP DATA SOURCES (Includes fix for hyphenated keys and matching IDs)
   const mapUrls = {
     ifeadigo: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63428.10098522304!2d6.983333!3d6.383333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1043818e6c7104d5%3A0x8bb11c13fb592f6d!2sAwba%20Ofemili%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
     urban_business: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31714.00412354897!2d6.9388!3d6.3486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1043831818bd2f0b%3A0x6b402be4dd69d5fb!2sIgbariam%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
     urban_ville: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31718.34902187313!2d6.9742!3d6.2925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104384b6f1ad123b%3A0x4a9d7cdbd7c5e533!2sUkwulu%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
-    urban_garden: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31719.55512312313!2d7.0822!3d6.2525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104385999999abcd%3A0x4a9d7cdbd7c5e533!2sAwka%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
     new_haven: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31718.88902187313!2d7.0422!3d6.2825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104384f50123abcd%3A0x4a9d7cdbd7c5e533!2sMgbakwu%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
     urban_haven: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31721.23412312313!2d7.0622!3d6.2125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104385123123abcd%3A0x4a9d7cdbd7c5e533!2sIsiagu%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
-    urban_residence: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31719.55512312313!2d7.0822!3d6.2525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104385999999abcd%3A0x4a9d7cdbd7c5e533!2sAgu-Awka%2C%20Awka%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng"
+    urban_residence: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31719.55512312313!2d7.0822!3d6.2525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104385999999abcd%3A0x4a9d7cdbd7c5e533!2sAgu-Awka%2C%20Awka%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng",
+    "Ifite-Ogwai": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.5!2d6.9531!3d6.4172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sIfite%2C%20Ogwari%2C%20Anambra!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng"
   };
 
   function updateView(locationKey) {
     if (!locationKey) return;
 
-    // Convert hyphens to underscores for internal key matching
-    let key = locationKey.trim().toLowerCase().replace(/-/g, '_');
+    let targetKey = locationKey.trim();
 
-    // Handle known name variations
-    if (key === 'ifeadigo_layout') key = 'ifeadigo';
+    // Flexible key mapping/normalization
+    if (targetKey.toLowerCase() === 'ifeadigo_layout') targetKey = 'ifeadigo';
+    if (targetKey.toLowerCase() === 'urban_garden') targetKey = 'urban_business';
+    if (targetKey.toLowerCase() === 'ifite') targetKey = 'Ifite-Ogwai';
 
-    // 1. Update Dropdown Select Element
+    // 1. Update Dropdown Select Element if it matches a valid option
     const selectElement = document.getElementById('estateSelect');
     if (selectElement) {
-      selectElement.value = key;
+      // Check if option exists before setting value to avoid blank select states
+      let optionExists = Array.from(selectElement.options).some(opt => opt.value === targetKey);
+      if (optionExists) {
+        selectElement.value = targetKey;
+      }
     }
 
-    // 2. Update Google Maps
+    // 2. Update Google Maps iframe safely
     const mapIframe = document.getElementById('mapIframe');
-    if (mapIframe && mapUrls[key]) {
-      mapIframe.src = mapUrls[key];
+    if (mapIframe && mapUrls[targetKey]) {
+      mapIframe.src = mapUrls[targetKey];
     }
 
     // 3. Hide all Flyer Cards
@@ -581,11 +613,17 @@
       card.classList.remove('active');
     });
 
-    // 4. Show Targeted Flyer Card
-    const targetCard = document.getElementById(`flyer-${key}`);
+    // 4. Show Targeted Flyer Card using exact ID match
+    let targetCard = document.getElementById(`flyer-${targetKey}`);
+    
+    // Fallback search if exact element ID lookup fails
+    if (!targetCard) {
+      targetCard = document.getElementById(`flyer-${targetKey.toLowerCase().replace(/_/g, '-')}`);
+    }
+
     if (targetCard) {
       targetCard.style.display = 'block';
-      void targetCard.offsetWidth; // Force layout recalculation
+      void targetCard.offsetWidth; // Force layout recalculation for transition animation
       targetCard.classList.add('active');
     }
   }
@@ -600,7 +638,7 @@
       const keywords = card.getAttribute('data-keywords') || '';
       const cardId = card.id.replace('flyer-', '');
       
-      if (keywords.toLowerCase().includes(filter) || cardId.includes(filter)) {
+      if (keywords.toLowerCase().includes(filter) || cardId.toLowerCase().includes(filter)) {
         updateView(cardId);
         break;
       }
@@ -621,4 +659,4 @@
 </script>
 
 </body>
-</html>b
+</html>

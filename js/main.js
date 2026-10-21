@@ -151,3 +151,46 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+
+/* =====================================================
+   POPUP MODAL ENGINE
+====================================================== */
+
+// Function to trigger the popup modal
+function showIfitePopup() {
+    const overlay = document.getElementById("ifitePopupOverlay");
+    if (overlay) {
+        overlay.classList.add("show");
+    }
+}
+
+// Function to close the popup modal
+function closeIfitePopup(event) {
+    if (!event || event.target.id === 'ifitePopupOverlay' || event.target.classList.contains('popup-close-btn')) {
+        const overlay = document.getElementById('ifitePopupOverlay');
+        if (overlay) {
+            overlay.classList.remove('show');
+        }
+    }
+}
+
+/* =====================================================
+   INTEGRATING WITH YOUR LOADER
+====================================================== */
+// OPTION A: If your loader has a set duration/timeout (e.g., 2 seconds loader), trigger popup right after:
+window.addEventListener("load", function () {
+    // Replace 2000 with your exact loader duration in milliseconds
+    setTimeout(() => {
+        showIfitePopup();
+    }, 2000); 
+});
+
+/* 
+OPTION B: If you have a custom loader hide function, call `showIfitePopup()` directly inside it:
+
+function hideLoader() {
+    loaderElement.style.display = 'none';
+    showIfitePopup(); // <--- CALL IT HERE DIRECTLY WHEN LOADER FINISHES
+}
+*/
